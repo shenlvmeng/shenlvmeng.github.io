@@ -1,0 +1,31 @@
+body{
+	margin: 0;
+}
+#container{
+	width: 400px;
+	height:200px;
+	background-color: #ccc;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	margin-left: -200px;
+	margin-top: -100px;
+	overflow: hidden;
+}
+#circle1, #circle2{
+	background-color: #fc0;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	border-radius: 100px;
+}
+#circle1{
+	margin-left: -50px;
+	margin-top: -50px;
+}
+#circle2{
+	right:0;
+	bottom: 0;
+	margin-right: -50px;
+	margin-bottom: -50px;
+}
