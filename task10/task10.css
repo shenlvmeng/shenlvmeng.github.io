@@ -1,0 +1,40 @@
+body{
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: space-between;
+	display: -webkit-flex;
+	-webkit-flex-flow: row wrap;
+	-webkit-justify-content: space-between;
+	-webkit-align-content: space-between;
+	-webkit-align-items: center;
+}
+div{
+	border:1px solid #f00;
+	width: 150px;
+	margin: 20px;
+}
+#one{
+	height: 120px;
+}
+#two{
+	height: 100px;
+}
+#there{
+	height: 40px;
+}
+#four{
+	height:200px;
+	border: 1px solid #0f0;
+}
+@media (max-width: 640px){
+	body{
+		align-items: flex-start;
+	    -webkit-align-items: flex-start;	
+	}
+	#four{
+		order:-1;
+		-webkit-order:-11;
+	}
+}
