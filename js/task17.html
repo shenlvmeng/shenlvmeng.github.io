@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>task2_29</title>
+	<style type="text/css">
+		body{
+			font-family: Microsoft YaHei;
+		}
+		form{
+			display: block;
+			margin: 50px auto auto 30px;
+		}
+		label{
+			margin-right: 10px;
+			color: #333;
+			font-size: 20px;
+			font-weight: bold;
+		}
+		input{
+			height:30px;
+			width: 400px;
+			margin-right: 10px;
+			border: 1px solid #aaa;
+			border-radius: 3px;
+		}
+		p{
+			margin-left: 55px;
+			color: #aaa;
+			font-size: 16px;
+		}
+		button{
+			height: 42px;
+			width: 70px;
+			background-color: darkblue;
+			color: #fff;
+			font-size:20px;
+			font-weight: bold;
+			font-family: Microsoft YaHei;
+			border: 1px solid;
+			border-radius: 5px;
+		}
+		.right{
+			color: darkgreen;
+			border-color: darkgreen;
+		}
+		.error{
+			color: #f00;
+			border-color: #f00;
+		}
+	</style>
+</head>
+<body>
+	<form id="form">
+		<label for="name">名称</label>
+		<input id="name" name="uname">
+		<button id="submit">验证</button>
+		<p id="hint">必填，长度为4~16个字符</p>
+	</form>
+	<script type="text/javascript">
+		var $ = function(el){ return document.querySelector(el)};
+		function test(){
+			var text = $("#name").value;
+			if(!new RegExp(/^\S+$/g).test(text)) return 3;
+			if(text.replace(/[\u0100-\uffff]/g,"--").length > 16) return 2;
+			if(text.length < 4) return 1;
+			return 0;
+		}
+		$("#form").onsubmit = function(){
+			var s = $("#hint");
+			var code = test($("#name").value);
+			if(code == 0){
+				s.setAttribute("class","right");
+				s.innerHTML = "名称格式正确";
+				$("#name").setAttribute("class","right");
+			} else {
+				s.setAttribute("class","error");
+				$("#name").setAttribute("class","error");
+				if(code == 1) s.innerHTML = "名称长度太短";
+				else if(code == 2) s.innerHTML = "名称长度太长";
+				else if(code == 3) s.innerHTML = "名称包含非法字符";
+				else s.innerHTML = "未知错误";
+			}
+			return false;
+		}
+	</script>
+</body>
+</html>
