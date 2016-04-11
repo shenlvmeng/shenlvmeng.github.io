@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>task2_24</title>
+	<link rel="stylesheet" type="text/css" href="css/task11.css">
+	<style type="text/css">
+		div#select{
+			background-color: blue;
+			color: #f00;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<button id="deeporder">深度优先遍历</button>
+		<button id="breaorder">广度优先遍历</button>
+		&nbsp;
+		<input type="text" value="cat" id="search">
+		<select id="searchtype">
+			<option value="deep">深度优先</option>
+			<option value="brea">广度优先</option>
+		</select>
+		<button id="submit">查询</button>
+		<br><br>
+		<input type="text" value="cow" id="insert"></input>
+		<button id="add">增加</button>
+		<button id="remove">删除</button>
+	</section>
+	<div class="root">
+		super
+		<div class="layer1">
+			corn
+			<div class="layer2">
+				apple
+				<div class="layer3">pear</div>
+				<div class="layer3">pig</div>
+				<div class="layer3">cola</div>
+				<div class="layer3">soccer</div>
+			</div>
+			<div class="layer2">
+				phone
+			</div>
+			<div class="layer2">
+				horse
+				<div class="layer3">book</div>
+				<div class="layer3">school</div>
+			</div>
+		</div>
+		<div class="layer1">
+			note
+			<div class="layer2">
+				human
+				<div class="layer3">code</div>
+				<div class="layer3">operate</div>
+				<div class="layer3">man</div>
+			</div>
+			<div class="layer2">
+				program
+				<div class="layer3">
+					bee
+					<div class="layer4">cat</div>
+				</div>
+				<div class="layer3">glass</div>
+			</div>
+		</div>
+		<div class="layer1">
+			fish
+		</div>
+	</div>
+	<script type="text/javascript" src="js/task12.js"></script>
+</body>
+</html>

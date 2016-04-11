@@ -28,22 +28,22 @@ div#active{
 div#found{
 	background-color: red;
 }
+div#select{
+	color: #000;
+}
 div.layer1, div.layer2, div.layer3, div.layer4{
 	color: #000;
+	background-color: white;
 }
 div.layer1{
 	z-index: 1;
-	background-color: white;
 }
 div.layer2{
-	z-index: 10;
-	background-color: white;
+	z-index: 11;
 }
 div.layer3{
-	z-index: 20;
-	background-color: white;
+	z-index: 21;
 }
 div.layer4{
-	z-index: 30;
-	background-color: white;
+	z-index: 31;
 }
