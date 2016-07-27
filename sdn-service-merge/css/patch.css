@@ -1,0 +1,17 @@
+body{
+	opacity: 0;
+}
+.header{
+	font-family: Microsoft Yahei;
+}
+article{
+	border-bottom: 0;
+}
+.panel{
+	height: 27%;
+	padding: 3% 6%;
+	border-bottom: 2px solid #eee;
+}
+.panel p{
+	padding-left: 30px;
+}

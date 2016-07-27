@@ -1,0 +1,122 @@
+/*
+	约定.和#前未指定标签名时为div标签。
+*/
+body, html{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+#container{
+	height: 85%;
+}
+#container article:first-child ~ article{
+	border-left: 1px solid #ddd;
+}
+article{
+	float: left;
+	width: 49.9%;
+	height: 100%;
+	border-bottom: 2px solid #eee;
+	font-family: Microsoft Yahei;
+}
+.header{
+	height: 10%;
+	background-color: #eee;
+	border-bottom: 1px solid #ddd;
+	position: relative;
+}
+.header span{
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	font-weight: bold;
+	font-size: 25px;
+}
+.topo{
+	height: 45%;
+	border-bottom: 1px solid #ddd;
+}
+.topo svg{
+	border: 0;
+	width: 100%;
+	height: 100%;
+}
+.panel{
+	height: 45%;
+	padding: 5% 7%;
+	font-size: 18px;
+	font-weight: bold;
+}
+.panel p{
+	margin: 1.5em 0;
+	font-family: Arial, Georgia, Microsoft Yahei;
+}
+.panel p input[type=text]{
+	margin: 0 2em;
+	height: 2em;
+	width: 20em;
+	border: 1px solid #aaa;
+	border-radius: 2px;
+	padding-left: 3px;
+}
+.panel p span{
+	letter-spacing: 2px;
+}
+.panel span.shift{
+	margin: 0 1.5em;
+	display: inline-block;
+	height: 25px;
+	width: 3em;
+	border-radius: 1em;
+	background-color: #aaa;
+	vertical-align: middle;
+}
+span.shift span{
+	display: inline-block;
+	background-color: #fff;
+	float: right;
+	width: 22px;
+	height: 22px;
+	border-radius: 11px;
+	margin-top: 1px;
+	cursor: pointer;
+}
+button{
+	min-width: 5em;
+	height: 2em;
+	border: 0;
+	border-radius: 2px;
+	box-shadow: 0 2px 3px #999;
+	cursor: pointer;
+	font-size: 14px;
+	color: #fff;
+	font-weight: bold;
+	font-family: Microsoft Yahei;
+}
+button.add_d{
+	background-color: tomato; 
+}
+button.add_a, button.start{
+	background-color: limegreen;
+}
+button i{
+	margin-right: .4em;
+}
+#merge{
+	clear: left;
+	height: 15%;
+	width: 100%;
+}
+#merge button{
+	position: fixed;
+	top: 91.5%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	background-color: steelblue;
+	width: 8em;
+	height: 2.5em;
+	font-size: 18px;
+}
