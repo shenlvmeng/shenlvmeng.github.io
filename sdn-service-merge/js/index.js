@@ -36,7 +36,10 @@
 			.enter()
 			.append('line')
 			.attr({
-				'stroke': '#ccc', 'stroke-width': 2
+				'stroke': '#ccc', 'stroke-width': 2,
+				'lid': function(d, i){
+					return i+1;
+				}
 			});
 		var svg_nodes = d3.selectAll('svg')
 			.selectAll('text')
@@ -55,6 +58,9 @@
 				else if(i > 1 && i < 5) return '\uf233';
 				else if(i == 5) return '\uf1c0';
 				else return '\uf0ac';
+			})
+			.on('dblclick', function(d){
+				d.fixed = false;
 			})
 			.call(force.drag); //this line can be commented
 		var svg_texts = d3.selectAll('svg')
@@ -84,6 +90,11 @@
 				'y': function(d) {return d.y;}
 			});
 		});
+		//add node fixed
+		force.drag()
+			.on('dragstart', function(d,i){
+				d.fixed = true;
+			});
 
 		//use <g> to separate graphs, define marker to draw arrow
 		d3.selectAll('svg').append('g')
@@ -200,7 +211,10 @@
 			})
 			.text(function(d){
 				return d;
-			});
+			})
+			.on('mouseover', mouseIn)
+			.on('mousemove', mouseMove)
+			.on('mouseout', mouseOut);
 		}
 
 		function drawEllipse(selection){
@@ -246,7 +260,7 @@
 				})
 				.text(function(d){
 					if(d == 1){
-						if(i == 0) return 'School';
+						if(i == 0) return 'Campus';
 						else if(i == 1) return 'Students';
 						else return 'Teachers';
 					} else {
@@ -254,7 +268,99 @@
 						else return 'DB';
 					}
 				})
+				.on('mouseover', function(){
+					mouseIn(d3.select(this).text());
+				})
+				.on('mousemove', mouseMove)
+				.on('mouseout', mouseOut);
 		}
+
+		//add logic graph hint
+		var tooltip = d3.select('body')
+			.append('div')
+			.attr('class','tooltip')
+			.style('opacity', 0);
+		//element on listener callback function -- display tooltip
+		function mouseIn(d){
+			var content = "";
+			if(d == "Campus") content = ": H1, H2";
+			else if(d == "Web Server") 
+				content = ":<br />Web Server 1(负载均衡前)<br />Web Server 1,Web Server 2(负载均衡后)";
+			else if(d == "Students") content = ": H1";
+			else if(d == "Teachers") content = ": H2";
+			else if(d == "DB") content = ": Database";
+			else content = "Unknown."
+			tooltip.html(d+content)
+				.style({
+					'left': d3.event.pageX + 'px',
+					'top': (d3.event.pageY+20) + 'px',
+					'opacity': 1
+				});
+		}
+		function mouseMove(){
+			tooltip.style({
+				'left': d3.event.pageX + 'px',
+				'top': (d3.event.pageY+20) + 'px'
+			});
+		}
+		function mouseOut(){
+			tooltip.style('opacity', 0);
+		}
+
+		//paint some nodes and some links
+		//topo 1
+		$('#container article:nth-child(1) svg text[did=3]').attr('fill', '#000');
+		[1,2].forEach(function(val){
+			$('#container article:nth-child(1) svg text[did='+ val +']').attr('fill', 'steelblue');
+			$('#container article:nth-child(1) svg line[lid='+ val +']').attr('stroke', 'steelblue');
+		});
+		//topo 2
+		[3,5].forEach(function(val){
+			$('#container article:nth-child(2) svg text[did='+ val +']').attr('fill', '#000');
+		});
+		[1,2,6,7].forEach(function(val){
+			$('#container article:nth-child(2) svg text[did='+ val +']').attr('fill', 'steelblue');
+		});
+		[1,2,4,6].forEach(function(val){
+			$('#container article:nth-child(2) svg line[lid='+ val +']').attr('stroke', 'steelblue');
+		});
+		[3,7].forEach(function(val){
+			$('#container article:nth-child(2) svg line[lid='+ val +']').attr('stroke', 'lightblue');
+		});
+		//topo 3
+		[1,7,8].forEach(function(val){
+			$('#container article:nth-child(3) svg text[did='+ val +']').attr('fill', 'steelblue');
+		});
+		$('#container article:nth-child(3) svg text[did=3]').attr('fill', '#000');
+		[1,4,6,8].forEach(function(val){
+			$('#container article:nth-child(3) svg line[lid='+ val +']').attr('stroke', 'steelblue');
+		});
+
+		var list = ['10.0.0.1', '10.0.0.2'];
+		//add deny button: change color and send ban request
+		$("button.add_d").on('click', function(){			
+			var d_ip = $(this).parent().find('input').val().trim();
+			var index = list.indexOf(d_ip);
+			if(index == -1) alert('Unknown host ip!');
+			if($('#container article:nth-child(1) svg text[did='+ (index+1) +']').attr('fill') != 'red'){
+				$('#container article:nth-child(1) svg text[did='+ (index+1) +']').attr('fill', 'red');
+				$('#container article:nth-child(1) svg line[lid='+ (index+1) +']').attr('stroke', 'red');
+				//some ajax request
+				//...
+			};
+		});
+		//add allow button: change color and send allow request
+		$("button.add_a").on('click', function(){
+			var a_ip = $(this).parent().find('input').val().trim();
+			var index = list.indexOf(a_ip);
+			if(index == -1) alert('Unknown host ip!');
+			if($('#container article:nth-child(1) svg text[did='+ (index+1) +']').attr('fill') != 'steelblue'){
+				$('#container article:nth-child(1) svg text[did='+ (index+1) +']').attr('fill', 'steelblue');
+				$('#container article:nth-child(1) svg line[lid='+ (index+1) +']').attr('stroke', 'steelblue');
+				//some ajax request
+				//...
+			};
+		});
 
 		//start button: 'new' a terminal or cmd window
 		$("button.start").on('click', function(){
@@ -280,15 +386,24 @@
 				self.animate({
 					'margin-right': '31px'
 				},100,'swing',function(){
-					$('#container article:nth-child(2) svg text[did=3]').attr('fill', 'steelblue');
+					[5,7,8].forEach(function(val){
+						$('#container article:nth-child(2) svg text[did='+ val +']').attr('fill', 'green');
+					});
+					[6,8].forEach(function(val){
+						$('#container article:nth-child(2) svg line[lid='+ val +']').attr('stroke', 'green');
+					});
 					self.parent().css("background-color", "limegreen");
 				});
 			else
 				self.animate({
 					'margin-right': '0'
 				},100,'swing',function(){
-					$('#container article:nth-child(2) svg text[did=3]').attr('fill', '#aaa');
-					self.parent().css("background-color", "#aaa");
+					$('#container article:nth-child(2) svg text[did=7]').attr('fill', 'steelblue');
+					$('#container article:nth-child(2) svg text[did=5]').attr('fill', '#000');
+					$('#container article:nth-child(2) svg text[did=8]').attr('fill', '#aaa');
+					$('#container article:nth-child(2) svg line[lid=6]').attr('stroke', 'steelblue');
+					$('#container article:nth-child(2) svg line[lid=8]').attr('stroke', '#aaa');
+					self.parent().css("background-color", "#aaa");				
 				});
 			return false;
 		});
