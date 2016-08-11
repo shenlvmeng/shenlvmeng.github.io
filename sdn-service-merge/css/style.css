@@ -99,7 +99,7 @@ button{
 button.add_d{
 	background-color: tomato; 
 }
-button.add_a, button.start{
+button.add_a, button.start, button.start_catch{
 	background-color: limegreen;
 }
 button i{
@@ -119,4 +119,8 @@ button i{
 	width: 8em;
 	height: 2.5em;
 	font-size: 18px;
+}
+.text{
+	fill: steelblue;
+	font-size: 14px;
 }

@@ -6,10 +6,11 @@ body{
 }
 article{
 	border-bottom: 0;
+	width: 33.2%;
 }
 .panel{
 	height: 27%;
-	padding: 3% 6%;
+	padding: 3% 3%;
 	border-bottom: 2px solid #eee;
 }
 .panel p{
