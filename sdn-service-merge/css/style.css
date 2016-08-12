@@ -62,6 +62,13 @@ article{
 	border-radius: 2px;
 	padding-left: 3px;
 }
+.panel p select{
+	margin: 0 2em;
+	height: 2em;
+	width: 5em;
+	border-radius: 2px;
+	font-size: 14px;
+}
 .panel p span{
 	letter-spacing: 2px;
 }
@@ -87,6 +94,7 @@ span.shift span{
 button{
 	min-width: 5em;
 	height: 2em;
+	margin-right: 15px;
 	border: 0;
 	border-radius: 2px;
 	box-shadow: 0 2px 3px #999;
@@ -96,11 +104,14 @@ button{
 	font-weight: bold;
 	font-family: Microsoft Yahei;
 }
-button.add_d{
+button.add_d, button.end{
 	background-color: tomato; 
 }
-button.add_a, button.start, button.start_catch{
+button.add_a, button.start{
 	background-color: limegreen;
+}
+button.start_catch{
+	background-color: orange;
 }
 button i{
 	margin-right: .4em;
@@ -135,4 +146,10 @@ button i{
 	border: 1px solid steelblue;
 	background-color: white;
 	border-radius: 4px;
+}
+#response{
+	font-family: Consolas;
+	letter-spacing: 0;
+	font-weight: lighter;
+	font-style: oblique;
 }
