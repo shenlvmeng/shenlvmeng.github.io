@@ -37,7 +37,7 @@ a.title{
 	font-weight: bold;
 }
 hr{
-	margin: 30px 20px 25px auto;
+	margin: 35px 20px 30px auto;
 	border: 0;
 	height: 1px;
 	background: #bbb;
@@ -90,6 +90,10 @@ code{
 	padding: 0 2px;
 	font-family: Consolas;
 	font-size: 13px;
+}
+code strong{
+	color: #000;
+	font-size: 14px;
 }
 span.i{
 	font-style: italic;

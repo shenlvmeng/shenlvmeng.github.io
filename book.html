@@ -39,10 +39,10 @@
 			<li><a href="#npm_commands">常用命令</a></li>
 			<li><a href="#npm_download">下载第三方包</a></li>
 			<li><a href="#npm_install_cmd">安装命令行程序</a></li>
-			<li><a href="#npm_realease">发布自己的包</a></li>
+			<li><a href="#npm_release">发布自己的包</a></li>
 			<li><a href="#npm_version">版本号控制</a></li>
 			<li><a href="#npm_sum_up">小结</a></li>
-			<li><a href="#npm">更多</a></li>
+			<li><a href="#npm_more">更多</a></li>
 		</ul>
 		<a href="#bower">Bower</a>
 		<ul>
@@ -50,7 +50,7 @@
 			<li><a href="#bower_usage">使用</a></li>
 			<li><a href="#bower_question">Bower or npm?</a></li>
 		</ul>
-		<a href="#Browserify">Browserify</a>
+		<a href="#browserify">Browserify</a>
 		<ul>
 			<li><a href="#brow_intro_usage">简介与使用</a></li>
 			<li><a href="#brow_manage_generate">管理与生成</a></li>
@@ -67,6 +67,7 @@
 			<li><a href="#grunt_tutorial">入门</a></li>
 			<li><a href="#gruntfile">Gruntfile</a></li>
 			<li><a href="#grunt_config">任务配置</a></li>
+			<li><a href="#grunt_example">配置实例</a></li>
 			<li><a href="#grunt_task">任务与插件</a></li>
 			<li><a href="#grunt_more">更多</a></li>
 		</ul>
@@ -517,8 +518,502 @@ function upload(response, data){
 </code></pre>
 		<p>5. 利用NodeJS的异步特点和子进程模块，可以将<code>start</code>和<code>upload</code>函数中的耗时操作设为异步进行，将异步运行的结果交给回调函数处理。在<span class="i">requestHandler.js</span>中添加<code>exec</code>语句即可。同时，允许用户上传文件，并将图片在浏览器中显示出来。可以用第三方插件完成大部分功能。这里从略。可以见更多中的Node入门。</p>
 		<h3 id="node_more">更多</h3>
-		<p><a href="https://nqdeng.github.io/7-days-nodejs/">七天学会NodeJS</a>，<a href="http://www.nodebeginner.org/index-zh-cn.html">Node入门</a></p>
+		<p><a href="https://nqdeng.github.io/7-days-nodejs/" target="_blank">七天学会NodeJS</a>，<a href="http://www.nodebeginner.org/index-zh-cn.html" target="_blank">Node入门</a></p>
 		<hr>
+		<h1 id="npm">npm</h1>
+		<h3 id="npm_introduction">简介</h3>
+		<p>npm是NodeJS随同安装的包管理工具。由于NodeJS使用模块组织工程的特点，npm能解决NodeJS部署上的很多问题。它允许用户从npm服务器下载别人编写的三方包到本地使用、允许用户从npm服务器下载并安装别人编写的命令行程序到本地使用、允许用户将自己编写的包或命令行程序上传到npm服务器供别人使用。</p>
+		<p>同时，NPM还是NodeJS的开放式模块登记和管理系统。它构建了一个NodeJS模块平台，发挥了类似github的功能。</p>
+		<h3 id="npm_install">安装</h3>
+		<p>npm一般随NodeJS一起安装。安装后，可以通过<code>npm intall npm@latest –g</code>进行更新。<code>npm help</code>和<code>npm –l</code>可以查看npm的帮助信息。</p>
+		<h3 id="npm_commands">常用命令</h3>
+		<p><code><strong>npm init</strong></code>: 在项目文件根目录下，需要有<span class="i">package.json</span>来完成模块的开发说明。该命令可以初始化新的<span class="i">package.json</span>文件，通过询问的方式完成。使用参数<code>-f</code>和<code>-y</code>可以跳过询问。</p>
+		<p><code><strong>npm set</strong></code>: 用来设置npm的环境变量，类似于<code>git config –global</code>。有<code>init-author-name</code> <code>init-author-email</code> <code>init-author-urllicense</code>等选项可供选择。针对某个项目有特殊设置时，可以另行<code>npm config</code>。</p>
+		<p><code><strong>npm info</strong></code>: 查看模块具体信息。类似于查看<span class="i">package.json</span>。还可以查看字段信息。如，<code>npm info {{module_name}} description</code>。</p>
+		<p><code><strong>npm search</strong></code>: 按照模块名搜索具体模块。npm的包名必须唯一。</p>
+		<p><code><strong>npm list</strong></code>: 树形结构列出当前项目安装的模块和其依赖模块。可以跟<code>-global</code></p>
+		<p><code><strong>npm install</strong></code>: 最常用的一个命令。安装可以选择本地（当前文件夹的<span class="i">node_modules</span>下）或全局。全局安装只适用于工具模块。该命令甚至支持通过github代码库地址安装。参数<code>-f</code>可以强制重新安装一个模块。删除<span class="i">node_modules</span>目录，执行该命令可以强制安装所有模块。</p>
+		<p>在模块后，可以用<code>@</code>后接版本号安装特定版本，<code>latest</code>表示最新版，<code>beta</code>表示测试版。后接<code>--save</code>会添加<code>dependencies</code>到<span class="i">package.json</span>中。<code>--save-exact</code>可以添加确切版本。<code>--save-dev</code>添加到<code>devDependencies</code>中。可以简化为<code>-S</code>或<code>-D</code>。<code>--production</code>会安装<code>dependencies</code>中的依赖而不考虑<code>devDependencies。</code></p>
+		<p><code><strong>npm update</strong></code>: 升级已安装的本地或者全局模块。<code>--depth</code>可以指定迭代的深度，升级依赖的依赖。</p>
+		<p><code><strong>npm uninstall</strong></code>: 卸载已安装模块。</p>
+		<p><code><strong>bpm run</strong></code>: 执行<span class="i">package.json</span>中的<code>scripts</code>字段对应的脚本。其中<code>npm run test</code>和<code>npm run start</code>可以简写成<code>npm test</code>和<code>npm start</code>。可以将脚本存成文件，在<code>scripts</code>字段中写上文件路径。同时，<code>npm run</code>执行的命令可以跟命令行参数。（实际上，<a href="http://gruntjs.com/" target="_blank">grunt</a>和<a href="http://gulpjs.com/" target="_blank">gulp</a>这样的工具就是完成此类工作）</p>
+		<p><code>npm run</code>的每个命令都有两个钩子pre和post。在执行命令command之前，npm会检查是否有precommand，执行之后会检查是否有postcommand。同时<code>npm run</code>可以使用一些内部变量，如<span class="i">package.json</span>中的<code>name</code>字段可以用<code>$npm_package_name</code>代表。<code>config</code>字段里可以设置内部字段。</p>
+		<p><code><strong>npm link</strong></code>: 将开发中的模块链接中本地的<span class="i">node_modules</span>中，方便边开发边使用。<code>npm unlink</code>可以删除符号链接。</p>
+		<p><code><strong>npm bin</strong></code>: 执行本地<span class="i">node_modules/.bin</span>目录下的命令。</p>
+		<p><code><strong>npm adduser</strong></code>: 在npmjs.com中添加一个用户。</p>
+		<p><code><strong>npm publish</strong></code>: 发布模块，在拥有npm账户后。使用<code>npm login</code>登录，接着在本地目录下输入命令即可发布模块。<code>--tag</code>可以为发布模块添加标记</p>
+		<p><code><strong>npm deprecate</strong></code>:  废弃某个版本或某个版本范围的模块，后面可以跟警告文本。如<code>npm deprecate mymodule@"&lt;0.2" "fix critical bugs"</code></p>
+		<p><code><strong>npm owner</strong></code>: 管理模块的维护者。有<code>ls, add, rm</code>命令可以选择。</p>
+		<p>其他的命令还有<code>npm install . –g</code>可用于发布包前的本地测试；<code>npm update cache clear</code>可以清空缓存；<code>npm unpublish {{package}}@{{version}}</code>可以撤销自己发布过的某个版本代码等。更多详细介绍见<a href="https://docs.npmjs.com/cli/" target="_blank">官网文档</a></p>
+		<h3 id="npm_download">下载第三方包</h3>
+		<p>使用命令<code>npm install {{module_name}}</code>，将包下载到node_modules后，直接使用<code>require({{module_name}})</code>即可加载第三方模块。同时，修改<span class="i">package.json</span>，添加<code>dependencies</code>项，即可批量加载第三方包，这样做的好处在他人加载你的模块时是非常明显的。用户只需关心自己直接使用的第三方包，而不需要自己解决依赖问题。</p>
+		<h3 id="npm_install_cmd">安装命令行程序</h3>
+		<p>方法和上面类似，如<code>npm install pug –g</code>(<code>-g</code>表示全局安装)，全局安装时，pug默认会安装到<span class="i"><strong>/usr/local(for Linux)</strong></span>或 <span class="i"><strong>%APPDATA%\npm(for Windows)</strong></span>下。npm会自动创建Linux下的软链和Windows下的<code>.cmd</code>文件。</p>
+		<h3 id="npm_release">发布自己的包</h3>
+		<p>需要在npm注册自己的账号，之后运行<code>npm adduser</code>。账号配置完成后，编辑<span class="i">package.json</span>文件，包括<span class="i">name, version, dependencies, main, bin, man</span>等内容，之后就可以在<span class="i">package.json</span>目录下运行<code>npm publish</code>发布代码了。<span class="i">package.json</span>下字段的更多解释参见<a href="https://docs.npmjs.com/files/package.json" target="_blank">官网文档。下面是一个<span class="i">package.json</span>的样例</a></p>
+		<pre><code>{
+    "name": "my_package",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "ag_dubs",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ashleygwilliams/my_package.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ashleygwilliams/my_package/issues"
+    },
+    "homepage": "https://github.com/ashleygwilliams/my_package"
+}</code></pre>
+		<h3 id="npm_version">版本号控制</h3>
+		<p>npm使用语义版本号进行版本号控制。分<code>X.Y.Z</code>三位，分别代表主版本号，副版本号，补丁版本号。其中主版本号对下不兼容，有大变动，次版本号只是新增功能向下兼容，补丁版本号只是修复bug。</p>
+		<p>在这个保证下，<code>dependencies</code>可以指定一定范围的版本码。包括>, >=, <, <=, ~, 0.0.x, *, -等等。</p>
+		<h3 id="npm_sum_up">小结</h3>
+		<p>npm是NodeJS自带的包管理工具。在复杂的工程背景下，通常需要使用许多的第三方包，在第三方框架下搭出可靠好用的应用。尤其在新技术层出不穷的web应用中，包管理成了很重要的一个环节。对于使用模块构建工程的NodeJS，NPM这样的包管理工具将更有利于它的发展和开发者的使用。</p>
+		<h3 id="npm_more">更多</h3>
+		<p><a href="http://javascript.ruanyifeng.com/nodejs/npm.html" target="_blank">npm模块管理器</a></p>
+		<hr>
+		<h1 id="bower">Bower</h1>
+		<h3 id="bower_introduction">简介</h3>
+		<p><a href="https://bower.io/" target="_blank">Bower</a>由<a href="https://twitter.com/" target="_blank">twitter</a>推出，是一个和<a href="https://www.npmjs.com/" target="_blank">npm</a>功能十分类似的包依赖管理软件。不同的是，npm管理整个工程项目的包依赖，而Bower专注于前端各网络资源的管理。它可以帮助快速搭建起前端以来环境，并管理各组件的版本状态。</p>
+		<p>和npm类似，Bower使用<span class="i">bower.json</span>作为项目配置文件中。使用<code>bower install</code>命令时，后面可以跟包名、github路径、git仓库路径、url或者干脆不要参数。Bower本身的配置文件为项目根目录下的<span class="i">.bowerrc</span>，通过<code>directory, json, endpoint, searchpoint, shorthand_resolver</code>指定了存放库文件的目录、描述库的json文件名，搜索库文件的路径，备选路径，库名称简写形式。下面是一个<span class="i">bower.json</span>的样例: </p>
+		<pre><code>{
+    "name": "app-name",
+    "version": "0.0.1",
+    "dependencies": {
+        "sass-bootstrap": "~3.0.0",
+        "modernizr": "~2.6.2",
+        "jquery": "~1.10.2"
+    },
+    "private": true
+}		</code></pre>
+		<h3 id="bower_usage">使用</h3>
+		<p>通过<code>npm intall bower –g</code>全局安装bower，以便可以使用bower命令。通过<code>bower help</code>可以查看所有的bower命令。bower命令和npm命令是很类似的。有<code>init, install, cache, search, list, info, uninstall</code>等命令。Bower在下载依赖包时，会保存一份到缓存中，通过<code>bower cache list</code>查看。</p>
+		<h3 id="bower_question">Bower or npm?</h3>
+		<p>由于前后端资源特点的不同，npm基于CommonJS的规范开发，是利于后端模块的依赖管理的，通过<span class="i">package.json</span>管理树形的依赖结构，模块间用require、export沟通。而这在带宽紧张的前端是不完全适合的，前端更需要扁平和松散的依赖关系，减少文件的传输次数。因此，使用简单的Bower在推出后，收到了很大欢迎。但是Bower的缺陷也很明显，bower管理松散、缺乏统一的构建机制。包的格式并没有限制，只通过<span class="i">bower.json</span>沟通。同时，bower缺少npm那样的registry，而直接取用github。</p>
+		<p>在Browserify, Webpack这样的工具出现后，使用npm管理前端时，不会出现CommonJS的规范下加上其他规范模块的不伦不类感。未来前后端包依赖统一管理的趋势是必然的，在node良好的生态环境下，使用npm统一管理似乎是更受欢迎的。</p>
+		<p>更多的讨论间<a href="https://www.zhihu.com/question/24414899" target="_blank">知乎话题</a>。</p>
+		<hr>
+		<h1 id="browserify">Browserify</h1>
+		<h3 id="brow_intro_usage">简介与使用</h3>
+		<p>如在Bower中提到的，浏览器端的文件并没有CommonJS这样的构建规范。因此，在使用npm管理时显得不伦不类。Browserify是node的一个插件，允许使用<code>require</code>的句法书写浏览器端的文件。通过<code>browserify</code>命令将入口文件打包输出，即可建立一个统一的依赖环境，且可以在html中只使用一条script或link等引入。</p>
+		<p>假设我们项目需要<a href="http://backbonejs.org/" target="_blank">backbone.js</a>和<a href="https://jquery.com/" target="_blank">jQuery</a>两个模块。首先，通过<code>npm install –g browserify</code>全局安装它。之后新建<span class="i">main.js</span>文件，将服务器端backbone模块转为客户端（即浏览器端）模块。先安装backbone和jquery模块，在main.js中写下如下内容：</p>
+		<pre><code>// main.js
+var Backbone = require('backbone');
+var $ = Backbone.$ = require('jquery/dist/jquery')(window);
+
+var AppView = Backbone.View.extend({
+  render: function(){
+    $('main').append('&lt;h1>Browserify is a great tool.&lt;/h1>');
+  }
+});
+var appView = new AppView();
+appView.render();
+</code></pre>
+		<p>之后使用browserify将main.js转为app.js:<code>browserify main.js –o app.js</code>。就可以通过<pre><code>&lt;script src=app.js>&lt;/script></code></pre>完成插入。</p>
+		<h3 id="brow_manage_generate">管理与生成</h3>
+		<p>使用browserify可以将CommonJS转为浏览器可以调用的格式(如上文)，同时，它也可以对纯粹的前端模块打包，然后再html中通过一行命令完成调用。使用<code>browserify-shim</code>支持jQuery等的CDN加载。使用<code>parcelify</code>模块可以对插件自带的css文件进行打包。</p>
+		<p>Browserify指定<code>-r</code>参数，还可以在打包模块的同时，为浏览器提供require方法。Browserify还支持实时生成脚本文件，通过browserify的bundle方法写在js文件里。</p>
+		<p>更多内容请参考<a href="http://javascript.ruanyifeng.com/tool/browserify.html" target="_blank">阮一峰的Javascript参考教程。</a></p>
+		<hr>
+		<h1 id="webpack">Webpack</h1>
+		<p>类似于Browserify，Webpack也是前端资源管理和打包工具，不过适用范围更广。它可以将松散的有依赖关系的前端资源打包成单一文件，根据loader的不同，它可以将CommonJS, AMD, ES6, CSS, 图片, JSON等视作模块。</p>
+		<h3 id="webpack_why">Why</h3>
+		<p>现有的模块管理和打包工具(包括commonJS，CMD等)不能很好地对模块进行无缝整合生成适合浏览器端请求的的静态资源。在以下方面发挥不良：<ul>
+			<li>拆分依赖树为按需加载的模块</li>
+			<li>减少初始化加载时间</li>
+			<li>将各种静态资源视为模块</li>
+			<li>自定义打包逻辑</li>
+		</ul>
+		从而，webpack有着以下特点：<ul>
+			<li>webpack支持同步和异步两种组织模块依赖的方法</li>
+			<li>webpack只能处理原生js模块，但是loader转换器可以将其他资源转换成js模块</li>
+			<li>webpack几乎可以处理所有第三方库，甚至运行使用动态表达式加载依赖</li>
+			<li>webpack有丰富的插件和高速的运行效率</li>
+		</ul>
+		</p>
+		<h3 id="webpack_usage">安装使用</h3>
+		<p>通过npm全局安装<code>npm install webpack –g</code>或安装到项目依赖<code>npm install webpack –save-dev</code>。在全局安装下，我们可以通过webpack命令打包文件。根据官方样例，若有<span class="i">module.js</span>和<span class="i">entry.js</span>如下：</p>
+		<pre><code>// module.js
+module.exports = 'It works from module.js.'
+// entry.js
+document.write('It works.')
+document.write(require('./module.js')) // add module
+</code></pre>
+		<p>通过<code>webpack entry.js bundle.js</code>命令将文件打包，并在html文件中引入。在页面启动后，会先启动<span class="i">entry.js</span>中的代码，其他的模块会在运行到require时再执行。</p>
+		<p>借助<span class="i">loader</span>，webpack可以处理非javascript资源，从而通过require命令引入其他类型的模块或文件。<span class="i">loader</span>本身是一个函数，它以管道的方式调用，将资源转换格式再传递给下一个<span class="i">loader</span>，但是最后一个<span class="i">loader</span>必须返回js。<span class="i">loader</span>可以接受参数，且作为模块运行在nodejs环境中。因此我们可以通过npm来管理<span class="i">loader</span>或在项目中自己写<span class="i">loader</span>模块。</p>
+		<p>如导入css文件时，指定<code>css-loader</code>来读取它，再用<code>style-loader</code>将它插入到页面中，通过命令<code>require("!style!css!./style.css")</code>即可，或在webpack命令后使用参数<code>--module-bind css=style!css</code>。</p>
+		<h3 id="webpack_config">配置文件</h3>
+		<p>Webpack在执行时，除了命令行参数，默认会搜索当前目录下的<span class="i">webpack.config.js</span>文件。这个问价有着类似于<span class="i">package.json</span>的功能。也可以通过<code>—config</code>手动指定配置文件位置。例如，我们可以创建以下配置文件，替代上文的做法：</p>
+		<pre><code>var webpack = require('webpack')
+
+module.exports = {
+    entry: './entry.js',
+    output: {
+        path: __dirname,
+        filename: 'bundle.js'
+    },
+    module: {
+        loaders: [
+            {test: /\.css$/, loader: 'style!css'}
+        ]
+    }
+}		</code></pre>
+		<p>此外，借助插件可以完成更多<span class="i">loader</span>之外的功能，在配置文件中指定<code>plugins</code>属性即可。实际上除了上面介绍的，配置选项还有很多（上面介绍的更常用），如<code>watch, debug</code>等等，参见<a href="http://webpack.github.io/docs/configuration.html" target="_blank">官方文档</a>对配置文件的讲解。</p>
+		<h3 id="webpack_more">更多</h3>
+		<p>在开发环境下，还有<code>webpack-dev-server</code>辅助浏览项目中的页面和资源输出，并可以在浏览器中的<a href="http://localhost:8080/webpack-dev-server/" target="_blank">localhost:8080/webpack-dev-server/</a>位置下查看进度。详情可以查看<a href="https://webpack.github.io/" target="_blank">官网</a>。</p>
+		<p>本节内容大多参考官网和<a href="http://zhaoda.net/webpack-handbook/index.html" target="_blank">Webpack中文指南</a>。个人认为这种工具型的技术实操学习起来更快。</p>
+		<hr>
+		<h1 id="grunt">Grunt</h1>
+		<h3 id="grunt_tutorial">入门</h3>
+		<p>在JS开发的过程中，经常会遇到一些重复性工作，如压缩代码，检查语法错误，将Sass文件转成CSS文件等。Grunt就是便于我们自动管理和运行任务的自动任务运行器。它会按照预定顺序执行它们，简化重复性工作的负担。</p>
+		<p>使用grunt前，需要使用npm命令将<code>grunt-cli</code>全局安装。需要注意的是，<code>grunt-cli</code>是通过组织安排其他grunt组件起到组建作用的。使用grunt时，需要在工程目录下添加<span class="i">package.json</span>和<span class="i">Gruntfile</span>两份文件，它们分别用来便于将项目发布为npm模块和配置和定义任务并加载Grunt插件。通常，最好在<span class="i">package.json</span>中间添加grunt插件的依赖。</p>
+		<h3 id="gruntfile">Gruntfile</h3>
+		<p><span class="i">Gruntfile</span>由<code>wrapper</code>函数、项目于任务配置、加载grunt插件和任务、自定义任务及部分构成。下面就是一个<span class="i">Gruntfile</span>的文件案例，加载<code>grunt-contrib-uglify</code>压缩资源文件。</p>
+		<pre><code>module.exports = function(grunt) {
+
+    // Project configuration.
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        uglify: {
+            options: {
+                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+            },
+            build: {
+                src: 'src/<%= pkg.name %>.js',
+                dest: 'build/<%= pkg.name %>.min.js'
+            }
+        }
+    });
+
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+    grunt.registerTask('default', ['uglify']);
+
+};		</code></pre>
+		<p><ul>
+			<li><code>Wrapper</code>函数：上文中的<code>module.export = function(grunt){}</code>部分。每一个<span class="i">Gruntfile</span>都遵循此格式，所写的grunt代码必须放在此函数的代码块内。</li>
+			<li>项目和任务配置：通过<code>grunt.initConfig()</code>将grunt任务所需要的配置对象写在输入参数里面。理论上，这个对象可以存储任意的数据。在上面的案例里，通过<code>grunt.file.readJSON</code>将<span class="i">package.json</span>中的元数据引入到<code>grunt config</code>。并通过制定<span class="i">uglify</span>的属性，配置<span class="i">uglify</span>任务。</li>
+			<li>加载grunt插件与任务：通过<code>grunt.loadNpmTasks({{plugin_name}})</code>使用已用npm安装的grunt插件。<code>grunt –help</code>将列出所有可用的任务。</li>
+			<li>自定义任务：即上文中的<code>grunt.registerTask()</code>，指定grunt的默认任务，在grunt命令后没有任务时，默认执行<span class="i">uglify</span>任务。实际上，还可以通过<code>grunt.loadTasks</code>加载定义好的外部任务。</li>
+		</ul></p>
+		<h3 id="grunt_config">任务配置</h3>
+		<p>当运行一个任务时，grunt会自动查找配置对象中的同名属性。在同名属性下甚至可以定义不同的target针对不同任务环境，通过grunt {{task_name}}:target的形式访问。在普通环境下grunt会默认执行所有target。同时，在任务配置中，任务的<code>options</code>属性可以覆盖默认值，在不需要的时候可以忽略。</p>
+		<p>在文件操作中，grunt通过src-dest的形式定义文件映射，并提供了不同程度的描述和控制。在简洁格式下，通过为target至此那个src和dest属性完成src-dest映射。这种格式支持个每个映射指定额外属性。文件对象格式下，则是用目标文件名做属性名，源文件列表做它的值，这种方式可以指定多个映射，但是不能给每个映射指定附加属性。文件数组格式支持对应多个映射，且允许每个映射拥有额外属性。下面是它们的一些样例。</p>
+		<pre><code>grunt.initConfig({
+    jshint: {
+        foo: {
+            src: ['src/aa.js', 'src/aaa.js']
+        },
+    },
+    concat: {
+        foo: {
+            files: {
+                'dest/a.js': ['src/aa.js', 'src/aaa.js'],
+                'dest/a1.js': ['src/aa1.js', 'src/aaa1.js'],
+            },
+        },
+        bar: {
+            files: [
+                {src: ['src/bb.js', 'src/bbb.js'], dest: 'dest/b/', nonull: true},
+                {src: ['tmp/**/*'], dest: 'dest/tmp/', filter: 'isFile'},
+            ],
+        }
+    }
+});		</code></pre>
+		<p>上面concat的<code>bar</code>目标中，使用了<code>filter</code>过滤函数找到<span class="i">tmp</span>目录下的所有文件还可以创建自己的过滤函数。Grunt支持在<code>src</code>中通过通配符指定源文件路径，关于通配符模式的语法，可以参见grunt中文文档。当源文件数目很多，难以一一列出时，可以通过<code>dynamic_mappings</code>动态指定文件映射关系。</p>
+		<p>使用<code><% %></code>分隔符指定的模板会从配置文件中读取响应数据来填充。因此，在其中写入grunt命令甚至也是可行的。之前案例里，也是通过<code>grunt.file.readJSON</code>读入外部文件导入配置的。</p>
+		<h3 id="grunt_example">配置实例</h3>
+		<p>假设我们的某个项目需要<a href="https://github.com/gruntjs/grunt-contrib-uglify" target="_blank">grunt-contrib-uglify</a>, <a href="https://github.com/gruntjs/grunt-contrib-qunit" target="_blank">grunt-contrib-qunit</a>, <a href="https://github.com/gruntjs/grunt-contrib-concat" target="_blank">grunt-contrib-concat</a>, <a href="https://github.com/gruntjs/grunt-contrib-jshint" target="_blank">grunt-contrib-jshint</a>, <a href="https://github.com/gruntjs/grunt-contrib-watch" target="_blank">grunt-contrib-watch</a>这5个插件。首先，我们写好<code>wrapper</code>函数和初始化<code>configuration</code>对象。并通过<pre><code>pkg: grunt.file.readJSON(package.json)</code></pre>将<span class="i">package.json</span>中的项目配置信息读进来。接着，我们需要逐一配置上面各插件。</p>
+		<p>Concat插件功能是将依赖的所有资源文件打包，通过指定o<code>ptions</code>中的<code>separator</code>属性可以更改默认的合并输出文件间的分隔符，指定<code>dist</code>属性，确定将要合并的文件和合并后文件的存放位置。例如我们可以如下配置，将所有文件合并为与项目名同名的输出文件。</p>
+		<pre><code>concat: {
+    dist: {
+        src: ['src/**/*.js'],
+        dest: 'dist/<%= pkg.name %>.js'
+    }
+}		</code></pre>
+		<p>Uglify插件用来压缩JS文件。我们可以指定<code>options</code>中的<code>banner</code>给出压缩文件的注释。可以简单地用文件对象的格式确定输入输出。这里我们将concat插件链接的这些文件压缩成一个<code>.min.js</code>文件。示例如下：</p>
+		<pre><code>uglify: {
+    options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+    },
+    dist: {
+        files: {
+            'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+        }
+    }
+}		</code></pre>
+		<p>QUnit插件用来进行单元测试，只需为它指定用于测试的文件位置即可。示例如下：</p>
+		<pre><code>qunit: {
+    file: [‘test/**/*.html’]
+}		</code></pre>
+		<p>JSHint插件可以检查代码中的潜在错误(即<code>lint</code>)。<code>Files</code>属性里是<code>lint</code>的对象。实例如下：</p>
+		<pre><code>jshint: {
+    // define the files to lint
+    files: ['gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+    // configure JSHint (documented at http://www.jshint.com/docs/)
+    options: {
+            // more options here if you want to override JSHint defaults
+        globals: {
+            jQuery: true,
+            console: true,
+            module: true
+        }
+    }
+}		</code></pre>
+		<p>Watch插件用于检测指定文件的变化，在它们变化时执行指定的任务。只需指定<code>files</code>属性和<code>tasks</code>属性即可。</p>
+		<p>最后的最后，通过<code>grunt.loadNpmTasks()</code>将插件导入，并<code>registerTask</code>注册所需的任务，尤其是<code>default</code>任务（当然也可以注册其他可选任务）。</p>
+		<h3 id="grunt_task">任务与插件</h3>
+		<p>启动grunt时，默认附带要执行的任务，当不跟参数时，执行<code>default</code>任务。通过<code>registerTask</code>确定任务名和任务列表。如上面的一些例子。</p>
+		<p>使用<code>grunt.registerMultiTask()</code>还可以创建多任务，它通过输入的属性名和目标名执行任务，并在未指定目标时执行所有目标。在自定义任务时，可以通过<code>grunt.task.run</code>执行其他任务，还可以访问自身的参数如名称、输入参数做相应处理。通过<code>grunt.task.require()</code>检查依赖任务执行成功与否或配置属性是否存在。</p>
+		<p>在grunt 0.4的版本下，<code>grunt-init</code>被拆分成独立的模块，可以通过npm安装。通过grunt插件模板可以创建自己的grunt插件，用类似于npm的形式部署和发布。在发布时，注意命名空间。</p>
+		<p><strong>Grunt cli</strong>是grunt的命令行工具。全局安装后，通过<code>grunt –h</code>即可查看grunt的所有命令。</p>
+		<h3 id="grunt_more">更多</h3>
+		<p><a href="http://www.gruntjs.net/getting-started" target="_blank">Grunt的中文文档</a>介绍得很好，可用作入门。</p>
+		<hr>
+		<h1 id="gulp">Gulp</h1>
+		<h3 id="gulp_tutorial">入门</h3>
+		<p>Gulp是个grunt功能类似的自动化构建工具。它利用Node.js的流概念，在管道中传输数据流，从而完成项目构建。同样使用<code>npm install –global</code> glup全局安装gulp组件，或作为项目开发依赖使用<code>--save-dev glup</code>安装。接着在项目的根目录下新建<span class="i">gulpfile.js</span>的文件，写入<code>glup.task(default, function(){})</code>来定义任务，并通过glup命令执行。还可以通过<code>glup &lt;task1> &lt;task2></code>执行系列任务</p>
+		<h3 id="gulp_api">常用API</h3>
+		<p>为了简化用户的使用难度，gulp的API用法很简洁，数目也很少。</p>
+		<p><code><strong>gulp.src(globs[, options])</strong></code>。输出符合glob匹配模式或匹配模式数组的文件，并返回一个stream可以被pipe方法传递到别的插件中。Glob的写法和Grunt类似。Options中可以选择<code>buffer, read, base</code>等属性，更改读取格式等。以下是样例。</p>
+		<pre><code>gulp.src('client/templates/*.jade')
+    .pipe(jade())
+    .pipe(minify())
+    .pipe(gulp.dest('build/minified_templates'));
+</code></pre>
+		<p><code><strong>gulp.dest(path[, options])</strong></code>。可以被<i>pipe</i>进来，将会写入文件，且重新输出所有数据。因此可以继续将它<i>pipe</i>到多个文件。若文件夹不存在将会自动创建。样例如下：</p>
+		<pre><code>gulp.src('./client/templates/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest('./build/templates'))
+    .pipe(minify())
+    .pipe(gulp.dest('./build/minified_templates'));
+</code></pre>
+		<p><code><strong>gulp.task(name[, deps], fn)</strong></code>用来定义一个使用<i>orchestrator</i>实现的任务。<code>name</code>指定任务名，<code>deps</code>指定任务列表数组，这些任务会在当前任务之前完成。<code>fn</code>表示任务要执行的一些操作。在<code>fn</code>接受一个<code>callback</code>，返回一个<code>stream</code>或返回一个<code>promise</code>时，允许任务异步执行。默认下，gulp会一次性运行所有<code>task</code>且不做等待。因此，若想创建一个序列化<code>task</code>队列，需要1）给出提示告知<code>task</code>依赖另一个<code>task</code>完成。样例如下:</p>
+		<pre><code>var gulp = require('gulp');
+
+gulp.task('one', function(cb) {
+	//do something
+    cb(err);
+});
+
+gulp.task('two', ['one'], function() {
+    // 'one' finshed
+});
+
+gulp.task('default', ['one', 'two']);
+</code></pre>
+		<p><code><strong>gulp.watch(glob[, opts], tasks)</strong></code>或<code><strong>gulp.watch(glob[, opts, cb])</strong></code>。监视文件，并在文件改动时做一些事情。它会返回一个<code>EventEmitter</code>释放<code>change</code>事件。其中<code>tasks</code>为在文件变动后执行的一个或多个<code>gulp.task()</code>名字。用法如：</p>
+		<pre><code>var watcher = gulp.watch('js/**/*.js', ['uglify','reload']);
+watcher.on('change', function(event) {
+    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+});		</code></pre>
+		<p>后者的用法则是，在<code>cb</code>中指定每次变动需要执行的<code>callback</code>。这个<code>callback</code>会被传入一个<code>event</code>对象描述监控到的变动。有如<code>path, type</code>这样的属性。其中<code>type</code>表示变动类型，有<code>added, changed, deleted</code>等。</p>
+		<p><code>gulp.run</code>可以最大并行化执行系列的任务列表。</p>
+		<h3 id="gulp_cli">CLI使用</h3>
+		<p>常用的gulp参数很有限。<code>-v</code>显示gulp版本，<code>--require &lt;path></code>在执行前require一个模块，可以多次使用，<code>--gulpfile &lt;path></code>手动指定<span class="i">gulpfile</span>路径，<code>--cwd</code>指定<span class="i">gulpfile</span>开始查找的位置，<code>--tasks</code>显示task依赖树。<code>--color</code>强制显示颜色，<code>--no-color</code>强制不显示颜色，<code>--silent</code>禁止所有日志输出。</p>
+		<p>task通过<code>gulp &lt;task name></code>来执行。只执行gulp，则会执行注册名为<code>default</code>的task.</p>
+		<h3 id="gulp_more">更多</h3>
+		<p>Gulp是基于流的自动构建系统。相对grunt结构简单，学习成本低。文件里存放代码而非配置。<a href="http://slides.com/contra/gulp" target="_blank">作者的幻灯片</a>里做了简明扼要地解释。想要更深入的学习，可以参加中文版的<a href="https://github.com/jabez128/stream-handbook" target="_blank">stream-book</a>对nodeJS流的介绍。在杂项里的<a href="stream">"Nodejs中的Stream"</a>也有做的笔记。</p>
+		<hr>
+		<h1 id="commonjs">CommonJS</h1>
+		<h3 id="common_brief">简介</h3>
+		<p>CommonJS的目标是在浏览器环境外构建JS生态系统，出现于2009年。官方的JS标准API是为了构建基于浏览器的应用程序，这限制了JS的更广泛应用。CommonJS定义了更多普通应用的API，它的终极目标是进行JS模块化，把JS提升到类似于Python、Ruby、Java的地位。只要环境兼容，使用CommonJS API编写的应用程序就可以通用。</p>
+		<p>而实际上，NodeJS就是CommonJS模块化规范的一种实现。规范还在不断的发展中。以下展示部分内容</p>
+		<h3 id="common_feature">特点</h3>
+		<p><ul>
+			<li>一个文件就是一个独立的作用域，只能通过global共享（不推荐）</li>
+			<li>通过<code>exports</code>定义对外接口，通过<code>require</code>加载此接口</li>
+			<li>模块可以多次加载，但只在第一次加载时运行并缓存。</li>
+			<li>模块加载的顺序和代码中出现顺序一致。</li>
+		</ul></p>
+		<h3 id="common_module">Module</h3>
+		<p>每个模块内部都有一个<code>module</code>对象，对象有<code>id, filename, loaded, parent, children, exports</code>等属性。这些在nodeJS中都有实现。</p>
+		<p><code>module.export</code>用于向外导出模块信息。Node中为每个模块提供了一个<code>exports</code>变量预绑定到<code>module.export</code>上，通过<code>exports.xxx</code>的形式导出。破坏这个绑定关系的操作都将使<code>exports</code>变量无效。</p>
+		<h3 id="require">Require</h3>
+		<p><code>require</code>用于加载模块文件，它会读入并执行一个Javascript文件，然后返回<code>exports</code>对象，如果未发现指定模块会报错。同时，加载的模块的输入时被输出值的拷贝。</p>
+		<p><code>require</code>加载模块时，默认为js文件。若路径以<code>/</code>开头表示绝对路径，以<code>./</code>开头表示相对路径，否则node会去<span class="i">node_modules</span>目录下查找。使用<code>require.resolve</code>可以看到确切结果。在找到目录后，会将<span class="i">package.json</span>中的<code>main</code>对应的值作为入口文件。</p>
+		<p><code>require</code>进来的模块会放在缓存中，不会多次加载。若想多次执行同一模块，可以用<code>module.exports</code>导出函数，或<code>delete require.cache[moduleName]</code></p>
+		<p>模块循环加载时，会先加载不完整的版本，在都<code>require</code>进来后，通过缓存读取<code>exports</code>避免不全的问题。</p>
+		<h3 id="amd">AMD and more?</h3>
+		<p>CommonJS主要是为JS在后端表现定制的，而浏览器和服务器端的特点是不一样的。<a href="https://github.com/amdjs/amdjs-api/wiki/AMD-(%E4%B8%AD%E6%96%87%E7%89%88)" target="_blank">AMD</a>的规范主要为前端JS表现定制。前者加载模块是同步的，后者是异步的。</p>
+		<p>AMD规范使用<code>define</code>方法闭包定义模块，格式类似于<pre><code>define(id?: String, dependencies?: String[], factory: Function|Object);</code></pre></p>
+		<p><code>id</code>是模块名，可选。<code>dependencies</code>是依赖模块列表。<code>function</code>是模块的具体实现，它的返回值就是模块的输出接口或值。范例如下：</p>
+		<pre><code>define('myModule', ['jquery'], function($) {
+    return $('body').text('hello world');
+});
+define(['myModule'], function(myModule) {});
+</code></pre>
+		<p>其中<code>function</code>的输入参数即为依赖模块的输出。通常将没有id的匿名模块作为应用的启动函数。</p>
+		<p>AMD规范允许输出模块兼容CommonJS规范。</p>
+		<p><a href="http://requirejs.org/" target="_blank">RequireJS</a>就是采用了AMD规范的用于模块以来的工具，使用方式同上面的范例。正如AMD名字中提到的那样，它异步引入所有的依赖模块，减少的导入的时间。同时也会因此出现隐式的难以发现的错误。与之并列的还有基于CMD规范的<a href="http://seajs.org/docs/" target="_blank">SeaJS</a>，主旨所限，从略。</p>
+		<h3 id="common_more">更多</h3>
+		<p>CommonJS实际上是JS模块化的一种体现。这也是JS发展的趋势。关于JS模块化编程的介绍见<a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank">模块的写法</a>，<a href="http://www.ruanyifeng.com/blog/2012/10/asynchronous_module_definition.html" target="_blank">AMD规范</a>，<a href="http://www.ruanyifeng.com/blog/2012/11/require_js.html?bsh_bid=230697246">require.js用法</a>。这三篇博客系统地讲解了模块化的思路和应用。另外还有<a href="http://www.cnblogs.com/skylar/p/4065455.html" target="_blank">CommonJS,AMD,CMD对比</a>，<a href="http://zhaoda.net/webpack-handbook/amd.html" target="_blank" 
+		>AMD使用样例</a>，<a href="http://javascript.ruanyifeng.com/nodejs/module.html" target="_blank">Node中CommonJS的部分实现</a>可以参考。</p>
+		<hr>
+		<h1 id="backbone">Backbone.js</h1>
+		<h3 id="backbone_brief">概述</h3>
+		<p>MVC框架是代码组织的经典模式，便于团队协作进行开发。M、V、C分别代表Model，View和Controller。同样在Javascript的社区中，也有着许多MVC和MVC变体框架MV*（下面介绍的AngularJS等）。框架的优点在于便于分工和和代码维护，缺点在于限制了代码的写法，且学习成本一般较高。</p>
+		<p><a href="http://backbonejs.org/" target="_blank">Backbone.js</a>提出于2010年，它严格来说并不算是MV*框架，而是借助一些功能模块的帮助快速构建一个单页面Web应用。因此它给用户了很大的自由在<code>Model</code>和<code>View</code>的连接上。从它的API结构就能看出，<code>Model</code>和<code>View</code>部分是较重的，<code>Controller</code>部分则只由<code>router</code>和<code>router</code>对应的<code>controller</code>处理函数构成。相对来说，backbone.js的体积很小，且学习成本较低。</p>
+		<p>根据官网介绍，<a href="http://underscorejs.org/" target="_blank">underscores.js</a>（一个功能型js函数库）是backbone.js的强依赖，jquery和<a href="https://www.npmjs.com/package/json2js" target="_blank">json2.js</a>是backbone用于Backbone.View的依赖，但是有类似<a href="http://zeptojs.com/" target="_blank">Zepto</a>等替代方案。因此在使用backbone.js时，通常要引入这四个文件。</p>
+		<h3 id="backbone_structure">项目组成</h3>
+		<p>一般来说，一个backbone.js的应用，由<code>models, views, collections, controllers</code>四部分组成。其中<code>models</code>用来描述数据的一个基本单位。如下：</p>
+		<pre><code>App.Models.Person = Backbone.Model.extend({
+    defaults: {
+        "name": "foo",
+        "value": "bar"
+    }
+});		</code></pre>
+		<p><code>Colletions</code>是同一种<code>model</code>的集合，可以方便地表示列表等展示方式，如下：</p>
+		<pre><code>App.Collections.Grade = Backbone.collection.extend({
+    model: App.Models.Person
+});		</code></pre>
+		<p>上面的代码表示，<code>Grade</code>这个集合由<code>Person</code>单元组成。View部分用来在页面上呈现数据，呈现中涉及到绑定DOM的工作大多由jquery完成，View部分必须有<code>el</code>属性，指定绑定的DOM节点，<code>events</code>指定监听事件和对应方法，<code>initialize</code>和<code>render</code>方法分别完成初始化和渲染两个步骤。</p>
+		<pre><code>App.Views.Medals = Backbone.View.extend({
+    el: "#list",
+
+    initialize: function() {
+        this.listenTo(Person, 'change', this.render);
+        this.listenTo(Person, 'destroy', this.remove);
+        this.render();
+    },
+
+    render: function() {
+        var template = _.template($('item-template').html());
+        this.$el.html(template(Person.Medals.toJSON()));
+    },
+
+    events: {
+        "click .toggle"     : "toggle",
+        "dbclick .view"     : "edit",
+        "click a.destroy"   : "clear",
+        "blur .edit"        : "close"
+    }
+})		</code></pre>
+		<p>控制器一般用来相应路由的结果，定义比较自由，例如下面的形式：</p>
+		<pre><code>App.Controllers.show = function(id) {
+    var p = new App.Models.Person({id: id});
+    p.updateTime(Date.now());
+    p.fetch(function(model,response,options){
+        var view = new App.Views.Medals({medal: p});
+    });
+};		</code></pre>
+		<p>最后路由方面。通过继承backbone的<code>router</code>模块实现：</p>
+		<pre><code>var paths = Backbone.Router.extend({
+    routes: {
+        ""                  : "wholeApp",
+        "users/:id"         : "usershow",
+        "users/:id/p:order" : "ordersIndex"
+    },
+
+    wholeApp    : App.Controller.default,
+    usershow    : App.Controller.show,
+    ordersIndex : App.Controller.orderBy
+});
+new paths();
+Backbone.history.start({pushState: true});
+</code></pre>
+		<p>在定义好路由部分后，通过backbone的<code>history</code>模块的<code>start</code>方法启动路由即可。一个基于Backbone.js构造的项目结构大抵如此，它们可以位于同一个文件下（一般案例完全可以这么做）甚至位于html的script标签内。诚然这便于中小型项目，尤其是单页面逻辑内容丰富的Web应用开发使用，不也和当前流行的组件化、模块化的js开发风格有所不同。目前backbone.js仍然在1.x版本，可能会在2.0版本后采用ES6的原生模块化方案等新js特性吧。</p>
+		<h3 id="backbone_api">API介绍（v1.3.3）</h3>
+		<p>Backbone官网对它的API有着详细的介绍，且页面风格与Zepto、underscore一致，非常便于阅读和检索。</p>
+		<h4 id="backbone_view">View</h4>
+		<p><code>Backbone.View</code>的方法用来定义视图类，其中最根本的方法extend拓展定义一个视图类，类的内部通常由<code>render</code>方法渲染界面，渲染时使用类jquery的语法，插入一些html比群标签或计算后的内容。定义好视图类后，通过新建视图实例的形式运行，得到结果，新建时，<strong>有时需要指定<code>Model</code></strong>。</p>
+		<p>在需要用到<strong>模板</strong>时，可以先通过underscore(简写符为'<code>_</code>')的<code>template</code>方法导入模板为函数。模板通常建议用<code>&lt;script></code>并指定<code>type=text/template</code>的定义在html文档中，并用jquery的语句获取。导入模板后，可以把数据的json格式输入到函数中。</p>
+		<p><ul>
+			<li><code><strong>extend(properties[, class properties])</strong></code>：用来创建视图类，有时不在配置中指定<code>el</code>，而通过<code>tagName</code>或是<code>className</code>指定列表中的各元素</li>
+			<li><code><strong>initialize([options])</strong></code>：在实例化视图类的时候调用，可以写入<code>el</code>的属性。</li>
+			<li><code><strong>el</strong></code>属性：指定视图所绑定的网页元素（通常用在<strong>单例视图类</strong>中），<code>$el</code>则表示<code>el</code>所对应的jquery对象。</li>
+			<li><code><strong>tagName, className</strong></code>属性：见上面介绍</li>
+			<li><code><strong>template</strong></code>方法：通过_.template(xxx)指定网页模板生成模板函数，在<code>render</code>中渲染。</li>
+			<li><code><strong>events</strong></code>属性：指定视图中的事件及其对应的处理函数</li>
+		</ul></p>
+		<p>另外，还有<code>setElement</code>更改<code>el</code>，<code>remove</code>移除<code>el</code>和jquery自带的一些方法可以使用。</p>
+		<h4 id="backbone_event">Events</h4>
+		<p><code>Backbone.Events</code>是一个事件对象，任何继承这个对象的对象，都具有<code>Backbone.Events</code>接口，可以使用<code>on</code>和<code>trigger</code>等方法，发布和订阅消息。</p>
+		<pre><code>// use extends
+var EventListener = _.extend({}, Backbone.Events);
+//use clone
+var Dispatch = _.extend(Backbone.Events);
+</code></pre>
+		<ul>
+			<li><code><strong>on(event, callback, [context])</strong></code>方法。可以将回调函数绑定在对象的一些事件上，并可以通过<code>off</code>方法取消绑定。<code>once</code>方法绑定的事件只触发一次回调函数。</li>
+			<li><code><strong>trigger(event, [*args])</strong>可以触发特定事件。</code></li>
+			<li><code><strong>listenTo(other, event, callback)</strong></code>可以把对象绑定在其他对象的事件上，经常用在View视图类中。如<code>view.listenTo(model, 'change', view.render);</code></li>
+		</ul>
+		<p>Backbone提供了许多内建的事件，如<code>add, remove, update, change, reset, change:[attr], destroy</code>等，更多的参加<a href="http://backbonejs.org/#Events-catalog" target="_blank">官方文档</a>。</p>
+		<h4 id="backbone_router">Router</h4>
+		<p><code>Router</code>是backbone提供的路由对象，用于将用户请求的url和后台函数一一对应。同样，它也通过<code>extend</code>方法定义。</p>
+		<ul>
+			<li><code><strong>routes</strong></code>属性：通过键值对形式指定路径和函数名。空字符串代表根路径，<code>*</code>代表任意路径，同时也可以通过":"设置路径参数，这些参数会被捕获并传入处理函数。同样可以用<code>route</code>函数一条条定义路由。</li>
+			<li><code><strong>navigate(fragment, [options])</strong></code>：调转到新页面，这是<code>trigger</code>和<code>replace</code>属性可以保留url和浏览器记录。</li>
+			<li><code><strong>execute(callback, args, name)</strong></code>：在每次路由时都会调用，通过<code>callback</code>的返回值是否为真，判断是否调用处理函数，如下：</li>
+		</ul>
+		<pre><code>var Router = Backbone.Router.extend({
+    execute: function(callback, args, name) {
+        if (!loggedIn) {
+            goToLogin();
+            return false;
+        }
+        args.push(parseQueryString(args.pop()));
+        if (callback) callback.apply(this, args);
+    }
+});		</code></pre>
+		<p>路由类设置好后，实例化之，并通过<code>Backbone.history.start()</code>启动。通常需要指定<code>pushState</code>为<code>true</code>。如果应用程序不在根目录，还需要设置<code>root</code>值。</p>
+		<h4 id="backbone_model">Model</h4>
+		<p><code>Model</code>代表单一的对象。和<code>Collection</code>一起组成Model层。Backbone.js并不要求Model的数据位于本地，在使用<code>fetch()</code>等操作时，backbone的sync方法默认会用jquery的<code>get</code>方法等去获取。所以，很多本地存储数据的应用会重写<code>Backbone.sync</code>函数。</p>
+		<p>Model依旧使用<code>extend</code>方法生成类，和view类似使用<code>new</code>创建实例，可以在<code>defaults</code>属性中设置默认属性。在生成实例时，需要提供各属性的具体值，且需要有主键字段，便于和MangoDB等数据库互动。</p>
+		<ul>
+			<li><code><strong>get(attr)，set(attr,[options])</strong></code>分别用来获取和设置该实例的值。在有特殊字符防止xss时，推荐使用<code><strong>escape</strong></code>方法代替<code>get</code>方法。</li>
+			<li><code><strong>has(attr), unset(attr,[options]), clear([options])</strong></code>：分别检测是否有某属性，删除某属性和删除所有除id外的属性，<code>options</code>中可以指定<code>silent</code>，不触发<code>change</code>事件。另外，属性可以直接通过<code>attributes</code>访问。</li>
+			<li><code><strong>idAttribute</strong></code>属性：指定作为主键的字段。可通过<strong>id</strong>访问。</li>
+			<li><code><strong>toJSON([options])</strong></code>：将该实例json化，常和<code>View.template</code>配合使用。</li>
+			<li><code><strong>fetch([options])</strong></code>：通过jquery发起XHR请求，获取model数据。在<code>options</code>中可以分别指定<code>success</code>和<code>error</code>的回调，回调分别接受<code>model, response, options</code>。使用方法如下：</li>
+			<pre><code>var user = new User ({id: 1});
+user.fetch({
+    success: function (user){
+        console.log(user.toJSON());
+    }
+})</code></pre>
+			<li><code><strong>save([attr], [options])</strong></code>：通知服务器新建或更新Model，如果Model实例不含id属性，将使用<code>POST</code>新建，如果Model带有id属性，<code>save</code>方法将使用<code>PUT</code>更新实例。<code>options</code>和<code>fetch</code>用法类似。</li>
+			<li><code><strong>validate(attr, [options])</strong></code>检测属性是否合法会，触发<strong>invalid</strong>事件。<code>isValid()</code>方法会执行validate返回是否合法的结果。</li>
+		</ul>
+		<p>另外<code>destroy</code>方法清除一个实例，<code>clone</code>拷贝一个实例，<code>hasChanged</code>检测属性是否已更新。Underscore关于对象的如<code>keys</code>，<code>pick</code>等方法也可使用。</p>
+		<h4 id="backbone_collection">Collection</h4>
+		<p>Colletcion是<strong>同一类</strong>Model的集合，如Model是学生，Collection就是班级；Model是歌，Collection就是专辑。如下面代码所示：</p>
+		<pre><code>var Song = Backbone.Model.extend({});
+var Album = Backbone.Collection.extend({
+    model: Song
+});		</code></pre>
+		<ul>
+			<li><code><strong>add(models, [options]), remove(models, [options])</strong></code>：将new出来的实例直接放入Collection的实例，或通过<code>id</code>字段值移除Model实例。</li>
+			<li><code><strong>get(id), set(model, [options])</strong></code>获取collection中的某个model，或重设整个collection。在重设时通过融合的方式完成。</li>
+			<li><code><strong>model([attrs], [options])</strong></code>指定collections所包括的Model。<strong>modelId</strong>属性指定Collection标记Model的方法，函数接受<code>attrs</code>。多用在不同<code>idAttribute</code>的情况。</li>
+			<li><code><strong>comparator</strong></code>指定排序Model的标准字段。<code>sort([options])</code>方法会跟这个属性来排列Models。</li>
+			<li><code><strong>pluck(attr), where(attr)</strong></code>取出所有Models的某一列，返回满足<code>where</code>条件的所有Model。<code>findWhere(attr)</code>返回第一个满足条件的结果。</li>
+			<li><code><strong>fetch([options])</strong></code>类似Model中的用法，获取整个Collection。</li>
+			<li><code><strong>create(attr, [options])</strong></code>通过Collection创建一个Model。</li>
+		</ul>
+		<p>此外，underscore和原生用于数组的方法如<code>push, pop, shift, unshift, forEach, every</code>等等函数也可以使用。</p>
+		<h3 id="backbone_demo">Demos</h3>
+		<p>由于Backbone.js并非使用模块来构建Web应用，且自由度很高，结合上面介绍的API，可以方便地构建很多单页面应用。官网也提供了许多demos，便于初学者上手掌握。</p>
+		<p>可以先从<a href="http://arturadib.com/hello-backbonejs/" target="_blank">Hello-backbonejs</a>上手，感受backbone的基本使用。之后学习<a href="http://backbonejs.org/examples/todos/index.html" target="_blank">Todos</a>（系列的<a href="https://github.com/tastejs/todomvc" target="_blank">TodoMVC</a>也是很不错的学习<a href="https://angularjs.org/" target="_blank">Angular</a>，<a href="http://emberjs.com/" target="_blank">Ember.js</a>等的demo），就可以开始自己捣鼓点小东西了。个人认为对比下面介绍的框架，已经好上手很多了。</p>
+		<h3 id="backbone_more">更多</h3>
+		<p><strong>Backbone.locaStorage</strong>也是很常用的backbone的插件，用于将Model和Collection的数据插入到本地存储中，根据介绍，使用很简单：</p>
+		<pre><code>window.SomeCollection = Backbone.Collection.extend({
+
+    localStorage: new Backbone.LocalStorage("SomeCollection"), // Unique name within your app.
+
+    // ... everything else is normal.
+
+});		</code></pre>
+		<p>另外很喜欢官网的style，和underscore以及zepto的一样，简约而便于检索。本文的样式也参考自此。</p>
+		<hr>
+		<h1 id="express">Express JS</h1>
 	</div>
 </body>
 </html>
