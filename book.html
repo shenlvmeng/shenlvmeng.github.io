@@ -1014,6 +1014,89 @@ var Album = Backbone.Collection.extend({
 		<p>另外很喜欢官网的style，和underscore以及zepto的一样，简约而便于检索。本文的样式也参考自此。</p>
 		<hr>
 		<h1 id="express">Express JS</h1>
+		<h3 id="express_brief">概述</h3>
+		<p>Express是基于Node.js的流行Web开放框架，没有对NodeJS进行二次抽象。可以快速搭建一个完整功能的网站。后面我们将用一个例子简单展示express的特点。</p>
+		<p>新建一个项目目录，进入该目录新建<span class="i">package.json</span>文件，填写项目的一些配置信息。包括<span class="i">name, description, version, dependencies</span>等等。其中<code>dependencies</code>，/中可指定express的版本范围，如<code>4.x</code>. 执行<code>npm install</code>指令安装环境。</p>
+		<p>新建<span class="i">index.js</span>，写入如下样例：</p>
+		<pre><code>var express = require('express');
+var app = express();
+
+app.get('/',function(req, res){
+	res.send('Hello, world!');
+});
+
+app.listen(8888);
+</code></pre>
+		<p>即可在浏览器看到页面效果。其中<code>app.get</code>对路由的处理还可以拓展到其他路径，封装成路由模块。</p>
+		<h3 id="express_basic">基本原理</h3>
+		<p>Express框架建立在nodeJS内置的<code>http</code>模块上。上面的<code>app</code>实际上就是由<code>http</code>的<code>createServer</code>方法生成的。而express只是做了一层包装。</p>
+		<p>中间件是处理http请求的函数。多个中间件按照流水线的形式处理请求，单个中间件处理完成后，通过调用<code>next</code>方法交给下个中间件处理。<code>next</code>方法所带参数表示抛出错误。可以通过<code>use</code>方法注册中间件。样例如下：</p>
+		<pre><code>var express = require('express')
+var http = require('http');
+var app = express();
+
+app.use('/home', function(req, res, next){
+	res.writeHead(200, {"Content-Type": "text/plain"});
+	res.end("Welcome!");
+});
+
+app.use('/about', function(req, res, next){
+	res.writeHead(200, {"Content-Type": "text/plain"});
+	res.end("About.");
+});
+
+app.use(function(req, res){
+	res.writeHead(404, {"Content-Type": "text/plain"});
+	res.end("404 error!\n");
+});
+
+app.listen(8888);
+</code></pre>
+		<h3 id="express_methods">常用方法</h3>
+		<p>除了上文中用到的<code>use</code>,/，对于一些特殊的<code>use</code>使用，还有别名的方法。如<code>all</code>方法表示所有满足第一个条件的请求都必须通过该中间件，<code>*</code>则表示所有请求都必须通过。<code>get</code>方法和<code>post, put, delete</code>等方法也类似，它们没有<code>next</code>方法，只要一个中间件被调用，后面的中间件就不再调用。注意，<code>app.get(name)</code>意为获取全局变量值。</p>
+		<p>这些方法的第一个参数都是请求的路径。Express允许模式匹配，即可以在路径中匹配并捕获模式字段，字段后加上<code>?</code>表示模式可选。范例如下：</p>
+		<pre><code>app.get('/hello/:who?', function(req, res){
+	if(req.params.who) res.end("Hello " + req.parmas.who + "!"); 
+	else res.send("Hello guest.");
+});		</code></pre>
+		<p>url匹配还支持正则匹配。范例略。同时，<code>set</code>方法可以为系统变量指定新值。</p>
+		<p><code>response</code>对象也有一些常用方法。<code>redirect</code>方法用于网页重定向，<code>sendFile</code>用于发送文件，<code>render</code>用于渲染网页模板，向模板中传递数据。<code>Request</code>也有着许多常用对象，<code>ip</code>用于获得请求的ip地址，<code>files</code>用于获取上传的文件。</p>
+		<p>搭建https服务器的方法略。更多API见<a href="http://expressjs.com/zh-cn/api.html" target="_blank">官方文档</a>。</p>
+		<h3 id="express_template">网页模板</h3>
+		<p>通常，对于大部分请求，返回的结果都为较复杂的网页，此时使用<code>send</code>方法就不再方便。展示静态网页模板时，使用<code>response</code>对象的<code>sendFile</code>方法可以解决此问题。渲染动态网页可以使用<code>render</code>方法，也可以利用一些模板引擎完成。</p>
+		<p>在模板中通过{{}}(因模板而异)加载动态数据。模板后缀，视图模板存放的路径，渲染引擎入口等可以在入口js处统一声明。</p>
+		<p>静态文件通过<code>express.static</code>方法指定路径，在浏览器发出非HTML文件请求时，去指定的目录寻找。</p>
+		<h3 id="express_router">路由</h3>
+		<p>在4.0后，express将路由功能封装成了一个单独的组件<code>Express.Router</code>。同样拥有<code>use, get, param, route</code>方法。用法和<code>app</code>极为相似。方便通过<code>app.use(xxx, router)</code>的形式挂载不同的根目录。<code>route</code>方法以路径作为输入参数，之后跟<code>post</code>或其他方法绑定到该路径上。注意，<code>router</code>中的<code>use</code>中间件须放在HTTP动词方法之前，否则不会执行。</p>
+		<p><code>app</code>同样有<code>route</code>属性，<code>app.route</code>是<code>express.router()</code>的等价形式。</p>
+		<h3 id="express_modules">常用模块</h3>
+		<p>使用Express快速开发网络应用的时候，会用到许多现成的模块辅助开发。它们能在express的组织下方便地完成各种功能。</p>
+		<h4 id="body-parser"></h4>
+		<p>body-parser是express的处理请求体的中间件。它接受stream格式的<code>request</code>体，并以用户需要的格式友好地返回。以下是一些body-parser提供的API。</p>
+		<p><code>bodyParser.json(options)</code>解析json格式的请求体，接受Unicode编码的请求提，支持gzip和deflate格式。<code>req.body</code>会被解析后的<code>body</code>替代。</p>
+		<p><code>bodyParser.raw(options)</code>将请求题以Buffer类型解析。返回的解析器将请求体解析为<code>buffe</code>r格式。<code>bodyParser.text(options)</code>类似，解析为<code>string</code>格式。</p>
+		<p><code>bodyParser.urlencoded(options)</code>只解析urlencoded请求体，接受UTF-8编码。生成的新的请求体是键值对的格式。</p>
+		<p>这些API可以按顺序多次列写，依次尝试解析直到body体被成功解析为止。更多信息见<a href="https://github.com/expressjs/body-parser" target="_blank">官方解释</a>。</p>
+		<h4 id="cookie-parser"></h4>
+		<p>cookie是用来解决HTTP协议无状态的问题的。Cookie通过服务器发往客户端浏览器，在浏览器每次发起请求时附带，有<code>path, expire, maxAge, secure, httpOnly</code>等参数。</p>
+		<h4 id="express-session">Express-session</h4>
+		<p>为了保证cookie的安全性，session因此诞生。Session通过<code>sid</code>标识，通常储存在cookie中，服务器每次接收到请求，将session id对应的<code>data</code>关联，进行相应操作。Session可以存放在1) 内存2) cookie 3) redis, memcached缓存 4)数据库中。</p>
+		<p>Express中操作session用来这个模块主要通过<code>session(options)</code>初始化并作为处理回话(session)的中间件。Options中的主要参数有<code>name</code>，用来指定cookie中保存session的字段名，<code>store</code>指定session的存储方式，<code>secret</code>指定hash加密cookie的方式，<code>cookie</code>指定存放sid的cookie的相关选项，<code>genid</code>指定生成新sid时用到的函数，<code>rolling</code>指定每个请求是否重新设置一个cookie，<code>resave</code>指定session未更改时，是否保存session值。</p>
+		<h4 id="connect-mongo">Connect-mongo</h4>
+		<p>这个组件是用来方便地将用户session存储在mongodb中的。通过<code>require(xxx)(session)</code>引入后，如<code>session(new MongoStore(opts))</code>这样使用。<code>opts</code>里可以通过Mangoose或其他驱动器或url指定MondoDB服务器。详情见<a href="https://github.com/kcbanner/connect-mongo" target="_blank">github api解释</a></p>
+		<h4 id="ejs">Ejs</h4>
+		<p>实际上ejs严格来说是一个模板引擎，负责将模板文件替换成html文件再发回到客户端。ejs有三种标签。<code><% code %> <%= code %> <%- code %></code>分别对应JS代码，可以通过使用for循环显示列表内容。ejs还可以使用<code><%- include a %></code>引入其他模板从而实现页面布局的效果。</p>
+		<p>个人认为jade模板引擎Markdown式的写法更简洁。</p>
+		<h4 id="express-mongo">Mongodb</h4>
+		<p>Node开发经常使用的MongoDB做数据库。MongoDB是Mongo在node.js中的驱动。在2.x版本的mongodb中，通过<code>MongoClient.connect(url, opts, callback)</code>创建和数据库的连接，其中<code>callback</code>可以读取<code>err</code>和<code>db</code>对象，从而对数据库操作。通过<code>db.collection(name)</code>获取指定集合，使用得到的collection的<code>insert, insertMany, find(quert), sort, limit, update, delete</code>完成增删改查。使用<code>toArray</code>可以把查询的数据转成数组格式。</p>
+		<p>更多Mongodb使用参见<a href="http://mongodb.github.io/node-mongodb-native/2.1/api/" target="_blank">node-mongodb API文档</a>.</p>
+		<h4 id="express-flash">Connect-flash</h4>
+		<p>flash使用session的特殊区域。信息在展示前被写入<code>flash</code>，展示给用户后即被擦除。Flash常用于跳转页面，保证信息能够正确传递到下一个被渲染的界面。</p>
+		<p>使用时，在初始化session后，创建<code>flash</code>中间件即可。在页面即将跳转时，写入信息到<code>req.flash</code>中，在跳转的页面里，即可通过<code>req.flash</code>获取到。</p>
+		<h3 id="express_more">更多</h3>
+		<p>在实际开发中，通常综合了许多的模块。惯例下，在<span class="i">bin</span>目录下放置可执行文件，<span class="i">models</span>目录下放置模型定义和与数据库沟通的文件充当Model部分，<span class="i">node_modules</span>放置依赖包，<span class="i">public</span>放置静态文件包括css文件等，<span class="i">routes</span>放置路由文件充当Controller部分，<span class="i">views</span>放置视图模板作为View部分。父目录下还有<span class="i">app.js</span>作为入口文件，<span class="i">package.json</span>作为项目配置文件，<span class="i">settings.js</span>储存常用设置参数如数据库端口等。</p>
+		<p>Express有着丰富的模块可供选择，模块文档可以在npm和github上找到，这些模块可以帮助你轻松完成复杂功能，让开发者专注于工程结构和代码逻辑。以上的笔记来自<a href="http://javascript.ruanyifeng.com/nodejs/express.html" target="_blank">阮一峰博客</a>和<a href="https://github.com/nswbmw/N-blog/wiki/%E7%AC%AC1%E7%AB%A0--%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%8D%9A%E5%AE%A2" target="_blank">开发简单博客的实例</a>。</p>
+		<hr>
 	</div>
 </body>
 </html>
