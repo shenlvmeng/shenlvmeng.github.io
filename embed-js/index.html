@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>VNE simulator</title>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html, body{
+			height: 100%;
+		}
+		input, button{
+			font-family: Calibri;
+		}
+		.title{
+			height: 45%;
+			background-color: steelblue;
+		}
+		.title h1{
+			position: absolute;
+		    top: 23%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			font-family: Microsoft YaHei;
+			color: #fff;
+			letter-spacing: 9px;
+			font-size: 50px;
+			font-weight: lighter;
+		}
+		.panel_d{
+			padding: 5% 10% 2% 10%;
+			height: 45%;
+			font-family: Calibri;
+			font-weight: bolder;
+			font-size: 25px;
+			color: #555;
+		}
+		.panel_d input{
+			margin: 0 20px 30px 0;
+			border: 1px solid #999;
+			border-radius: 3px;
+			min-width: 100px;
+			height: 24px;
+			font-size: 16px;
+			padding-left: 3px;
+		}
+		.panel_d input[type=radio]{
+			margin: 0 0 30px 15px;
+			min-width: inherit;
+		}
+		.panel_d button{
+			float: right;
+			height: 40px;
+			width: 90px;
+			background-color: limegreen;
+			margin-right: 15%;
+			border: 0;
+			border-right: 2px solid #999;
+			border-bottom: 2px solid #999;
+			border-radius: 3px;
+			color: #fff;
+			font-size: 18px;
+			opacity: .8;
+		}
+		#display{
+			padding: 2% 10%;
+			background-color: #ccc;
+			height: 35%;
+			font-family: Calibri;
+			font-size: 25px;
+			color: #555;
+		}
+		.result{
+			margin-right: 10px;
+			color: steelblue;
+		}
+		span#display_s, span#display_a, span#display_r{
+			font-weight: bolder;
+			margin-right: 40px;
+		}
+		span#display_t{
+			font-style: oblique;
+		}
+		span.notice{
+			font-size: 14px;
+			color: #999;
+			font-family: Consolas;
+			font-weight: lighter;
+		}
+	</style>
+</head>
+<body>
+	<div class="title">
+		<h1>两步法虚网映射仿真演示</h1>
+	</div>
+	<div class="panel_d">
+	<form id="panel">
+		<label for="vns">Average VNs per time window: </label>
+		<input type="text" name="vns" id="vns" placeholder="10" max="1000" min="0"/>
+		<label for="wins">Total time windows: </label>
+		<input type="text" name="wins" id="wins" placeholder="5" max="1000" min="1" />
+		<br />
+		<label>Choose Mode: </label>
+		<input type="radio" name="isinf" id="f"   value="1" /> <label for="f"  >Capacity Mode</label>
+		<input type="radio" name="isinf" id="inf" value="0" /> <label for="inf">Property Mode</label>
+		<br />
+		<label for="linkrate">Link rate: </label>
+		<input type="text" name="linkrate" id="linkrate" placeholder="0.5" max="1" min="0" />
+		<label for="cpu">Max CPU: </label>
+		<input type="text" name="cpu" id="cpu" placeholder="1" max="10" min="0">
+		<label for="bw">Max Bandwidth: </label>
+		<input type="text" name="bw" id="bw" placeholder="1" max="10" min="0">
+		<br />
+		<label for="life">Average life of each VN: </label>
+		<input type="text" name="life" id="life" placeholder="3" max="10000" min="1" />
+		<span class="notice">This is readonly when Capacity Mode is selected.</span>
+		<br />
+		<button id="submit">Submit</button>
+	</form>
+	</div>
+	<div id="display">
+		<span class="result">Total number: </span><span id="display_s"></span>
+		<span class="result">Acceptance rate: </span><span id="display_a"></span>
+		<span class="result">R/C: </span><span id="display_r"></span>
+		<br><br>
+		<span class="result">Retries: </span><span id="display_t"></span>
+	</div>
+	<script src="./dist/preload.bundle.js"></script>
+</body>
+</html>

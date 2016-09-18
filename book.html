@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="javascript,js,front-end,book,tutorial,shenlvmeng">
+	<meta name="description" content="前端技术学习笔记">
+	<meta name="author" content="shenlvmeng">
+	<title>Front-end tools book(1)</title>
+	<link rel="stylesheet" type="text/css" href="./css/book.css">
+	<link rel="stylesheet" href="./css/atom-one-dark.css">
+	<script src="./highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+	<aside>
+		<a href="#" class="title">前端技术学习笔记</a>
+		<ul>
+			<li><a href="#introduction">前言</a></li>
+			<li><a href="#tail">尾注</a></li>
+		</ul>
+		<hr>
+		<a href="#nodejs">nodeJS</a>
+		<ul>
+			<li><a href="#node_what_why">What and Why</a></li>
+			<li><a href="#node_install">安装</a></li>
+			<li><a href="#node_modules">模块</a></li>
+			<li><a href="#node_require">代码组织</a></li>
+			<li><a href="#node_file">文件操作</a></li>
+			<li><a href="#node_network">网络操作</a></li>
+			<li><a href="#node_thread">进程管理</a></li>
+			<li><a href="#node_features">特点</a></li>
+			<li><a href="#node_examples">使用示例</a></li>
+			<li><a href="#node_more">更多</a></li>
+		</ul>
+		<a href="#npm">npm</a>
+		<ul>
+			<li><a href="#npm_introduction">简介</a></li>
+			<li><a href="#npm_install">安装</a></li>
+			<li><a href="#npm_commands">常用命令</a></li>
+			<li><a href="#npm_download">下载第三方包</a></li>
+			<li><a href="#npm_install_cmd">安装命令行程序</a></li>
+			<li><a href="#npm_realease">发布自己的包</a></li>
+			<li><a href="#npm_version">版本号控制</a></li>
+			<li><a href="#npm_sum_up">小结</a></li>
+			<li><a href="#npm">更多</a></li>
+		</ul>
+		<a href="#bower">Bower</a>
+		<ul>
+			<li><a href="#bower_introduction">简介</a></li>
+			<li><a href="#bower_usage">使用</a></li>
+			<li><a href="#bower_question">Bower or npm?</a></li>
+		</ul>
+		<a href="#Browserify">Browserify</a>
+		<ul>
+			<li><a href="#brow_intro_usage">简介与使用</a></li>
+			<li><a href="#brow_manage_generate">管理与生成</a></li>
+		</ul>
+		<a href="#webpack">Webpack</a>
+		<ul>
+			<li><a href="#webpack_why">Why</a></li>
+			<li><a href="#webpack_usage">安装使用</a></li>
+			<li><a href="#webpack_config">配置文件</a></li>
+			<li><a href="#webpack_more">更多</a></li>
+		</ul>
+		<a href="#grunt">Grunt</a>
+		<ul>
+			<li><a href="#grunt_tutorial">入门</a></li>
+			<li><a href="#gruntfile">Gruntfile</a></li>
+			<li><a href="#grunt_config">任务配置</a></li>
+			<li><a href="#grunt_task">任务与插件</a></li>
+			<li><a href="#grunt_more">更多</a></li>
+		</ul>
+		<a href="#gulp">Gulp</a>
+		<ul>
+			<li><a href="#gulp_tutorial">入门</a></li>
+			<li><a href="#gulp_api">常用API</a></li>
+			<li><a href="#gulp_cli">CLI使用</a></li>
+			<li><a href="#gulp_more">更多</a></li>
+		</ul>
+		<a href="#commonjs">CommonJS</a>
+		<ul>
+			<li><a href="#common_brief">简介</a></li>
+			<li><a href="#common_feature">特点</a></li>
+			<li><a href="#common_module">Module</a></li>
+			<li><a href="#require">Require</a></li>
+			<li><a href="#amd">AMD and more?</li>
+			<li><a href="#common_more">更多</a></li>
+		</ul>
+		<a href="#backbone">Backbone.js</a>
+		<ul>
+			<li><a href="#backbone_brief">概述</a></li>
+			<li><a href="#backbone_structure">项目组成</a></li>
+			<li>
+				<a href="#backbone_api">API介绍(v1.3.3)</a>
+				<ul>
+					<li><a href="#backbone_view">View</a></li>
+					<li><a href="#backbone_event">Events</a></li>
+					<li><a href="#backbone_router">Router</a></li>
+					<li><a href="#backbone_model">Model</a></li>
+					<li><a href="#backbone_collection">Collection</a></li>
+				</ul>
+			</li>
+			<li><a href="#backbone_demo">Demos</a></li>
+			<li><a href="#backbone_more">更多</a></li>
+		</ul>
+		<a href="#express">Express JS</a>
+		<ul>
+			<li><a href="#express_brief">概述</a></li>
+			<li><a href="#express_basic">基本原理</a></li>
+			<li><a href="#express_methods">常用方法</a></li>
+			<li><a href="#express_template">网页模板</a></li>
+			<li><a href="#express_router">路由</a></li>
+			<li><a href="#express_modules">常用模块</a></li>
+			<ul>
+				<li><a href="#body-parser">body-parser</a></li>
+				<li><a href="#cookie-parser">cookie-parser</a></li>
+				<li><a href="#express-session">Express-session</a></li>
+				<li><a href="#connect-mongo">Connect-mongo</a></li>
+				<li><a href="#ejs">Ejs</a></li>
+				<li><a href="#express-mongo">Mongodb</a></li>
+				<li><a href="#express-flash">Connect-flash</a></li>
+			</ul>
+			<a href="#express_more">更多</a>
+		</ul>
+		<a href="#react">React JS</a>
+		<ul>
+			<li><a href="#react_what_why">What and Why</a></li>
+			<li><a href="#thinking_in_react_way">Thinking in React Way</a></li>
+			<li><a href="#react_data">数据呈现</a></li>
+			<ul>
+				<li><a href="#jsx">JSX</a></li>
+				<li><a href="#jsx_html">JSX属性扩散与HTML</a></li>
+			</ul>
+			<li><a href="#react_interact">添加交互</a></li>
+			<li><a href="#react_component">组合组件</a></li>
+			<li><a href="#react_form">表单组件</a></li>
+			<li><a href="#react_component_life">组件说明与生命周期</a></li>
+			<li><a href="#refs">Refs</a></li>
+			<li><a href="#react_api">API</a></li>
+			<ul>
+				<li><a href="#react_reactapi">React</a></li>
+				<li><a href="#reactdomapi">ReactDOM</a></li>
+				<li><a href="#reactdomserverapi">ReactDOMServer</a></li>
+				<li><a href="#reactcomponentapi">Component</a></li>
+			</ul>
+			<li><a href="#react_others">标签/属性/事件</a></li>
+			<li><a href="#flux">Flux/Redux</a></li>
+			<li><a href="#react_more">更多</a></li>
+		</ul>
+		<a href="#angular">Angular JS</a>
+		<ul>
+			<li><a href="#angular_brief">简介与安装</a></li>
+			<li><a href="#angular_usage">使用</a></li>
+			<ul>
+				<li><a href="#angular_app">应用/控制器</a></li>
+				<li><a href="#angular_expression">表达式</a></li>
+				<li><a href="#angular_model">数据模型</a></li>
+				<li><a href="#angular_filter">过滤器</a></li>
+				<li><a href="#angular_service">服务</a></li>
+				<li><a href="#angular_sql">Sql</a></li>
+				<li><a href="#angular_dom">DOM/事件</a></li>
+				<li><a href="#angluar_form">表单验证</a></li>
+				<li><a href="#angular_router">路由</a></li>
+				<li><a href="#angular_api">通用API函数</a></li>
+			</ul>
+			<li><a href="#dependency_injection">依赖注入</a></li>
+			<li><a href="#angular_extend_command">基础拓展指令</a></li>
+			<li><a href="#angular2">Angular 2</a></li>
+			<ul>
+				<li><a href="#componency">组件化</a></li>
+				<li><a href="#angular2_extend_commonds">拓展命令</a></li>
+			</ul>
+			<li><a href="#angular_more">更多</a></li>
+		</ul>
+		<a href="#mangodb">Mangodb</a>
+		<ul>
+			<li><a href="#mango_brief">简介</a></li>
+			<li><a href="#mango_unit">基本单位</a></li>
+			<li><a href="#mango_database">连接/创建/删除数据库</a></li>
+			<li><a href="#mango_crud">CRUD操作</a></li>
+			<li><a href="mango_index">索引与聚合</a></li>
+			<li><a href="#mango_others">其他</a></li>
+		</ul>
+		<a href="#socketio">Socket.io</a>
+		<a href="#jade">Jade</a>
+		<ul>
+			<li><a href="#jade_brief">简介</a></li>
+			<li><a href="#jade_lang">语法</a></li>
+		</ul>
+		<a href="#d3">D3.js</a>
+		<ul>
+			<li><a href="#d3_brief">简介</a></li>
+			<li><a href="#svg">SVG介绍</a></li>
+			<ul>
+				<li><a href="#svg_axis">坐标</a></li>
+				<li><a href="#svg_shape_path">形状与路径</a></li>
+				<li><a href="#svg_fill_stroke">填充与边框</a></li>
+				<li><a href="#svg_pattern_text">模式与文字</a></li>
+				<li><a href="#svg_transform_distord">渐变与变形</a></li>
+				<li><a href="#svg_cut">剪切与遮罩</a></li>
+				<li><a href="#svg_filter">滤镜</a></li>
+				<li><a href="#svg_others">其他</a></li>
+			</ul>
+			<li><a href="#d3_dom">DOM操作API</a></li>
+			<li><a href="#d3_scale">比例尺API</a></li>
+			<li><a href="#d3_transition">渐变API</a></li>
+			<li><a href="#d3_layout">布局API & 形状API</a></li>
+			<ul>
+				<li><a href="#d3_pie">饼状图</a></li>
+				<li><a href="#d3_force">力导向图</a></li>
+				<li><a href="#d3_chord">弦图</a></li>
+				<li><a href="#d3_cluster">集群图/树状图/矩阵树图</a></li>
+				<li><a href="#d3_bundle">捆图</a></li>
+				<li><a href="#d3_pack">打包图</a></li>
+				<li><a href="#d3_partition">分区图</a></li>
+				<li><a href="#d3_geo">地理图</a></li>
+				<li><a href="#d3_histogram">直方图</a></li>
+				<li><a href="#d3_stack">堆栈图</a></li>
+			</ul>
+			<li><a href="#d3_xhr">请求API</a></li>
+			<li><a href="#d3_random">随机数API</a></li>
+			<li><a href="#d3_behavior">行为API</a></li>
+			<li><a href="#d3_color">颜色API</a></li>
+			<li><a href="#d3_more">更多</a></li>
+		</ul>
+		<a href="#es2015">ES6新特性</a>
+		<a href="#groccery">杂项</a>
+		<ul>
+			<li><a href="#markdown">Markdown</a></li>
+			<li><a href="#jsonp">JSONP & CORS</a></li>
+			<li><a href="#dependency_infection_intro">依赖注入</a></li>
+			<li><a href="#candy">语法糖</a></li>
+			<li><a href="#function_language">函数式编程</a></li>
+			<li><a href="#iife">IIFE</a></li>
+			<li><a href="#stream">Nodejs中的Stream</a></li>
+			<li><a href="#crypto">Crypto</a></li>
+		</ul>
+		<p>&copy; shenlvmeng</p>
+	</aside>
+	<div class="container">
+		<h3 id="introduction">前言</h3>
+		<p>此文源于6月初的一个知乎问题“<a href="http://www.zhihu.com/question/29875948" target="_blank">为什么市场上优秀的前端这么少，国外也是这样吗?</a>”，简单阅览了答案后才发现，有那么多的web技术自己还闻所未闻。于是开始从javascript(js)开始，广度优先地学习起一些新技术（当然有些列举的已经不算新了）。在学习的过程中，也发现了作为一名前端工程师的不易：</p>
+		<ul>
+			<li>科技树太广，需要广泛的知识面</li>
+			<li>随着js的发展，前端技术已渗透到各个方面，做前端≈做全栈</li>
+			<li>新技术出现太快，需要保持open mind</li>
+		</ul>
+		<p>这里整理了对一些技术的学习笔记，几乎都是与js相关的技术，按照分类列举在下面（有些未做学习）:</p>
+		<ul>
+			<li><strong>框架</strong>：AngularJS, EmbedJS, ReactJS, ExpressJS, Backbone.JS</li>
+			<li><strong>环境</strong>：NodeJS</li>
+			<li><strong>包管理</strong>：Bower, npm</li>
+			<li><strong>包构建</strong>：Browserify, Webpack</li>
+			<li><strong>任务自动化</strong>：Grunt, Gulp</li>
+			<li><strong>模块化规范</strong>：RequireJS, CommonJS, AMD, CMD</li>
+			<li><strong>DOM操作</strong>：jQuery, Zepto</li>
+			<li><strong>数据库</strong>：MongoDB</li>
+			<li><strong>可视化</strong>：D3</li>
+			<li><strong>测试工具</strong>：Protractor, Selenium, PhantomJS, mocha</li>
+			<li><strong>其他</strong>：Jade, Markdown, Socket.io等</li>
+		</ul>
+		<p>关于本文，还有一些想说的。首先，前端技术发展很快，文中提到的用法等内容是有一定时效性的，请谨慎；其次，写本文的时候是奔着信息充分，便于日后检索去的，所以当作工具书更为适合；最后，水平有限，纰漏还望指正。</p>
+		<hr>
+		<h1 id="nodejs">NodeJS</h2>
+		<h3 id="node_what_why">What and Why</h3>
+		<p>NodeJS是以下介绍的许多技术的出发点和基础。它让JS从前端技术走到后台开发。对于独立运行的JS来说，NodeJS就是一个解析器，就像PHP。但是和PHP不同的是，NodeJS在实现应用的同时，还实现了整个HTTP服务器，不像PHP需要Apache等的帮助。</p>
+		<p>NodeJS具有很好的事件机制和异步IO模型。类似于浏览器，NodeJS提供了内置对象给用户操作。</p>
+		<h3 id="node_install">安装</h3>
+		<p>Windows下和Mac OS X系统下，分别去<a href="http://nodejs.org" target="_blank">nodejs.org</a>下载.msi和.pkg后缀的安装文件。Linux下需要下载.tar.gz包编译安装。</p>
+		<p>Windows环境下安装后可以在命令行中使用<code>node –v</code>, <code>npm –v</code>查看是否成功。另外终端下直接输入node命令可进入命令交互模式.</p>
+		<h3 id="node_modules">模块</h3>
+		<p>运行简单的web应用程序时，可以直接通过命令或是<code>node example.js</code>的形式启动。在程序稍大时，通常会将代码模块化。文件即模块，通过<code>require</code>、<code>exports</code>、<code>module</code>命令导入、导出、声明模块。范例：</p>
+		<pre><code>var foo = require("./foo");
+exports.hello = function(){
+    console.log("Hello World!");
+}
+module.exports = function(){
+    console.log("Hello World!");
+}		</code></pre>
+		<p><code>require</code>函数用于在当前模块中加载和使用别的模块，返回一个模块导出对象。模块名可以以相对或是绝对路径。模块后缀名可省略。<code>exports</code>对象用于导出模块共有方法和属性，导出的内容由别的模块使用<code>require</code>获取。<code>module</code>对象可以访问当前模块的一些相关信息，包括导出对象。</p>
+		<p>一个模块中的JS代码仅在模块第一次被使用时执行一次，并在执行过程中初始化模块的导出对象。之后，缓存起来的导出对象被重复利用。通过命令行传递给NodeJS启动的模块称为主模块。</p>
+		<p>最后，NodeJS支持使用C/C++编写二进制模块，使用方法和JS模块相同，它可以使用操作系统提供的所有功能，潜能很大，但是难以跨平台。这里从略。</p>
+		<h3 id="node_require">代码组织</h3>
+		<p><code>require</code>函数支持绝对、相对路径，可以通过<span class="i">node_modules</span>目录，<span class="i">NODE_PATH</span>定制。</p>
+		<p>当模块较复杂时，可以使用包结构将多个子模块。将这些子模块放在同一目录下，使用<code>index.js</code>作为入口模块。这样路径只需写到文件夹即可。范例：</p>
+		<pre><code>var head = require('./head');
+var body = require('./body');
+
+exports.create = function (name) {
+    return {
+        name: name,
+        head: head.create(),
+        body: body.create()
+    };
+};		</code></pre>
+		<p>另外，使用<code>package.json</code>可以自定义入口模块的文件名和存放位置。使用name,main即可</p>
+		<p>标准的工程目录应该包括<span class="i">bin/</span>, <span class="i">doc/</span>, <span class="i">lib/</span>, <span class="i">node_modules/</span>, <span class="i">tests/</span>, <span class="i">package.json</span>, <span class="i">README.md</span>等部分，分别存放命令相关代码、文档、API相关代码、第三方包、测试用例、元数据文件、说明文件。nodeJS有许多内置的模块可供使用，下面分几个部分分别介绍之。</p>
+		<h3 id="node_file">文件操作</h3>
+		<p>NodeJS作为后台解析环境，可以完成很多文件操作。使用NodeJS内置的<code>fs</code>模块的API可以完成如拷贝等功能。拷贝小文件时，使用<code>writeFileSync</code>, <code>readFileSync</code>即可完成，大文件拷贝时，使用<code>createReadStream</code>, <code>pipe</code>, <code>createWriteStream</code>可以完成。</p>
+		<p>同时NodeJS还提供了<code>Buffer</code>，<code>Stream</code>，<code>Path</code>用于完成更完善的文件操作功能。</p>
+		<p><a href="https://nodejs.org/api/buffer.html" target="_blank"><code>Buffer</code></a>对象是与<code>String</code>对等的二进制数据类型，可以用<code>to_string</code>和<code>string</code>相互转换。不同的是，<code>buffer</code>对象是可写的，这点和C很像。因此，<code>buffer</code>更像是指针操作的C语言数组，如使用<code>slice</code>命令更像是将指针赋予了新值，对新值做的修改对原值有直接影响。因此，拷贝<code>buffer</code>时，需要先创建一个新的<code>buffer</code>才能复制新数据。</p>
+		<p><a href="https://nodejs.org/api/stream.html" target="_blank"><code>Stream</code></a>对象在内存无法一次装下大文件的数据时，或需要一边读取一边处理时提供对数据流的操作，例如可用<code>createReadStream</code>创建一个只读数据流<code>rs</code>，<code>rs</code>有<span class="i">on, pause, resume, end</span>等功能。<code>Stream</code>对象都是事件驱动的，上文提到的rs即可监听<span class="i">data, end, drain</span>等事件。<code>pipe</code>方法提供了防爆仓控制，用于大文件拷贝。</p>
+		<p><a href="https://nodejs.org/api/fs.html" target="_blank"><code>fs</code></a>模块提供了许多有用的API，包括文件属性读写，文件内容读写，底层文件操作。这些API大多为异步，不过都有同步版本，并在函数名后添加Sync。</p>
+		<p><a href="http://nodejs.org/api/path.html" target="_blank"><code>Path</code></a>模块用于文件路径的操作。<code>Normalize</code>方法将传入的路径转换为标准路径，<code>join</code>方法将传入的多个路径拼接成标准路径。</p>
+		<p>下面是一个遍历目录的同步例子，用到了以上介绍的内容：</p>
+		<pre><code>function travel(dir, callback) {
+    fs.readdirSync(dir).forEach(function (file) {
+        var pathname = path.join(dir, file);
+
+        if (fs.statSync(pathname).isDirectory()) {
+            travel(pathname, callback);
+        } else {
+            callback(pathname);
+        }
+    });
+}		</code></pre>
+		<p>除了以上介绍的文件操作外，一些其他需求也经常出现，如去文件BOM头，GBK转换UTF-8编码，单字节编码。</p>
+		<p>NodeJS提供的这些文件操作功能对于变现前端工具是很有帮助的。</p>
+		<h3 id="node_network">网络操作</h3>
+		<p>由于NodeJS的用途是实现高性能的Web服务器，给独立运行的JS提供解释环境，它所提供的网络操作可以完成相对底层的网络操作，如Socket和HTTP协议相关。NodeJS提供了<code>http, https, url, querystring, zlib, net</code>等库帮助开发者实现网络编程。</p>
+		<p><a href="https://nodejs.org/api/http.html" target="_blank"><code>http</code></a>模块提供了两种使用方式: 作为服务端使用和作为客户端使用。如测试第1例中所写，<code>createServer</code>方法创建一个服务器（这也是最常用的一种用法），然后抵用listen方法监听端口。客户端每请求一次，创建时输入的回调函数就调用一次。函数中的<code>request</code>和<code>response</code>实际上也是数据流的格式，所以可以用文件操作函数来读取，如<code>request.on</code>, <code>request.write</code>等方法.</p>
+		<p>在作为客户端使用时，有<code>get</code>, <code>post</code>等方法，同样地，可以使用<code>response</code>对象访问响应头数据，还能把<code>response</code>对象当作一个只读数据流访问响应体数据。用法范例如下：</p>
+		<pre><code>http.get('http://www.example.com/', function (response) {
+    var body = [];
+
+    console.log(response.statusCode);
+    console.log(response.headers);
+
+    response.on('data', function (chunk) {
+        body.push(chunk);
+    });
+
+    response.on('end', function () {
+        body = Buffer.concat(body);
+        console.log(body.toString());
+    });
+});		</code></pre>
+		<p><a href="https://nodejs.org/api/https.html" target="_blank"><code>https</code></a>模块和<code>http</code>模块很类似，区别在于<code>https</code>模块需要额外的SSL证书处理，在<code>createServer</code>时，将公钥和私钥放在<code>option</code>里作为输入参数。同时<code>https</code>的<code>addContext</code>方法还可以使用多个域名提供服务。在客户端模式下，<code>https</code>模块默认拒绝连接未从颁发机构购买SSL证书的服务器。在<code>options</code>中添加<code>rejectUnauthorized: false</code>即可在开发条件下允许自制证书。</p>
+		<p><a href="https://nodejs.org/api/url.html" target="_blank"><code>url</code></a>模块允许生成、解析、拼接url。url分为<span class="i">protocol, auth, hostname, port, pathname, search(query) hash/host, path, href</span>等部分。<code>parse</code>方法可以将url解析成以上部分，且不要求url完整。<code>parse</code>的第二和第三个参数分别可以将query部分转换成对象和解析不带协议头的URL。相反地，<code>format</code>方法允许将URL对象转换为URL字符串。<code>resolve</code>方法支持URL的拼接。</p>
+		<p><a href="https://nodejs.org/api/querystring.html" target="_blank"><code>querystring</code></a>实现了query字符串和参数对象之间的转换，类似于PHP的<code>$_GET，$_POST</code>。同样适用<code>parse</code>方法和<code>stringify</code>方法完成两个方向的转换。</p>
+		<p><a href="https://nodejs.org/api/zlib.html" target="_blank"><code>zlib</code></a>函数支持压缩和解压到功能，在对HTTP响应体数据压缩时，可能需要用到这个模块。下面的范例是官网文档使用的判断用户端是否支持gzip，并在支持时返回gzip之后的响应体数据：</p>
+		<pre><code>http.createServer(function (request, response) {
+    var i = 1024,
+        data = '';
+
+    while (i--) {
+        data += '.';
+    }
+
+    if ((request.headers['accept-encoding'] || '').indexOf('gzip') !== -1) {
+        zlib.gzip(data, function (err, data) {
+            response.writeHead(200, {
+                'Content-Type': 'text/plain',
+                'Content-Encoding': 'gzip'
+            });
+            response.end(data);
+        });
+    } else {
+        response.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+        response.end(data);
+    }
+}).listen(80);</code></pre>
+		<p>同理，<code>zlib</code>可以使用<code>gunzip</code>解压缩文件。</p>
+		<p><a href="https://nodejs.org/api/net.html" target="_blank"><code>net</code></a>模块可以创建底层的socket服务器或是客户端，但是在前端领域使用范围并不广。它可以在socket层面实现HTTP请求和响应。需要有网络编程的底层认识和HTTP协议的熟悉。</p>
+		<p>最后还需要注意的几点是，<code>http</code>模块创建的服务器返回响应时默认使用<code>chunked</code>传输模式，因为<code>writeHead</code>方法后的响应体数据长度未知，设置<code>header</code>中的<code>Content-Length</code>字段后，NodeJS就不会自动添加<code>Transfer-Encoding</code>字段。<code>http</code>模块提供一个全局客户端<code>http.globalAgent</code>，允许直接使用<code>request</code>方法和<code>get</code>方法，但是最多只允许5个并发连接，通过<code>http.globalAgent.maxSockets</code>可以修改这个值。</p>
+		<h3 id="node_thread">进程管理</h3>
+		<p>NodeJS可以可以感知和控制自身进程的运行环境和状态，也可以创建子进程并与其协同工作，这使得NodeJS可以把多个程序组合在一起共同完成某项工作，并在其中充当胶水和调度器的作用。与之相关的API有<code>process, child_process, cluster</code>等等。</p>
+		<p>其中<code>process</code>对象可以感知和控制NodeJS自身进程的方方面面，它是一个全局对象，可以在任何地方使用。通过<code>process</code>可以感知nodeJS进程的各种状态，如<code>process.argv</code>获取命令行参数。它也继承<code>eventEmitter</code>。有<code>exit</code>等事件可以监听，同时有<code>exit, stdin, stdout, env</code>等对程序的精细控制。</p>
+		<p><a href="https://nodejs.org/api/child_process.html" target="_blank"><code>child_process</code></a>可以创建和控制子进程，利用<code>spawn, fork</code>方法创建新的进程，使用<code>exec, execFile</code>方法执行命令、文件。<code>Spawn</code>方法还被其他API做进一步的封装，以适应不同场景。<code>cluster</code>模块是对<code>child_process</code>的进一步封装，用于解决单进程NodeJS Web服务器不能充分利用多核CPU的问题。</p>
+		<p>这里以进程降权和子进程间通过信号通讯为例，熟悉简单API的一些使用：</p>
+		<pre><code>http.createServer(callback).listen(80, function () {
+    var env = process.env,
+        uid = parseInt(env['SUDO_UID'] || process.getuid(), 10),
+        gid = parseInt(env['SUDO_GID'] || process.getgid(), 10);
+
+    process.setgid(gid);
+    process.setuid(uid);
+});
+/* parent.js */
+var child = child_process.spawn('node', [ 'child.js' ]);
+
+child.kill('SIGTERM');
+
+/* child.js */
+process.on('SIGTERM', function () {
+    cleanUp();
+    process.exit(0);
+});		</code></pre>
+		<p>实际上父子进程都为NodeJS进程时，可以通过IPC通讯双向传递数据，双方通过<code>on</code>和<code>send</code>方法在IPC上双向传递数据。具体范例见官网对<code>child.send()</code>的范例。这种情况下，子进程通常使用<code>process.fork</code>方法创建。</p>
+		<h3 id="node_features">特点</h3>
+		<p>正如<a href="#node_what_why">What and Why</a>中所说，NodeJS最大的特点就是事件机制和异步调用。JS是单线程运行的，但是setTimeout，setInterval这样的函数可以通过创建平行进程的形式实现异步的效果。因此实际运行时，JS主进程会顺序向下执行除回调函数以外的代码，这也意味着，回调函数的执行在JS主线程后。例子见<a href="https://nqdeng.github.io/7-days-nodejs/#4.2.2" target="_blank">参考</a>。</p>
+		<p>因此，虽然NodeJS提供了很多异步函数的同步版本，但是为了利用它的优势，熟悉回调和异步的编码思路还是很必要的。如，在同步中以返回值的形式嵌套调用，异步里采用回调函数套回调函数。在遍历等步骤时要更为复杂。</p>
+		<p>异常处理也是如此，由于异步调用的形式会打断错误冒泡的路径，使之不会被try语句catch住，因此NodeJS提供的try catch语句只能在同步形式下使用。异步API通常采用向回调函数中传入<code>err</code>参数实现。从以上可以看到，NodeJS最大的特点会增大代码的复杂度，尤其在有异常处理的情况下。对此，NodeJS提供了一些解决方法。</p>
+		<p><a href="https://nodejs.org/api/domain.html" target="_blank"><code>domain</code></a>模块可以简化异步代码的异常处理。对于全局异常，可以直接通过<code>process</code>的<code>uncaughtException</code>事件捕获。对于普通异常，我们为每个请求创建一个子域，子域内运行的代码可以随意抛出异常，这些异常可以通过子域对象统一捕获，会使得代码简介很多。范例如下：</p>
+		<pre><code>function async(request, callback) {
+    // Do something.
+    asyncA(request, function (data) {
+        // Do something
+        asyncB(request, function (data) {
+            // Do something
+            asyncC(request, function (data) {
+                // Do something
+                callback(data);
+            });
+        });
+    });
+}
+
+http.createServer(function (request, response) {
+    var d = domain.create();
+
+    d.on('error', function () {
+        response.writeHead(500);
+        response.end();
+    });
+
+    d.run(function () {
+        async(request, function (data) {
+            response.writeHead(200);
+            response.end(data);
+        });
+    });
+});		</code></pre>
+		<p>根据NodeJS官方文档的说法，无论怎么捕获到异常，都强烈建议处理完异常后立即重启程序，而不是让程序继续运行。这是由于NodeJS的部分API内部是用C/C++实现的，代码在执行过程中穿梭在JS引擎内部和外部，因此JS的异常抛出机制可能会打断正常的代码执行，导致C/C++部分代码表现异常。而使用JS语句捕获异常时一般捕获到的都是JS本身的异常，不用担心上述问题。</p>
+		<h3 id="node_examples">使用示例</h3>
+		<p>这一部分主要展示了一个完整的应用实例。</p>
+		<p>1. 为了展示NodeJS的最基本的使用和简单的调试方式。我们创建一个用于启动应用的主文件，起名为<code>server.js</code>，写入如下代码。</p>
+		<pre><code>var http = require("http");
+
+http.createServer(function(request, response){
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    response.write("Hello, World!");
+    response.end();
+}).listen(8888);</code></pre>
+		<p>将文件放在NodeJS目录下（其他目录亦可），接着用NodeJS执行这段脚本。打开浏览器访问<a href="http://localhost:8888" target="_blank">http://localhost:8888</a>，可看到此网页。对比PHP还是看出很大不同的。</p>
+		<p>回调函数很好地反映了使用JS做服务器的特点：事件驱动、异步。在请求到达后交给<code>onRequest()</code>函数处理，函数接受两个参数<code>request</code>和<code>response</code>。</p>
+		<p>2. 上文的<code>server.js</code>是启动服务器基本代码，需要交给主文件<code>index.js</code>使用。因此，采用模块一节介绍的方法，使用<code>exports</code>对象。新建<code>index.js</code>，使用<code>require</code>导入。</p>
+		<pre><code>var http = require("http");
+
+function start(){
+    http.createServer(function(request, response){
+        console.log("Request Received");
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.write("Hello, World!");
+        response.end();
+    }).listen(8888);
+    console.log("Server has started.");
+}
+
+exports.start = start;
+
+var server = require("./server");
+server.start();</code></pre>
+		<p>这次同样使用<code>node index.js</code>启动脚本，可以实现同样的效果。</p>
+		<p>3. 路由也是一个Web应用开发的关键一块。利用<code>url</code>模块可以完成这一功能。同时在<code>server.js</code>中，将<code>route</code>作为参数传入<code>start</code>函数中。在<code>index.js</code>中，导入<code>router</code>模块。<code>router.js</code>代码如下。</p>
+		<pre><code>function route(handler, pathname){
+    console.log("Handle a request to " + pathname);
+    if(typeof(handler[pathname]) === "function")
+        handler[pathname]();
+    else
+        console.log("Handler for "+ pathname+ " not found.");
+}
+
+exports.route = route;</code></pre>
+		<p>4. 在start路径下允许用户输入数据，并在upload目录下获得POST数据，需要用到<code>stream</code>和<code>querystring</code>的内容。<span class="i">Server.js</span>和<span class="i">requestHandler.js</span>关键部分定义如下：</p>
+		<pre><code>function start(router, handler){
+    http.createServer(function(request, response){
+	var pathname = url.parse(request.url).pathname;
+	var postData = "";
+	console.log("Request for "+pathname+" received");
+
+	request.setEncoding("utf-8");
+	request.on("data", function(chunk){
+		postData += chunk;
+		console.log("Receive POST data chunk "+chunk+".");
+	});
+
+	request.on("end", function(){
+		router(handler,pathname,response,postData);
+	});
+		
+    }).listen(8888);
+    console.log("Server has started.");
+}
+var querystring = require("querystring")
+
+/* requestHandler.js */
+function start(response, data){
+    console.log('Handler \'start\' was called.');
+    var body = '&lt;html>'+
+        '&lt;head>'+
+        '&lt;meta http-equiv="Content-Type" content="text/html; '+
+        'charset=UTF-8" />'+
+        '&lt;/head>'+
+        '&lt;body>'+
+        '&lt;form action="/upload" method="post">'+
+        '&lt;textarea name="text" rows="20" cols="60">'+
+        '&lt;textarea>'+
+        '&lt;input type="submit" value="Submit text" />'+
+        '&lt;/form>'+
+        '&lt;/body>'+
+        '&lt;/html>';
+
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(body);
+    response.end();
+}
+
+function upload(response, data){
+    console.log('Handler \'upload\' was called.');
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write("You have sent "+ querystring.parse(data).text);
+    response.end();
+}
+</code></pre>
+		<p>5. 利用NodeJS的异步特点和子进程模块，可以将<code>start</code>和<code>upload</code>函数中的耗时操作设为异步进行，将异步运行的结果交给回调函数处理。在<span class="i">requestHandler.js</span>中添加<code>exec</code>语句即可。同时，允许用户上传文件，并将图片在浏览器中显示出来。可以用第三方插件完成大部分功能。这里从略。可以见更多中的Node入门。</p>
+		<h3 id="node_more">更多</h3>
+		<p><a href="https://nqdeng.github.io/7-days-nodejs/">七天学会NodeJS</a>，<a href="http://www.nodebeginner.org/index-zh-cn.html">Node入门</a></p>
+		<hr>
+	</div>
+</body>
+</html>

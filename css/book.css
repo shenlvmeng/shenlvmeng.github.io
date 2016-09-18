@@ -1,0 +1,100 @@
+body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: Simsun, Arial, Dengxian;
+}
+p{
+	margin: 0;
+	padding: 0;
+}
+aside{
+	height: 100%;
+	width: 250px;
+	overflow-y: scroll;
+	position: fixed;
+	background-color: snow;
+	padding: 20px 0 5px 20px;
+}
+aside p{
+	margin-top: 10px;
+	margin-bottom: 30px;
+	font-size: 12px;
+	color: #aaa;
+}
+a{
+	text-decoration: none;
+	color: #555;
+	line-height: 35px;
+	display: block;
+	margin-top: 20px;
+}
+aside a:hover{
+	color: #333;
+	font-weight: bold;
+}
+a.title{
+	font-weight: bold;
+}
+hr{
+	margin: 30px 20px 25px auto;
+	border: 0;
+	height: 1px;
+	background: #bbb;
+    background-image: -webkit-linear-gradient(left, #eee, #aaa, #eee);
+    background-image: -moz-linear-gradient(left, #eee, #aaa, #eee);
+    background-image: -ms-linear-gradient(left, #eee, #aaa, #eee);
+    background-image: -o-linear-gradient(left, #eee, #aaa, #eee);
+}
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+ul a{
+	margin-top: 0;
+	font-size: 15px;
+	line-height: 25px;
+}
+ul ul a{
+	margin-left: 15px;
+	font-size: 13px;
+}
+div.container{
+	margin-left: 250px;
+	padding: 35px 0 0 55px;
+	max-width: 800px;
+	font-family: Microsoft Yahei;
+	font-size: 14px;
+}
+div.container a{
+	text-decoration: underline;
+	color: #888;
+	margin-top: 0;
+	display: inline;
+	line-height: 14px;
+}
+div.container ul{
+	list-style-type: circle;
+	margin: .5em 0 .5em 1.5em;
+}
+div.container ul li{
+	line-height: 1.5em;
+}
+div.container p{
+	margin-bottom: .5em;
+	line-height: 1.5em;
+}
+code{
+	color: #333;
+	padding: 0 2px;
+	font-family: Consolas;
+	font-size: 13px;
+}
+span.i{
+	font-style: italic;
+	font-size: 13px;
+	padding: 0 2px;
+	font-family: Verdana;
+	color: #333;
+}
