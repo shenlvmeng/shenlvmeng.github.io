@@ -180,7 +180,7 @@
 			<li><a href="#mango_unit">基本单位</a></li>
 			<li><a href="#mango_database">连接/创建/删除数据库</a></li>
 			<li><a href="#mango_crud">CRUD操作</a></li>
-			<li><a href="mango_index">索引与聚合</a></li>
+			<li><a href="#mango_index">索引与聚合</a></li>
 			<li><a href="#mango_others">其他</a></li>
 		</ul>
 		<a href="#socketio">Socket.io</a>
@@ -1435,6 +1435,91 @@ bootstrap(angularComponent);
 		<p>Angular JS 1.x版本有着较丰富的参考资料，官网有<a href="https://docs.angularjs.org/api/" target="_blank">API reference</a>和demo分析，<a href="http://www.w3schools.com/angular/" target="_blank">w3school的教程</a>也是不错的学习资料。另外还有<a href="http://www.cnblogs.com/whitewolf/category/404298.html" target="_blank">一些博客</a>和<a href="https://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter4/chapter4.html" target="_blank">gitbook</a>可供参考。Angular 2.0版本较新，Angular 2.0版本的内容主要参考自<a href="https://dzone.com/articles/typed-front-end-with-angular-2" target="_blank">DZone的一篇文章</a>，同时2.0版本有了<a href="https://angular.io/" target="_blank">新的官网</a>。</p>
 		<hr>
 		<h1 id="mangodb">MangoDB</h1>
+		<p>MangoDB是node开发中经常用的数据库。这里做简单介绍。</p>
+		<h3 id="mango_brief">简介</h3>
+		<p>MangoDB是一个基于分布式文件存储的NoSQL数据库，介于关系数据库和非关系数据库间。NoSQL相比关系数据库而言，更适合与海量的网络应用数据，而SQL则更适合商业事务的存储与处理。基于NoSQL的MangoDB由C++编写，它将数据存储成文档，数据结构由键值对组成，类似于JSON对象。</p>
+		<p>MangoDB的安装部署十分简单。去官网下载预编译包安装后，在根目录下创建数据目录即可。</p>
+		<h3 id="mango_unit">基本单位</h3>
+		<p>MangoDB中保留了database和索引的概念，将表视作集合，将数据记录行视作文档，将数据字段视作域，联表替换成文档嵌入，会自动将<code>_id</code>字段设置为主键。</p>
+		<p>在MangoDB自身提供的shell下，<code>show dbs</code>可以查看所有已有的数据库。<code>db</code>可以查看当前的数据库对象，使用<code>use xxx</code>可以切换数据库。数据库通过名字来标识，<span class="i">admin, local, config</span>是保留的特殊数据库。</p>
+		<p>文档是一个键值对，文档不需要设置相同的字段，且相同字段不要求相同数据类型。同时文档中的值甚至可以是其他的富数据类型。</p>
+		<p>集合等同于RDBMS中的表，存在于数据库中，没有固定结构。当第一个文档插入时，集合就会被创建。Capped collection是固定大小的集合，是高性能的自动维护对象插入顺序的集合。需要显示的创建。</p>
+		<p>数据库的信息储存在<span class="i">{dbname}.system</span>这个系统空间中，它的各字段包含着多种系统信息。其中个别字段支持修改或删除。</p>
+		<h3 id="mango_database">连接/创建/删除数据库</h3>
+		<p>在shell（支持JavaScript语法）下，通过命令<code>mongodb://localhost</code>连接数据库，若有用户名和密码，须写成<code>mongodb://username:password@hostname/dbname</code>的形式。</p>
+		<p>使用<code>use</code>命令可以创建或切换到指定数据库。使用<code>db.dropDatabase()</code>删除当前数据库，使用<code>db.createCollection()</code>创建集合。<code>db.collection.drop()</code>删除集合。</p>
+		<h3 id="mango_crud">CRUD操作</h3>
+		<p><code>db.COLLECTION_NAME.insert(document)</code>插入文档，文档格式和JSON基本一样，也可以先将文档存储在变量中。若指定的集合不在数据库中，MongoDB会自动创建该集合并插入。<code>insert()</code>方法可以认为是不指定<code>_id</code>字段的<code>save()</code>方法。</p>
+		<p><code>db.COLLECTION_NAME.update(QUERY, UPDATE,{upsert: BOOL, multi: BOOL, writeConcern: …})</code>. <code>query</code>是查询条件, <code>update</code>是update内容和更新操作符。常用操作符有<code>$set $unset $inc $rename $setOnUpdate $(query)</code>等. <code>upsert</code>意义是如果不存在update的记录是否插入新纪录，<code>multi</code>意为若找到多条是否更新多条。<code>save</code>方法则通过传入一个带有<code>_id</code>的文档，替换原id的文档。</p>
+		<p><code>db.COLLECTION_NAME.remove(QUERY, JUST_ONE)</code>，第一个参数指定查询条件，第二个参数选择是否只删除一条。</p>
+		<p><code>db.COLLECTION_NAME.find()</code>以非结构化方式显示所有文档。<code>pretty()</code>方法以格式化方式显示所有文档。<code>find()</code>方法可以接受条件作为where子句。同样用<code>{}</code>方式表示大小关系，有<code>$lt $lte $gt $gte $ne</code>操作符，这些操作符可以并列书写，如<code>{likes: {$lt: 200, $gt: 100}}</code>。用逗号隔开的键值表示并列的<code>AND</code>条件，用<code>$or</code>表示<code>OR</code>条件，以<code>$or:[{}{}]</code>的方式使用。同时<code>$type</code>操作符可以用于筛选特定类型的字段。</p>
+		<p><code>limit()</code>方法同样可以跟在<code>find()</code>后面，类似于SQL语句中的<code>LIMIT</code>。<code>skip()</code>方法用于跳过<code>find(n)</code>方法得到的前n条文档。<code>sort()</code>类似于<code>ORDER BY</code>，通过<code>{KEY: 1/-1}</code>来控制特定字段的升降序。</p>
+		<h3 id="mango_index">索引与聚合</h3>
+		<p><code>db.COLLECTION_NAME.ensureIndex({KEY: 1/-1}. {background: true/false})</code>用来创建索引，提高搜索效率。<code>KEY</code>的位置可以指定多个字段，创建复合索引。第二个参数指定是否后台执行。</p>
+		<p>集合还有<code>aggergate(middleware)</code>方法用于聚合，类似SQL的聚合函数。接受若干个中间件作为输入参数。中间件可以有<code>project，match，limit，skip，unwind，group，sort，geoNear</code>。分别修改输入文档的结构，过滤数据，跳过指定数目文档，拆分数组类型字段，文档分组，排序输出，按地理位置排序。<code>$group</code>类似SQL中的<code>group by</code>，需要指定<code>_id</code>和输出字段名。聚合表达式有<code>$sum, $avg, $min, $max, $first, $last, $push, $addToSet</code>.</p>
+		<h3 id="mango_others">其他</h3>
+		<p>可以通过应用ObjectId的方式嵌入文档实现关系。当引用在不同的数据库、集合、文档时，通过DBRefs引用外部内容，有操作符<code>$ref</code> <code>$id</code> <code>$db</code> 可以使用。</p>
+		<p>查询的<code>explain()</code>和<code>hint()</code>方法分别用来提供查询信息和强迫MongoDB使用特定索引查询。</p>
+		<p>复制：在使用mongod启动时指定<code>--replSet</code>参数设置副本集。在客户端通过<code>rs.add</code>加入。</p>
+		<p>分片：通过<span class="i">Shard, Config Server, Query Router</span>完成分割数据的功能，具体略</p>
+		<p>备份：使用mongodump工具指定要备份的数据库，使用mongorestore数据恢复</p>
+		<hr>
+		<h1 id="socketio">Socket.io</h1>
+		<p><strong>TODO</strong></p>
+		<hr>
+		<h1 id="jade">Jade</h1>
+		<h3 id="jade_brief">简介</h3>
+		<p>Jade实际上属于模板引擎的一种，模板引擎可以便于HTML文档的书写。Jade受Haml简写法的影响，它是用JS实现的，可以供Node.js使用，具有高度可读性。Jade通过行首的标签和缩进控制文档结构。通过过滤器可以书写less、markdown、coffee-script等内容。同时，jade也有其他语言的实现，包括php，scala，ruby，java等，可以实现前后端渲染的统一。</p>
+		<p>通过<code>npm install jade</code>下载jade，指定全局选项-g后，可以使用jade命令。</p>
+		<h3 id="jade_lang">语法</h3>
+		<p>Jade的语法和markdown也有许类似。</p>
+		<p>Jade使用<code>doctype html, xml, transitional, mobile, basic, 1.1</code>...代替最外围的标签结构，默认为html5，在<code>doctype</code>下书写html开始文档。</p>
+		<p>Jade中，将标签放在行首，它能自动识别自闭标签如<code>&lt;input></code>。标签后加空格，可以添加标签文本，嵌套标签时，换行使用缩进即可。当标签内容很多时，在标签后添加句点. 配合缩进或者在每段前加入<code> | </code>将下面的文本转为plain text类型。</p>
+		<p>Jade中使用<code>()</code>分割属性，<code>()</code>内的内容和html标签一致，可以用空格或逗号隔开。注释使用<code>//</code>书写，在<code>//</code>后添加短横线<code>-</code>，可以将注释视作jade注释。同时支持IE版本注释。</p>
+		<p>使用类似于css选择器的方法，用<code>#</code>和句点标注id和class，在标签后紧跟不带空格，如果没有标签名，默认为<code>div</code>标签。</p>
+		<p>使用<code>#</code> <code>{}</code>使用之前用<code>var</code>声明的变量，变量中的特殊字符会被转义，使用<code>!</code>代替<code>#</code>表示不转义。以短横线<code>-</code>开始非缓冲代码，如<code>for</code>循环结构。用紧跟标签的<code>=</code>表示缓冲代码，会默认转义内容，<code>!=</code>表示不转义。循环结构用<code>each VAL[,KEY] in OB</code>表示。选择结构用<code>case when</code>表示类似于<code>switch</code>，可以多个<code>when</code>执行同一语句块。</p>
+		<p>Jade允许使用<code>extends</code>结合<code>block</code>关键字预定义一个模板文件给其他模板调用，实现模板的集成。<code>includes</code>允许我们插入另一个jade文件到当前文件中，从而实现多重继承，除了<code>.jade</code>文件还可以引用<code>.html</code>甚至<code>.css</code> <code>.js</code>以及纯文本文件等。可以通过过滤器引入其他模板格式的模板。</p>
+		<p>通过<code>mixin name(args)</code>可以定义代码片段，通过<code>+name(args)</code>的形式引用，类似于函数的用法。Mixin中还支持<code>attribute</code>，可以在<code>+name(args)</code>后跟其他的属性。同时在mixin中指定了<code>block</code>时，可以使用<code>include</code>那样的块。</p>
+		<p>使用过滤器如<code>:markdown</code>可以导入其他格式的模板。下面是一个使用jade模板引擎的样例：</p>
+		<pre><code>doctype html
+html(lang="en")
+  head
+    - var name = 'Jade'
+    title= name
+    meta(charset="utf-8")
+    link(rel="stylesheet", type="text/css" href="/stylesheets/style.css")
+
+  body
+    h1 Jade - node template engine
+    #container.col
+      if name === 'Jade'
+        p #{name} is very cool
+      else
+        p Get on Jade
+    footer
+      p.
+        Jade is a terse and simplae
+        templating language with a
+        strong focus on performance
+        and powerful features.</code></pre>
+		<p>更多参考<a href="http://blog.jayself.com/2014/07/28/Jade/" target="_blank">中文教程</a>，还可以进行<a href="http://naltatis.github.io/jade-syntax-docs/" target="_blank">在线演示</a>。另外，由于jade商标已被其他的商业公司注册，<strong>jade-lang现已更名为pug</strong>，官网已更换为<a href="https://pugjs.org/" target="_blank">pugjs</a>。</p>
+		<hr>
+		<h1 id="d3">D3.js</h1>
+		<h3 id="d3_brief">简介</h3>
+		<p>D3全称<span class="i">Data-Driven Document</span>，是使用javascript的实现数据可视化的函数库。它是一个颇受关注的开源项目，官网为<a href="http://d3js.org" target="_blank">http://d3js.org</a>。它不仅可以完成dom元素操作，更可以在画布上完成图表的绘制。</p>
+		<p>HTML中提供两种标签<i>SVG</i>和<i>Canvas</i>来完成这个功能。其中SVG使用XML格式定义图形，绘制矢量图；Canvas是H5提出的新标签，用JS绘图，绘制的是位图。D3的许多图形生成器都是只支持SVG的。因此下面先对SVG做简要介绍。</p>
+		<h3 id="svg">SVG介绍</h3>
+		<p>SVG同XML格式定义二维图形和绘图程序，在改变尺寸时不会损失图像质量，是W3C的标准之一。svg可以通过<code>embed</code>，<code>object</code>或<code>iframe</code>标签嵌入进HTML页面中，并按照后来居上的规则渲染。下面的内容糅合自<a href="http://www.w3school.com.cn/svg/index.asp" target="_blank">w3school</a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial" target="_blank">MDN的SVG教程</a>。</p>
+		<h4 id="svg_axis">坐标</h4>
+		<p>SVG使用的坐标系统以左上角为原点，x轴正方向向右，y轴正方向向下。点或形状的左上角以坐标的形式定位。SVG中的长度不标注单位时表示使用相对大小，默认为用户单位。</p>
+		<h4 id="svg_shape_path">形状与路径</h4>
+		<p>SVG有许多<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element" target="_blank">预设的形状元素</a>。其中常用的有<code>&lt;rect> &lt;circle> &lt;ellipse> &lt;line> &lt;polyline> &lt;polygon> &lt;path></code>。<code>&lt;rect></code>有<code>x, y, width, height, rx, ry</code>(圆角半径)等属性。<code>&lt;circle></code>有<code>r, rx, ry</code>三个属性，<code>&lt;ellipse></code>有<code>rx, ry, cx , cy</code>(圆心位置)四个属性，<code>&lt;line></code>有<code>x1, x2, y1, y2</code>四个属性。<code>&lt;polyline></code>将转折点系列放在<code>points</code>属性中，<code>&lt;polygon></code>和polyline类似，不同的是polygon路径最后一个点会返回第一个点。<code>&lt;path></code>通过<code>d</code>属性绘制路径。</p>
+		<p><code>&lt;path></code>常用于绘制复杂的图形。<code>d</code>属性由命令和位置组成。命令由一个字母表示，大写字母表示绝对定位，小写字母表示相对定位。<code>M [x, y]</code>命令表示将画笔当前位置移动到<code>(x, y)</code>，但并不画线。使用<code>L [x, y] H x V y</code>可以画线，后者表示水平和垂直线。<code>Z</code>命令表示添加一条线段到路径起点闭合路径。<code>C [x1 y1, x2 y2, x y]</code>绘制三次贝塞尔曲线，<code>S [x2 y2, x y]</code>命令延长三次贝塞尔曲线，<code>Q [x1 y1, x y]</code>绘制二次贝塞尔曲线，<code>T x y</code>延长二次贝塞尔曲线。<code>A [rx ry x-asis-rotation large-arc-flag sweep-flag x y]</code>绘制弧形，<code>rx ry</code>分别表示椭圆长短轴长度，<code>x-axis-rotation</code>表示椭圆旋转角度，<code>large-arc-flag</code>表示是否选择较长弧，<code>sweep-flag</code>表示选择画弧旋转方向，<code>x y</code>表示终点坐标。</p>
+		<h4 id="svg_fill_stroke">填充与边框</h4>
+		<p>SVG使用属性<code>fill</code>和<code>stroke</code>属性完成填充和描边上色，颜色命名可以已使用css颜色命名方案。<code>fill-opacity</code>和<code>stroke-opacity</code>分别控制两者的透明度。描边里，<code>stroke-width</code>确定描边宽度，<code>stroke-linecap</code>指定线段两端格式，有<code>butt, square, round</code>可以选择，<code>stroke-linejoin</code>指定线段连接处格式，有<code>miter, round, bevel</code>可以选择。<code>stroke-dasharray</code>指定虚线的空白和实线长。另外，还有<code>fill-rule</code>定义重叠位置上色，<code>stroke-miterlimit</code>定义绘制miter效果的情况，<code>stroke-dashoffset</code>定义虚线开始位置。另外，可以通过css修饰svg标签，同样有内联、内部定义和引入外部css文件三种方式。需要注意的是，内部定义许放在svg标签的<code>&lt;def></code>中，使用<code>fill</code>和<code>stroke</code>表示填充和描边。</p>
+		<p><code>&lt;pattern></code>元素中，可以包含任何之前包含的基本形状。它定义了单元系统和大小位置。<code>x</code>和<code>y</code>属性定义了pattern的起始点，<code>width</code>和<code>height</code>定义了下一个box要跨过多远。<code>patternUnits</code>用于描述模式本身的单位系统。<code>patternContentUnits</code>描述了基于基本形状的单元系统。对象改变大小时，pattern对象会自适应，但是对象里面的内容不会。pattern的单位系统混合使用了<code>userSpaceOnUse和objectBoundingBox</code>，易混淆。详细讨论略。</p>
+		<p>文字写在<code>&lt;text></code>元素内，通过<code>x</code>和<code>y</code>属性确定位置。<code>&lt;tspan></code>用来强调文本，有<code>x, dx, y, dy, rotate, textLength</code>等属性，须放在<code>&lt;text></code>或<code>&lt;tspan></code>下使用。<code>tref</code>元素允许通过<code>xlink:href</code>引用已定义的文本。<code>textPath</code>利用<code>xlink:href</code>获得一个任意路径，让字体环绕路径。<code>text-anchor</code>属性可以改变文字的对齐方式，可以选择<code>start, middle</code>和<code>end</code>。<code>&lt;text</code>中的内容可以用字体相关的属性修饰，如<code>font-size</code>。</p>
+		<h4 id="svg_transform_distord">渐变与变形</h4>
 	</div>
 </body>
 </html>
