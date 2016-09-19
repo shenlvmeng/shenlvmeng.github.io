@@ -160,12 +160,13 @@
 				<li><a href="#angular_service">服务</a></li>
 				<li><a href="#angular_sql">Sql</a></li>
 				<li><a href="#angular_dom">DOM/事件</a></li>
-				<li><a href="#angluar_form">表单验证</a></li>
+				<li><a href="#angular_form">表单验证</a></li>
 				<li><a href="#angular_router">路由</a></li>
 				<li><a href="#angular_api">通用API函数</a></li>
 			</ul>
 			<li><a href="#dependency_injection">依赖注入</a></li>
 			<li><a href="#angular_extend_command">基础拓展指令</a></li>
+			<li><a href="#angular_services">常用服务</a></li>
 			<li><a href="#angular2">Angular 2</a></li>
 			<ul>
 				<li><a href="#componency">组件化</a></li>
@@ -1097,6 +1098,343 @@ app.listen(8888);
 		<p>在实际开发中，通常综合了许多的模块。惯例下，在<span class="i">bin</span>目录下放置可执行文件，<span class="i">models</span>目录下放置模型定义和与数据库沟通的文件充当Model部分，<span class="i">node_modules</span>放置依赖包，<span class="i">public</span>放置静态文件包括css文件等，<span class="i">routes</span>放置路由文件充当Controller部分，<span class="i">views</span>放置视图模板作为View部分。父目录下还有<span class="i">app.js</span>作为入口文件，<span class="i">package.json</span>作为项目配置文件，<span class="i">settings.js</span>储存常用设置参数如数据库端口等。</p>
 		<p>Express有着丰富的模块可供选择，模块文档可以在npm和github上找到，这些模块可以帮助你轻松完成复杂功能，让开发者专注于工程结构和代码逻辑。以上的笔记来自<a href="http://javascript.ruanyifeng.com/nodejs/express.html" target="_blank">阮一峰博客</a>和<a href="https://github.com/nswbmw/N-blog/wiki/%E7%AC%AC1%E7%AB%A0--%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%8D%9A%E5%AE%A2" target="_blank">开发简单博客的实例</a>。</p>
 		<hr>
+		<h1 id="react">React JS</h1>
+		<h3 id="react_what_why"><a href="https://facebook.github.io/react/blog/2013/06/05/why-react.html" target="_blank">What and Why</a></h3>
+		<p>React起源于facebook的内部项目。起初用来搭建Instagram的UI界面，渐渐地发展为前后端都有的网络应用解决方案。React作为开发UI界面的库，特点十分明显。</p>
+		<ul>
+			<li>组件化，react允许将代码封装成一个个组件，然后像插入HTML标签一样，在网页中插入这个组件。在定义好组件后，要做的只是组建的复用和组合。</li>
+			<li>组件就像台有限状态机，用户交互改变状态变化，自动触发重新渲染。组件的生命周期内，有特定处理函数去处理状态变化，并更新改变的部分。这在页面数据经常更新时，会非常方便。</li>
+		</ul>
+		<p>关于它还有些需要明确的东西。首先，React并不是一个完整的MVC框架，它和MVC中的V更像；react也并不是一种新的模板语言，没有<span class="i">JSX</span>的React也能正常工作，<span class="i">JSX</span>是为那些更偏好HTML写法的人准备的。React提供了服务器端的Render能力，但实际上这并不是它的核心出发点，事实上React官方教程是以浏览器端应用介绍为主的。</p>
+		<h3 id="thinking_in_react_way"><a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank">Thinking in React Way</a></h3>
+		<p>使用React可以快速构建Web应用程序组件。在使用React构建一个产品时，通常有如下几步：</p>
+		<ul>
+			<li><strong>拆分界面为一个组件树</strong>，理想状态下一个组件应该只做一件事，当功能较大时就需要拆分成更小的子组件。</li>
+			<li><strong>利用React创建一个静态版本</strong>，不考虑交互功能，只将数据模型渲染在UI上。在这个过程中，将会构造一些组件，这些组件重用其他组件，并通过props传递数据。注意，这里不用到state，state用来实现交互功能。</li>
+			<li><strong>为组件设计最小完整state</strong>，<code>state</code>使得交互触发底层数据模型的变化。考虑设计中的所有数据片段，从父级传入的，不随时间变化的，根据其他<code>props</code>和<code>state</code>算出的多半不适合做state。</li>
+			<li><strong>确定state的生命周期</strong>，在上一步确定作为state的数据片段后，需要确定改变或拥有这些state数据的组件。因为React中数据沿着组件树从上向下单向流动，通常，选择基于state渲染节点的组件的共同祖先组件维护这个state。</li>
+			<li><strong>添加反向数据流</strong>，在上面的步骤后，数据流已经基于<code>props</code>和<code>state</code>沿组件树从上到下单项渲染。层级较深的组件需要更新state时，需要祖先组件传递一个回调函数，在特定事件时触发。</li>
+		</ul>
+		<h3 id="react_data">数据呈现</h3>
+		<p>用户界面做的最多的就是数据的呈现。React让呈现更简单，且数据变化时，用户界面自动更新。例子见<span class="i">reactjs-demo</span>的<span class="i">hello-react</span>。</p>
+		<p>React并不会去操作真实DOM（除非必要），它用一个快速的内置虚拟DOM元素呈现改变来达到高效率。组件的数据输入称为<code>props</code>，通过JSX语法传递，且只读。React组件就像是函数，接受<code>props</code>和<code>state</code>做参数，渲染单个HTML节点。</p>
+		<p>MVC模型中通常将模板显示和数据逻辑分离开，React开发者认为这样会产生过多代码。因此，React的解决方案是通过Javascript直接生成模板，允许在js中使用HTML语法，这种js和HTML混用的语法被称为JSX。JSX和HTML很像，在babel的帮助下，可以在多种环境下使用JSX。</p>
+		<p><strong>React不强制使用JSX，完全可以使用React API（<code>React.createElement</code>）和原生Javascript创建React元素</strong>。方便起见，可以通过工厂方法<code>React.createFactory()</code>创建自定义组件。React已经为HTML标签设置了内置工厂方法。</p>
+		<h4 id="jsx">JSX</h4>
+		<p>JSX很像XML的Javascript的语法拓展，通过React可以做JSX的简单转换。虽然不强制，但是React建议使用JSX语法。XML标签的语法可以使组件关系更加清晰，比方法调用和字面量的形式可读性更好。</p>
+		<p>React可以渲染HTML标签(string)和React组件(classes)，其中前者需要在JSX中使用小写字母开头的标签名，后者需要创建一个大写字母开头的本地变量（使用时是也是大写字母开头的标签名）。这是React约定俗称的。需要注意的是，<strong>JSX中的一些标识符如<code>class</code>和<code>for</code>替代为<code>className</code>和<code>htmlfor</code></strong>（它们是js的保留字）。</p>
+		<p>React会将类XML语法的JSX转成纯粹的Javascript，XML元素，属性和子节点会被转换成<code>React.createElement</code>的参数。JSX同样允许类似XML的方式定义子节点。示例如下：</p>
+		<pre><code>var Nav, Profile;
+// React Input (JSX):
+var app = &lt;Nav color="blue">&lt;Profile>click&lt;/Profile>&lt;/Nav>;
+// React Output (JS):
+var app = React.createElement(
+    Nav,
+    {color:"blue"},
+    React.createElement(Profile, null, "click")
+);		</code></pre>
+		<p>上面代码中，Input和output的语句是等效的。JSX还将从变量名中设定组件的<code>displayName</code>，若使用<code>React.createClass</code>时没有指定<code>displayName</code>的属性。</p>
+		<p>V0.11.0后，React支持命名空间组件，当构建一个有许多子节点的组件时，可以通过设置父组件的命名空间避免过多的变量定义。在定义时，使用类似于<code>FatherComponent.son = xxx</code>的形式定义。</p>
+		<p>Javascript表达式在JSX中使用一对大括号{}包裹，不使用引号。组件中的提及的属性默认为<code>true</code>，未提及的属性默认为<code>false</code>。子组件也可以作为表达式使用。</p>
+		<h4 id="jsx_html">JSX属性扩散与HTML</h4>
+		<p>若事先知道组建的全部属性（<code>props</code>），JSX可以很轻松地定义组件。同时，如果不知道应该设置哪些props，最好不要设置它。JSX的新特性属性扩散支持通过<code>{…props}</code>的形式将属性传递进组件内。它可以多次使用，且可以和其他属性一起使用，后面的属性会覆盖前面的。语法类似下面：</p>
+		<pre><code>var props = {};
+props.foo = x;
+props.bar = y;
+var component = &lt;Component {...props} />;
+</code></pre>
+		<p><code>...</code>操作符实际上也是<a href="#es2015">ES6新规范</a>中的新特性。</p>
+		<p>JSX中可以插入HTML实体，但JSX会对所有字符串做二次转义，避免XSS攻击。最简单的方法是直接使用Unicode字符，或者通过<code>\u00xx</code>的形式插入Unicode字符，万不得已，可以在div的<code>dangerouslySetInnerHTML</code>的属性里直接指定原始HTML。</p>
+		<p>可以为原生HTML元素指定自定义属性，但需要在属性前加上<code>data-</code>的前缀，否则React不会渲染它们。然而自定义元素支持任意属性表示网络可达性的<code>aria</code>属性会被正确渲染。</p>
+		<h3 id="react_interact">添加交互</h3>
+		<p>React用<code>state</code>记录因用户交互改变的组件状态。把事件处理器以驼峰命名形式当作组件props传入即可，就像使用普通HTML一样。在背后，React把事件回调隐式绑定在它的组件实例上，减少了用户的代码量。实际上，React也并没有把事件处理器绑定在节点上，而是用一个最外层的唯一事件监听器处理和分发事件，分发时根据组件在内部映射的事件处理器做处理。</p>
+		<p>如之前提到的，可以把用户界面的组件想象成状态机，React只需更新组件的<code>state</code>，然后根据<code>state</code>重新渲染界面，无需操作DOM。常用的通知React数据变化的方法是调用<code>setState(data, callback)</code>合并<code>data</code>到<code>this.state</code>中，触发重新渲染。</p>
+		<p>实际上，大多数的组件完成的工作只是从<code>props</code>里读取数据并渲染，但是在需要响应用户操作、服务器请求或时间推移时，<code>state</code>是需要的。<strong>React建议将尽量多的组件无状态化</strong>，这样可以减少冗余，更好描述组件业务逻辑。因此，<strong>通常的模式是创建多个只负责渲染数据的无状态(stateless)组件，并在它们上层创建一个有状态(stateful)组件，这个组件封装了所有的用户交互逻辑，而它的无状态子组件负责声明式渲染数据</strong>。</p>
+		<p>承接上文，由于React会根据<code>state</code>自动渲染，因此尽量只把组件的状态原子化，会避免经常性的手动保持数据同步。计算所得数据、React组件、基于props的重复数据不建议包括在state中。总结下来就是，<strong>state内储存的数据相互独立且和props的数据相互独立</strong>。</p>
+		<h3 id="react_component">组合组件</h3>
+		<p>上面的介绍都局限在但各组件内，React里能通过开发简单组件将程序的不同关注点分离，获得类似于使用函数和类的好处。官网提供的Avatar组件例子清晰易懂：</p>
+		<pre><code>var Avatar = React.createClass({
+  render: function() {
+    return (
+      &lt;div>
+        &lt;ProfilePic username={this.props.username} />
+        &lt;ProfileLink username={this.props.username} />
+      &lt;/div>
+    );
+  }
+});
+
+var ProfilePic = React.createClass({
+  render: function() {
+    return (
+      &lt;img src={'http://graph.facebook.com/' + this.props.username + '/picture'} />
+    );
+  }
+});
+
+var ProfileLink = React.createClass({
+  render: function() {
+    return (
+      &lt;a href={'http://www.facebook.com/' + this.props.username}>
+        {this.props.username}
+      &lt;/a>
+    );
+  }
+});
+
+React.render(
+  &lt;Avatar username="pwh" />,
+  document.getElementById('example')
+);		</code></pre>
+		<p>从上面的例子看到，组件的拥有者为组件设置<code>props</code>，反之亦然。同样的道理，组件无法修改自己的<code>props</code>。React中，<strong>从属关系</strong>和<strong>父子关系</strong>是两个不同的概念。上一个例子中，<code>Avatar</code>是<code>div</code>、<code>ProfilePic</code>和<code>ProfileLink</code>的拥有者，<code>div</code>是<code>ProfilePic</code>和<code>ProfileLink</code>实例的父级。</p>
+		<p>在React组件实例化时，可以在闭合标签内引用其他组件或javascript表达式。通过<strong><code>this.props.children</code></strong>这个<code>props</code>读取子级。每次render后，React会根据子级的渲染顺序校正子级。当状态化组件需要删除组件时，通常采用设置<code>display: none</code>来解决。React里，数据通过上面介绍的<code>props</code>从拥有着流向从属者，这就是React中的<strong>单向数据绑定</strong>。拥有者可以通过<code>props</code>和<code>state</code>计算出一些值，然后将结果绑定在从属组件的<code>props</code>上。结合ES7的实验特性，使用<code>var {x, y, …other}=this.props</code>（解构赋值）定义组件<code>props</code>，把未知属性批量提取出来，避免传递不必要的<code>props</code>给子组件。</p>
+		<p>随着应用不断拓展，确保组件正确使用很重要。<strong><code>React.propTypes</code></strong>提供了很多验证其来验证传入数据的有效性，如<code>React.PropTypes.element</code>可以限定只能传入一个子级。当<code>props</code>接收到无效数据时，Javascript控制器会抛出警告。出于性能考虑，通常只在开发环境验证<code>propType</code>。官网教程给出了<code>propType</code>的各种用法，在使用时，<code>propTypes</code>需要写在组件的属性里。<code>getDefaultProps</code>属性支持用声明式的方式定义<code>props</code>的默认值。保证父级未传入<code>props</code>时，<code>this.props.value</code>有默认值。利用JSX的属性扩散语法，可以轻松传递<code>props</code>，就像下面这样：</p>
+		<pre><code>var CheckLink = React.createClass({
+    render: function() {
+        return &lt;a {...this.props}>{'√ '}{this.props.children}</a>;
+    }
+});
+
+React.render(
+    &lt;CheckLink href="/checked.html">
+        Click here!
+    &lt;/CheckLink>,
+    document.getElementById('example')
+);		</code></pre>
+		<p>组件间有时也需要共用一些功能，React使用mixins解决这类问题。在mixins定义好之后，通过指定组件的<code>mixins</code>属性，并用<code>[]</code>包裹引用mixin。另外，利用ES6的js新特性class定义，可以使用<code>class HelloMessage extends React.Component</code>定义组件。</p>
+		<h3 id="react_form">表单组件</h3>
+		<p>React的表单组件支持几个受交互影响的属性: <code>value, checked</code>和<code>selected</code>。组件可以通过<code>onChange</code>回调函数监听组建变化。设置了<code>value</code>的<code>&lt;input></code>是一个受限组件，渲染出来的HTML始终保持<code>value</code>属性的值。没有设置<code>value</code>的<code>&lt;input></code>组件是一个不受限的组件，渲染的元素直接反应用户输入，可以通过<code>defaultValu</code>e设置初始值。同样地，radio，checkbox的<code>&lt;input></code>支持<code>defaultChecked</code>属性，<code>&lt;select></code>支持<code>defaultValue</code>属性。</p>
+		<p>设置受限组件和不受限组件是因为React的组件实际上反映了视图在任何时间点的状态。所以既然明确写出value=xxx，那么输入框的值在任何时间点被渲染都应该不变。另外，<code>textarea</code>和<code>select</code>标签也使用<code>value</code>和<code>defaultValue</code>方便进行组件控制。</p>
+		<h3 id="react_component_life">组件说明与生命周期</h3>
+		<p>组件通过<code>React.createClass</code>创建（ES6新特性下，继承<code>component</code>类亦可）。</p>
+		<ul>
+			<li><code>render</code>方法是必须的，它应该是纯粹的，不修改组件<code>state</code>，不涉及交互，每次调用返回相同信息。</li>
+			<li><code>getInitialState</code>方法在组件挂载前调用，设置<code>this.state</code>的初值。</li>
+			<li><code>getDefaultProps</code>在组件创建时调用一次，返回值被缓存下来，用于父组件遗漏props，这个方法不能依赖<code>this.props</code></li>
+			<li><code>propType</code>对象允许验证传入组件的<code>props</code></li>
+			<li><code>mixins</code>对象允许使用mixin来在组件间共享行为。</li>
+			<li><code>statics</code>对象允许定义静态方法在组件类上调用</li>
+			<li><code>displayName</code>字符串输出调试信息</li>
+		</ul>
+		<p>组件的生命周期分为三个阶段：挂载、更新、移除。React提供生命周期方法，其中<strong><code>will</code>方法</strong>在某些行为发生前调用，<strong><code>did</code>方法</strong>在某些行为发生后调用。</p>
+		<p><strong>挂载</strong>：组件被插入到DOM中。<code>getInitialState()</code>方法在组件挂载前调用。状态化组件需要实现这个方法，返回初始的state数据。<code>componentWillMount()</code>在前，<code>componentDidMound</code>在后。</p>
+		<p><strong>更新</strong>：组件被重新渲染，查明DOM是否应该刷新。</p>
+		<ul>
+			<li><code>componentWillReceive(obj nextProps)</code>当一个挂在组件接收到新的<code>props</code>时候被调用。该方法应该用于比较<code>this.props</code>和<code>nextProps</code>的不同来判断是否使用<code>this.setState()</code>来改变<code>state</code>。</li>
+			<li><code>shouldComponentUpdate(o- bj nextProps, obj nextState): boolean</code>当组件作出是否要更新DOM决定时被调用，实现该函数优化<code>this.props</code>和<code>nexProps</code>以及<code>this.state</code>和<code>nextState</code>的比较，如果不需要更新，返回<code>false</code>。</li>
+		</ul>
+		<p><code>componentWillUpdate()</code>和<code>componentDidUpdate()</code>分别在更新发生前后调用。</p>
+		<p><strong>移除</strong>：组件从DOM中移除。<code>componentWillUnmount()</code>在组件移除和销毁前被调用。</p>
+		<h3 id="refs">Refs</h3>
+		<p><strong>React从不直接操作DOM</strong>，它在内存中维护一个DOM描述，并通过描述快速计算差异然后更新浏览器中的DOM。另外，React实现了完备的虚拟事件系统，确保所有事件对象符合W3C标准。但是，React也提供了直接使用底层DOM API的途径。</p>
+		<p>通过<code>React.findDOMNode</code>函数可以通过DOM节点获取挂载在之上的React组件。通过<code>his.refs.xxx</code>指向一个声明了<code>ref</code>属性的组件。</p>
+		<p>另外，render方法返回UI结构时，有时会出现超出虚拟DOM限制的需求，在render返回的组件实例上调用某些方法。通常，这对于应用中的数据流是不必要的。因为这些数据流总是确保最新的props被传递到每一个从<code>render()</code>输出的子级上。React提供<code>refs</code>属性来满足一些特殊情况，如操作DOM表现形式，在非React环境下使用React等。</p>
+		<p>ReactDOM库提供了<code>render()</code>方法（不要和组件类的render方法搞混），在绑定组件类的同时返回元素的支撑实例。一般在最外层使用。</p>
+		<p>React支持非常特殊的<code>ref</code>属性，可以绑定到render()输出的任何组件上。这个属性允许引用render()返回的响应支撑实例。使用时通过<code>this.refs.xxx</code>来获取支撑实例。在最新的React版本中这种方式已经不推荐，而推荐使用下面的ref回调属性。</p>
+		<p>React支持在组件上绑定ref回调函数属性，这个回调会在组件被挂载后立即执行。被引用的节点将被传入作为输入参数，回调函数可以立即使用这个节点或者将之保存下来<code>(this.xxx = input)</code>为以后使用做准备。ref使用在DOM组件上时，会返回DOM节点，使用在React组件上时会返回组建对象实例。</p>
+		<p>React建议在通常情况下，使用props和state向子组件发送消息，在场景不那么reactive时，使用<code>refs</code>。Ref的优点在于1）可以通过它调用组件类中的公共方法； 2）方便可靠地管理DOM； 3）Ref被自动管理，会和实例同生共死，不用考虑内存问题。在使用时，要注意以下问题：1）不要在render()方法中访问refs； 2）尽量通过在父级使用state避免refs的过度使用。</p>
+		<h3 id="react_api">API</h3>
+		<p>React JSX语法所提供的完全可以由React的API调用所替代。下面是react一些API的reference（主要摘自官方文档）</p>
+		<h4 id="react_reactapi">React</h4>
+		<p><span class="i">React</span>是React库的入口。使用预编译包时，React是全局的；如果使用CommonJS的模块规范，则通过<code>require</code>引入。</p>
+		<p><span class="i">Component</span>是定义React组件的基本类，通过ES6的新特性，可以通过<code>extends</code>定义自己的组件类。</p>
+		<ul>
+			<li><code>React.createClass(specification)</code>方法创建一个组件类，并给出定义。定义中必须给出render方法。组件定义和声明周期参见别节。</li>
+			<li><code>React.createElement(type, [props], [children ...])</code>创建一个指定类型的ReactElement，<code>type</code>可以为DOM原型或ReactClass。</li>
+			<li><code>React.createFactory(type)</code>返回一个可以生成指定类型ReactElement的函数。</li>
+			<li><code>React.cloneElement(element, [props], [children ...])</code>克隆一个已有的元素，并融合进新的<code>props</code>，是新增特性</li>
+		</ul>
+		<p>除此之外，还有<code>isValidElement</code>判断是否是合法元素，DOM方法更方便地创建DOM元素，<code>PropTypes</code>方法方便表单检验。React的<code>Children</code>对象提供了对<code>props.children</code>数据结构处理的工具，有<code>map</code>和<code>forEach</code>（与array的同名方法类似），以及<code>count</code>计算总数、<code>only</code>返回children仅有的子级元素和<code>toArray</code>方法将children数据专转为数组结构。</p>
+		<h4 id="reactdomapi">ReactDOM</h4>
+		<p>ReactDOM包使用在React应用的最外层，用于进行网页原生DOM操作（虽然官方不推荐），其中render方法时最为常用的。<code>ReactDOM.render(element, DOM container, [function callback]) </code>React用于将组件绑定在DOM上，若已被绑定，则会更新。在绑定时，会将DOM原内容清除。React预计会在未来支持将多个组件类绑定在同一个DOM内。</p>
+		<p><code>unmountComponentAtNode(DOM container)</code>方法和<code>findDOMNode(React component)</code>方法分别用于移除DOM上的组件和找到组件所对应的DOM。其中后者是ref的替代用法（官方不推荐），且不能在无状态组件内使用。</p>
+		<h4 id="reactdomserverapi">ReactDOMServer</h4>
+		<p><code>renderToString</code>和<code>renderToStaticMarkup</code>方法用于将React元素渲染成HTML内容。其中后者不会添加额外的DOM属性。另外，两个方法都只能在服务器环境下运行。</p>
+		<h4 id="reactcomponentapi">Component</h4>
+		<p>Component实例在渲染时创建，并在之后的渲染中重复使用。可以在组件方法中用<code>this</code>访问。唯一一种外部访问的方法是储存<code>ReactDOM.render</code>的返回值，在其他组件里还能通过refs来实现同一效果。</p>
+		<ul>
+			<li><code>setState(function/obj nextState, [function cb])</code>方法<strong>合并</strong>nextState和当前state，支持回调函数。<strong><i>绝不要</i></strong>直接改变<code>this.state</code>。另外，除非在<code>shouldComponentUpdate()</code>中实现条件渲染逻辑，否则，该方法触发一次重绘。</li>
+			<li><code>replaceState</code>方法和<code>setState</code>方法类似，区别在于该方法会先<strong>删除</strong>现有<code>state</code>。</li>
+			<li><code>forceUpdate([function cb])</code>用在<code>this.props</code>和<code>this.state</code>未改变而仍需要重绘时调用，在手动修改<code>this.stat</code>e时也是如此。在该方法触发重绘时，子组件也会重绘（官方不推荐使用该方法= =）。</li>
+			<li><code>bool isMounted()</code>方法判断组件是否已被绑定在DOM中，该方法多用在异步场景下。</li>
+		</ul>
+		<p><code>setProps</code>和<code>replaceProps</code>方法在新版本中已被删去。</p>
+		<h3 id="react_others">标签/属性/事件</h3>
+		<p>React支持几乎所有的html和svg标签，同时也支持所有标准属性。React中的属性都用驼峰命名，<code>class</code>和<code>for</code>属性改为<code>className</code>和<code>htmlFor</code>。React还添加了特殊的非DOM属性：</p>
+		<ul>
+			<li><code>key</code>作为唯一标识器，用于在渲染和差异检测时将顺序打乱后，确保组件还存在。</li>
+			<li><code>ref</code>，介绍略。</li>
+			<li><code>dangerouslySetInnerHTML</code>提供插入纯HTML字符串功能</li>
+		</ul>
+		<p>React对浏览器本地事件也有封装，且保证了浏览器兼容性。需要时，通过<code>nativeEvent</code>属性获得底层浏览器事件。通过<code>e.preventDefault()</code>可以避免事件冒泡。React的事件处理器在事件冒泡阶段出发，通过在事件后添加<code>Capture</code>（如<code>onClickCapture</code>）可以在捕获阶段处理事件。包括剪贴板、键盘、鼠标、焦点、表单、选择、触摸、UI、鼠标滚轮、多媒体、图片、动画、渐变事件（html5标准后添加了许多）。具体参加<a href="https://facebook.github.io/react/docs/events.html" target="_blank">官方文档介绍</a>。</p>
+		<h3 id="flux">Flux/Redux</h3>
+		<p>React为开发者提供了状态化组件的前端开发方式，这仅仅完成了MVC的V部分。Flux是Facebook提出了用于M和C部分的解决方案（实际上并不能称为M和C）。Flux是一种架构约定和架构模式。根据<a href="http://facebook.github.io/flux/docs/overview.html" target="_blank">文章</a>介绍一个Flux应用主要包含四部分：dispatcher，stores，views，actions。数据流在它们之间单向流动。如下图所示：</p>
+		<img src="./img/flux.png" />
+		<ul>
+			<li>首先定义一些action creator方法。根据需要提供给dispatcher来分发。</li>
+			<li>View部分通过交互触发Action。</li>
+			<li>Dispatcher会分发出发的Action给所有注册的Store的回调函数</li>
+			<li>Store回调函数根据Action的payload的部分更新自身数据，并触发一个change事件</li>
+			<li>View会监听该事件，通过Store的方法拿到新数据，调用<code>setState</code>更新组件UI</li>
+		</ul>
+		<p>数据流在整个过程都是单向移动的，通过dispatcher来组织，由Store来维护所有状态。各部分分工明确。Dispatcher分发动作给Store注册的回调函数，官方提供了<a href="https://github.com/facebook/flux/blob/master/src/Dispatcher.js" target="_blank">Dispatcher.js</a>这个demo，与<a href="https://github.com/facebook/flux/tree/master/examples/flux-todomvc/js" target="_blank">flux-todomvc</a>作为使用样例。在样例中可以学到flux的简单使用。</p>
+		<p>Redux提出于2015年，充分利用函数式编程的特点，简化了flux的的用法。将flux中的action和dispatcher进一步解耦，且将dispatcher从store中解耦， store成为了stateless function（state,action）=> state。现在的store只<strong>管理</strong>状态，从而增强了其可拓展性。</p>
+		<p>在Redux中，action只是包含type和payload的对象，需要通过<code>store.dispatch()</code>方法来发送，action creator可以返回一个事件。Reducer用来处理action触发的对state的修改，形式类似于(oldState, action)=>newState。Redux将store视为唯一可信数据源，整个状态由一个store储存，由一个<strong>root reducer</strong>管理，在root reducer下，可以定义pure function管理状态树的各子树。</p>
+		<p>Redux的Store提供<code>getState</code>方法获取state，提供<code>dispatch</code>方法发送action修改state，提供<code>subscribe()</code>方法注册回调函数监听state的修改。总结起来，<code>store.dispatch(action)</code>触发事件，action的type和payload说明事件情况；action触发指定root reducer，根据type和payload返回一个新的state；所有通过subsribe注册的监听函数会被调用，它们可以通过<code>getState</code>拿到新的state。</p>
+		<h3 id="react_more">更多</h3>
+		<p>React仍然没有一个系统且用户友好的学习教程（循序渐进且有demo）。个人认为效率较高的学习方式是先由<a href="http://www.ruanyifeng.com/blog/2015/03/react.html" target="_blank">阮一峰的博客</a>获得感性认识，再通过<a href="https://facebook.github.io/react/docs/getting-started.html" target="_blank">官方文档</a>和<a href="http://reactjs.cn/react/docs/getting-started.html" target="_blank">中文文档</a>的讲解获得全面认识。文档中也有demo展示。另外，<a href="http://react-china.org/" target="_blank">React中文社区</a>里会有一些不错的资源和讨论，<a href="https://www.gitbook.com/book/hulufei/react-tutorial/details">React入门教程</a>也有些补充，如Flux和Redux的介绍。</p>
+		<p>另外，React一直处在发展中，直到现在也未推出1.0版，且框架特点和使用方法和typical MVC框架差别较大，学习成本较高。在学习文档的同时根据"Tutorial"的介绍训练，效果会更好。</p>
+		<hr>
+		<h1 id="angular">Angular JS</h1>
+		<h3 id="angular_brief">简介与安装</h3>
+		<p>Angular是比较新的技术，1.0版本发布于2012年。它采用MVVM架构，和MVC架构的React不同，View和ViewModel有着数据的双向绑定。Angular现由Google正式支持。</p>
+		<p>Angular和React类似着眼点在前端的内容展示，不同于React尝试将UI界面组件化，Angular试图拓展HTML的功能来弥补与实际Web应用间的鸿沟。如：</p>
+		<ul>
+			<li>通过<code>{{}}</code>绑定数据</li>
+			<li>使用DOM控制结构迭代或隐藏DOM片段</li>
+			<li>将逻辑代码关联到DOM元素上</li>
+			<li>将HTML做成可重用组件</li>
+		</ul>
+		<p>Angular具有很好的抽象性简化了应用的开发，且在CRUD应用中灵活性也很好，在DOM操作频繁且复杂的应用里，Angular并不适合。如游戏或是图形编辑器。这时使用React或者jQuery会好些。</p>
+		<p>Angularjs可以使用npm或者bower进行安装，<code>bower/npm install angular</code>。之后便可以在<span class="i">node_modules</span>或<span class="i">bower_components</span>中找到。在<code>script</code>标签中引入即可。</p>
+		<h3 id="angular_usage">使用</h3>
+		<h4 id="angular_app">应用/控制器</h4>
+		<p>Angular在后台通过定义AngularJS module确定应用；在前端通过<code>ng-app</code>指定Angular应用所绑定的位置（通常是html标签）。应用的所有controller也由模块包含。后台应用通过<code>angular.module(name, [])</code>构造，前者确定应用名，后者确定依赖模块。</p>
+		<p>Angular支持创建自己的指令，使用<code>app.directive(name, function(){})</code>即可。自定义的指令可以通过元素名、属性、类名甚至注释来调用。在function部分的return中设置<code>restrict</code>为E A C M分别限制指令只能通过元素名、属性、类名、注释使用，可以叠用，默认为EA。</p>
+		<p>应用可以有多个控制器处理不同功能，后台通过<code>app.controller(name, function(){})</code>定义，前端通过指定<code>ng-controller</code>绑定。Angular控制器是对象类型，有属性和方法，都可以通过<code>$scope</code>访问，其他方法可以通过<code>ng-click</code>等命令绑定在前端标签。应用和控制器的后台js文件可以外部通过<code>script</code>标签导入，建议放在body后。</p>
+		<h4 id="angular_expression">Angular表达式</h3>
+		<p>Angular的表达式写在双大括号内，把数据绑定在HTML内，和<code><strong>ng-bind</strong></code>有一样的效果，Angular表达式和js表达式很像，可以包含数组，对象，字符串、数字、运算等等，但是不支持条件判断和过程控制，且支持过滤器。</p>
+		<h4 id="angular_model">数据模型</h4>
+		<p>在controller中，可以为<code>$scope</code>变量赋值，从而定义应用的数据模型。在前端可以用<code>ng-bind</code>或<code>{{}}</code>使用已定义好的数据模型，或通过<code>ng-model</code>在前端输入域绑定数据。由于Angular采用数据双向板顶，修改输入域的值时，AngularJS的属性值也将<strong>同步</strong>更改。</p>
+		<p>指定标签<code>ng-show</code>属性，可以在后台结果返回为<code>true</code>时显示标签。<code>ng-model</code>还可以为应用数据提供状态值，通过<code>$invalid, $dirty, $touched, $error</code>访问。</p>
+		<p>同时在CSS类中，指定<code>ng-invald, ng-empty, ng-not-empty, ng-touched, ng-un-touched, ng-valid, ng-dirty, ng-pending, ng-pristine</code>类，可以让样式跟着模型状态改变。</p>
+		<h4 id="angular_filter">过滤器</h4>
+		<p>过滤器可以被添加在Angular语句中，用来格式化数据。有如下的一些可以选择：</p>
+		<ul>
+			<li><code>currency</code>格式化为指定货币；<code>date</code>格式化为指定日期；<code>number</code>格式化数字为字符串</li>
+			<li><code>json</code>格式化为json字符串</li>
+			<li><code>filter</code>筛选数组的子集</li>
+			<li><code>limitTo</code>限制数组或字符串指定数目的长度</li>
+			<li><code>lowercase/uppercase</code>格式化为大写或小写</li>
+			<li><code>orderBy</code>使数组按序排列</li>
+		</ul>
+		<p>在使用时，通过一个管道字符<code> | </code>和一个过滤器添加到表达式中，如<code>{{price | currency}}</code>或<code>{{x in names | filter: ’Bill’ | orderBy:’name’}}</code>。filte支持自定义，在后台通过<code>app.filter(name, function(){return function(){}})</code>定义即可。</p>
+		<h4 id="angular_service">服务</h4>
+		<p>AngularJS中，服务是一个函数或对象，以<code>$</code>开头，可以在应用中使用（<strong>注意服务需要作为一个参数传递到controller中，需要先传入后使用</strong>），用来构造一些常用或是复杂的操作。AngularJS内建有30多个服务。</p>
+		<p><code>$location</code>服务返回当前页面的地址信息等，有<code>absURL()</code>等方法使用。<code>$index</code>记录着<code>ng-repeat</code>的序号。<code>$timeout</code>有类似于<code>setTimeout</code>的作用；同理<code>$interval</code>对应着<code>setInterval</code>函数。</p>
+		<p><code>$http</code>是Angular应用最常用的服务，用于向特定位置发送请求，并通过<code>then(function(){})</code>获取返回。发送的方法有get/delete/head/jsonp/patch/post/put等。也可以直接通过类似如下的方式发起请求：</p>
+		<pre><code>var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope, $http) {
+    $http({
+        method : "GET",
+        url : "welcome.htm"
+    }).then(function mySucces(response) {
+        $scope.myWelcome = response.data;
+    }, function myError(response) {
+        $scope.myWelcome = response.statusText;
+    });
+});		</code></pre>
+		<p>返回值<code>response</code>有<code>config, data, header, status, statusText</code>等属性可以使用，可以在<code>then</code>方法的第二个参数指定错误处理函数。</p>
+		<p>另外，可以通过<code>app.service(name,function(){})</code>自定义服务对象，然后在控制器中使用。常用服务一节还列举了一些其他服务。</p>
+		<h4 id="angular_sql">Sql</h4>
+		<p>由于Angular是一个前端的框架，需要后台如PHP，ASP等的辅助才可完成和数据库的交互，解决跨域问题的方法从略。</p>
+		<h4 id="angular_dom">DOM事件</h4>
+		<p><code>ng-disabled</code>和<code>ng-show</code>、<code>ng-hide</code>结合<code>ng-model</code>可以实现disabled和show/hide的效果。Angular还提供了许多DOM事件监听器。有<code>ng-blur, change, click, copy, cut, dbclick, focus, keydown, keypress, keyup, mousedown, mouseenter, mouseleave, mouseover, mouseup, paste</code>等。指定标签的这些属性即可为DOM事件绑定处理函数。Angular事件并不会重写HTML事件。</p>
+		<h4 id="angular_form">表单验证</h4>
+		<p>Angular的数据双向绑定使得表单验证更加简洁，结合HTML5的新特性。<code>required</code>属性要求不能为空，type限制输入的数据类型。在输入域改变的同时，<code>$untouched</code>, <code>$touched</code>, $<code>pristine</code>（未被修改过）<code>$dirty</code>（已被修改过）<code>$invalid</code> <code>$valid</code>等状态也随之改变。表格则有<code>$pristine $dirty $invalid $valid $submitted</code>等状态。使用样例如下</p>
+		<pre><code>&lt;input name="myName" ng-model="myName" required>
+&lt;span ng-show="myForm.myName.$touched && myForm.myName.$invalid">The name is required.&lt;/span>
+</code></pre>
+		<p>另外，在数据模型中一节已提到，Angular会新增CSS类在标签上，便于设置CSS样式。结合HTML5新属性，会有很不错的效果。在特殊情况，可以通过<code>app.directive</code>定义新的验证方法，添加在控制器的$parsers中，当输入域的值改变时做检验。具体添加方式可参见文档。</p>
+		<h4 id="angular_router">路由</h4>
+		<p>AngularJS通常用来构造单页网络应用。因此，URL采用<code>/#/name</code>的形式。在后台指定应用的依赖模块<code>ngRoute</code>，并通过<code>app.confi</code>配置<code>routeProvider</code>服务，使用依赖注入引入<code>routeProvider</code>服务，通过<code>when(path, object).otherwise(object)</code>按顺序定义所有路由。其中<code>when</code>的第二个输入参数是路由配置对象，有如下的参数可以配置：</p>
+		<ul>
+			<li><code>template</code>: 直接在<code>ng-view</code>中插入简单的HTML内容</li>
+			<li><code>templateUrl</code>: 在<code>ng-view</code>中插入HTML模板文件</li>
+			<li><code>controller</code>: 在当前模板执行的controller函数，生成新的<code>scope</code></li>
+			<li><code>controllerAs</code>: 为controller指定别名</li>
+			<li><code>redireTo</code>: 重定向地址</li>
+			<li><code>resolve</code>: 指定当前controller所依赖的其他模块</li>
+		</ul>
+		<h4 id="angular_api">通用API函数</h4>
+		<p><code>angular.copy</code>复制变量；<code>angular.element</code>；方法可以将元素包装为jquery对象；<code>equals</code>判断两个变量是否相等；<code>fromJson</code>反序列化一个JSON字符串；<code>isArray, Date, Defined, Element,  Function, Number, Object, String, Undefined</code>分别判断数据类型。<code>merge</code>方法合并两个变量；<code>noop</code>执行一个空函数。</p>
+		<h3 id="dependency_injection">依赖注入</h3>
+		<p>依赖注入是一种软件设计模式，用来为代码的依赖关系解耦。如杂项里介绍的，在需要其他依赖通过依赖的对象创建并传入。在Angular JS中引入服务，实际上就是依赖注入的一种语法糖。以输入参数的形式注入了控制器的依赖关系。这一点可以通过控制器的<code>$inject</code>来访问到。</p>
+		<p>为了更好地理解，我们通过下面的代码创建一个注入器inject，来向函数中注入依赖：</p>
+		<pre><code>var inject = {
+    dependencies: {},
+    register: function(key, value) {
+        this.dependencies[key] = value;
+    },
+    resolve: function(deps, func, scope) {
+        var arr = [];
+        for (var i = 0 ; i < deps.length ; i++) {
+            if (this.dependencies.hasOwnProperty(deps[i])) {
+               arr.push(this.dependencies[deps[i]])
+            }
+        }
+        console.log(arr);
+        return function(){
+            func.apply(scope || {}, arr);
+        }
+
+    }
+}		</code></pre>
+		<p>其中<code>dependencies</code>属性存储所有依赖，<code>register</code>方法注册依赖，<code>resolve</code>方法实现依赖注入，在之后可以模仿Angular用register注册几个模块，Angular的依赖注入服务<code>$inject</code>就是采取类似的思路完成依赖注入，先对函数使用<code>toString()</code>方法，之后通过正则匹配获得函数的输入参数，再加入依赖。</p>
+		<h3 id="angular_extend_command">基础拓展指令</h3>
+		<p>Angularjs通过<code>ng-directives</code>拓展了HTML。下面介绍了一些常用的directives。</p>
+		<p><code><strong>ng-app</strong></code><strong>：定义一个AngularJS</strong>应用程序，一般绑定在html标签下。当然也可以在个别标签下绑定。范例：<code>&lt;html ng-app> &lt;div ng-app></code>。</p>
+		<p><code><strong>ng-controller</strong></code>：指定特定<strong>控制器控制一个AngularJS应用程序</strong>，位于ng-app下，一般为应用下的自功能。范例：<code>&lt;body ng-controller=”MainCtrl”></code>。控制器端，<code>app.controller (‘MainCtrl’, function($scope){…})</code>。</p>
+		<p><code><strong>ng-init</strong></code>： 在视图中<strong>初始化变量</strong>，范例：<code>&lt;div ng-init="book=[…]"></code>；可以同时初始化多个变量，引号内用分号隔开即可。通常使用时，在控制器内完成，不推荐使用<code>ng-init</code>初始化。</p>
+		<p><code><strong>ng-bind</strong></code>：把<strong>变量绑定到视图</strong>中。范例：<code>&lt;span ng-bind="book">&lt;/span></code>。</p>
+		<p><code><strong>ng-model</strong></code>：<strong>定义模型数据</strong>，绑定输入域值到模型数据，Angular支持数据双向绑定，可以轻松实现数据实时更新。范例：<code>&lt;input type="search" ng-model="criterial"></code></p>
+		<p><code><strong>ng-repeat</strong></code>：<strong>遍历集合中的元素</strong>，用来<strong>迭代DOM元素</strong>。范例：<code>&lt;li ng-repeat="book in books"> {{book.name}}&lt;/li></code>. 使用过滤器可以实现过滤文本，改变格式，甚至实现搜索功能，<code>filter:criteria | orderBy</code>。利用<code>ng-repeat</code>结合<code>tr</code>和<code>td</code>可以方便地绘制表格。</p>
+		<p><code><strong>ng-include</strong></code>：<strong>引入本地或跨域html文件</strong>，实现组件化的效果。</p>
+		<p>还有一些<code>ng-directives</code>会根据条件真假决定是否是否展示，如<code>ng-show, ng-if, ng-invalid</code>等。其中<code>ng-show</code>和<code>ng-if</code>后有<code>$odd</code>和<code>$even</code>辅助条件判断(<code>ng-repeat</code>中)。</p>
+		<p>还有<code>ng-click ng-href ng-show ng-hide</code>等。更多请参考文档。</p>
+		<h3 id="angular_services">常用服务</h3>
+		<p><code><strong>$scope</strong></code>：是带有属性和方法的对象，是控制器后台和前端模型数据的粘合剂。可以通过它定义数据，绑定元素等。在定义控制器时，可以作为输入参数传入，使得视图可以获取控制器属性。在大型项目中，<code>$scope</code>(作用域)往往不止一个，在使用时要注意区别开。所有应用都有一个<code>$rootScope</code>，可以在同一<code>ng-app</code>下的所有控制器中使用，是各个scope间的桥梁。</p>
+		<p><code><strong>$watch</strong></code>：每次绑定一些东西(如<code>ng-model</code>)到UI时，就会向<code>$watch</code>队列插入一条<code>$watch</code>，它可以检测model里有变化的东西。需要注意的是，通过<code>$scope</code>定义的模型在绑定前不会加入<code>$watch</code>，且对象内的属性和数组内的元素也会作为一个个体添加如<code>$watch</code>队列中。<code>$watch</code>可以手动绑定。<code>$scope.$watch(”xxx”, function(oldvalue,newvalue){},true/false)</code></p>
+		<p><code><strong>$digest</strong></code>：Angular拓展了浏览器等待用户交互的时间循环，生成一个称为Angular context的执行环境。在浏览器接收到可以进入Angular context的事件时，<code>$digest</code>将会遍历<code>$watch</code>，检查值的变化，至少一个<code>$watch</code>更新后，循环就会再次触发。$digest循环后，DOM相应发生变化。<strong>1</strong>个事件会触发<strong>1</strong>个<code>$digest</code>循环。</p>
+		<p><code><strong>$apply</strong></code>：决定事件是否能进入Angular context。Angular会自动封装事件到一个<code>$apply</code>调用。因此jQuery没有调用<code>$apply</code>时，<code>$digest</code>循环不会执行。可以通过<code>scope.$apply()</code>强制一次<code>$digest</code>循环。</p>
+		<p><code><strong>$q</strong></code>：提供了广义的异步回调机制，<code>$http</code>即在此基础上构建。<code>$q</code>有四种方法，<code>all([p1, p2])</code>方法合并多个<code>promise</code>为1个，<code>defer()</code>方法返回一个defer</code>对象，<code>reject(data)</code>触发后链的链式回调，用在<code>p.then().then()</code>的链式环境下。<code>when()</code>方法用来将数据包装成<code>promise</code>对象。<code>defer()</code>方法返回一个<code>defer</code>对象，<code>promise</code>属性是一个<code>promise</code>对象，<code>resolve</code>和<code>reject</code>方法分别触发成功和失败回调。</p>
+		<p><code><strong>$log</strong></code>：向终端打印一些信息，<code>error(), info(), warn(), log()</code>方法分别打印不同级别的信息。</p>
+		<p><code><strong>$cacheFactory</strong></code>：简单封装了一个缓存机制，调用时需要id和配置项如capacity。缓存实例有<code>info(), put(k, v), get(k), remove(k), removeAll(), destroy()</code>等方法。</p>
+		<p><code><strong>$resource</strong></code>：Angular封装了一个更面向RESTful的模块代替<code>$http</code>使用，通过<code>$resource</code>的配置对象可以轻松实现CRUD操作。</p>
+		<h3 id="angular2">Angular 2</h3>
+		<p>Angular的开发团队在2015年7月推出Angular 2.0版本。对比1.x版本，Angular的2.0版本改动很大。2.0版本<strong>完全由Atscript书写</strong>，完全<strong>支持最新的ES6特性</strong>。AtScript改进自Typescript，后者由微软提出于2012年，简单来看是ES5+ES6+Type，在完全兼容Javascript的同时，提出了弱类型等更像传统编程语言的特性（又是一个新坑，日后再学）。目前（<span class="i">2016/7</span>）官网中并无Javascript版的2.0介绍。同时，一些诸如scope和controller的传统概念也被完全删除。<strong>组件化</strong>和<strong>面向对象</strong>成了2.0版本的最大特点。</p>
+		<h4 id="componency">组件化</h4>
+		<p>如上文所说，<code>controller</code>和<code>$scope</code>等概念被替代成组件和命令。控制器都由模板的方式定义为类的样式，如在下文的代码中，将组件（component）绑定到<code>&lt;angularComponent></code>标签上，所有使用组件都需经<code>bootstrap</code>挂载，且被页面导入（imported）：</p>
+		<pre><code>//&lt;reference path="typeings.tsd.d.ts" />
+import {Component, View, bootstrap} from 'angular2/angular2';
+//Annotation section
+@Component({
+selector: 'angularComponent',
+templateUrl: '/list.html’,
+directives:  'importedComponent’
+})
+@View({
+    templateUrl: 'component.html'
+})
+class angularComponent{
+    constructor(){
+        //code
+    }
+}
+bootstrap(angularComponent);
+</code></pre>
+		<p><i>注意：上文应保存为.ts文件。</i></p>
+		<p>Angular 2.0采用ES6自带的模块特性进行模块管理，并保证全局域安全。定义组件时（Angular 1.x中称为module）中通过<code>import from</code>的形式引入依赖，并通过Component注解完成控制器注册。而控制器本身是通过<code>export class xxxComponent{}</code>的形式定义的。在组件的构造函数中用输入参数的形式完成依赖注入。</p>
+		<h4 id="angular2_extend_commonds">拓展命令</h4>
+		<p>拓展命令的用法也做了较大改动。<code>ng-app</code>和<code>ng-controller</code>已经结合在模块的定义中。<code>ng-click</code>等事件删除前缀<code>ng-</code>，用<code> () </code>包裹，交由<code>component</code>方法处理。<code>ng-href</code>, ng-hide</code>等有HTML5标签对应的命令删去前缀<code>ng-</code>，用<code> [] </code>包裹。特别地，在路由中，a标签的路径已经不需要<code> # </code>。<code>ng-if</code>和<code>ng-for</code>等控制命令删去短划线采用驼峰命名，前方加星号<code> * </code>。<code>ng-model</code>双向绑定数据使用<code>[(ngModel)]</code>。</p>
+		<p><code>{{}}</code>仍起着单向绑定的作用，过滤器使用管道<code>pipe</code>方法替代，<code>ngFor</code>中的变量用<code>let</code>声明。另外，过滤器中的<code>filter</code>和<code>orderBy</code>被删除，需要自行实现，<code>limitTo</code>改为<code>slice</code>。</p>
+		<p>总体来说，Angular 2.0的出现也是顺应了时代的步伐，减少了繁冗的API，和对前端页面元素的过多装饰，改为更适合开发的模块化封装，通过修饰器约束组件的特性。同时保留了数据双向绑定等特点。无论如何，对于1.x的使用者来说，都要花上不少时间去适应全新的一切。更多的改变可以参考<a href="https://angular.io/docs/ts/latest/cookbook/a1-a2-quick-reference.html" target="_blank">官网的对比</a>。</p>
+		<h3 id="angular_more">更多</h3>
+		<p>Q 使用Angular JS和jQuery可以兼容吗？如何做到？</p>
+		<p>A. Angular JS采用的MVVM的架构和jQuery的思路并不十分兼容，<a href="http://stackoverflow.com/questions/14994391/thinking-in-angularjs-if-i-have-a-jquery-background" target="_blank">建议使用前者，养成不用后者的习惯</a>。</p>
+		<p>Angular JS 1.x版本有着较丰富的参考资料，官网有<a href="https://docs.angularjs.org/api/" target="_blank">API reference</a>和demo分析，<a href="http://www.w3schools.com/angular/" target="_blank">w3school的教程</a>也是不错的学习资料。另外还有<a href="http://www.cnblogs.com/whitewolf/category/404298.html" target="_blank">一些博客</a>和<a href="https://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter4/chapter4.html" target="_blank">gitbook</a>可供参考。Angular 2.0版本较新，Angular 2.0版本的内容主要参考自<a href="https://dzone.com/articles/typed-front-end-with-angular-2" target="_blank">DZone的一篇文章</a>，同时2.0版本有了<a href="https://angular.io/" target="_blank">新的官网</a>。</p>
+		<hr>
+		<h1 id="mangodb">MangoDB</h1>
 	</div>
 </body>
 </html>
