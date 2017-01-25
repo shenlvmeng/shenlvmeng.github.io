@@ -50,6 +50,9 @@
 		span:first-child{
 			margin-right: 30px;
 		}
+		span:nth-child(2){
+			margin: 0 30px;
+		}
 		span:last-child{
 			margin-left: 30px;
 		}
@@ -58,7 +61,7 @@
 <body>
 	<div id="slogan"><a href="http://cfighter.cn:3000">Chat ?</a></div>
 	<footer>
-		<span><a href="http://shenlvmeng.github.io/book.html">A book?</a></span> | <span><a href="http://shenlvmeng.github.io/embed-js/index.html">A game?</a></span>
+		<span><a href="http://shenlvmeng.github.io/book.html">Book</a></span> | <span><a href="http://shenlvmeng.github.io/embed-js/index.html">Virtual Network Embedding</a></span> | <span><a href="http://shenlvmeng.github.io/elevator/index.html">Elevator</a></span>
 	</footer>
 	<script type="text/javascript">
 		var back = document.getElementsByTagName('body');
@@ -67,6 +70,14 @@
 		target.addEventListener('mouseover', function(){
 			back[0].style.backgroundColor = "steelblue";
 			foot[0].style.opacity = 0;
+		}, false);
+		target.addEventListener('touchstart', function(){
+			back[0].style.backgroundColor = "steelblue";
+			foot[0].style.opacity = 0;
+		}, false);
+		target.addEventListener('touchend', function(){
+			back[0].style.backgroundColor = "#111";
+			foot[0].style.opacity = 0.4;
 		}, false);
 		target.addEventListener('mouseout', function(){
 			back[0].style.backgroundColor = "#111";
