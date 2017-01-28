@@ -31,6 +31,11 @@
 				})
 				.each(function (d) {
 					var y = parseInt(d3.select(this).attr('cy'));
+					if (d.f && y > 370) {
+						d.y = d.y * -0.6;
+						d.f = false;
+						return;
+					}
 					if (y > 400 && d.y > 0) {
 						d.y = d.y * -0.5;
 						d.x = d.x * 0.9;
@@ -42,16 +47,17 @@
 		createOne = function () {
 			d3.select('svg')
 				.append('circle')
+				.datum({
+					x: -20 + Math.random() * 40, y: -25 * Math.random(), f: true,
+					r: 10 + Math.random() * 8
+				})
 				.attr({
-					cx: 400, cy: 100, r: 10 + Math.random() * 8,
+					cx: 400, cy: 100, r: function (d) {return d.r},
 					fill: function(){
 						return color[Math.floor(Math.random() * 20)];
 					}
 				})
-				.datum({
-					x: -20 + Math.random() * 40, y: -25 * Math.random(), 
-					r: function (d) {return d.r}
-				});
+;
 		},
 
 		turn = function() {
