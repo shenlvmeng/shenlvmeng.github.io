@@ -174,6 +174,73 @@
 			</ul>
 			<li><a href="#angular_more">更多</a></li>
 		</ul>
+		<a href="#vuejs">Vue.js</a>
+		<ul>
+			<li id=""><a href="#vuejs_start">第一印象</a></li>
+			<li><a href="#vuejs_base">基础</a></li>
+			<li><a href="#vuejs_usage">使用</a></li>
+			<ul>
+				<li>
+					<a href="#vuejs_template">模板</a>
+					<ul>
+						<li><a href="#vuejs_text">文本</a></li>
+						<li><a href="#vuejs_dire">指令</a></li>
+						<li><a href="#vuejs_abbr">缩写</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#vuejs_fields">复杂属性</a>
+					<ul>
+						<li><a href="#vuejs_computed">计算属性</a></li>
+						<li><a href="#vuejs_watch">Watcher</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#vuejs_style">样式</a>
+					<ul>
+						<li><a href="#vuejs_class">Class</a></li>
+						<li><a href="#vuejs_inlinestyle">内联样式</a></li>
+						<li><a href="#vuejs_transition">Transition</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#vuejs_control">流程控制</a>
+					<ul>
+						<li><a href="#vuejs_if">v-if/v-else</a></li>
+						<li><a href="#vuejs_show">v-show</a></li>
+						<li><a href="#vuejs_for">v-for</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#vuejs_response">响应</a>
+					<ul>
+						<li><a href="#vuejs_event">监听事件</a></li>
+						<li><a href="#vuejs_form">表单控件</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#vuejs_component">组件</a>
+					<ul>
+						<li><a href="#vuejs_comp_usage">使用</a></li>
+						<li><a href="#vuejs_prop">Prop</a></li>
+						<li><a href="#vuejs_custom">自定义事件</a></li>
+						<li><a href="#vuejs_dispatch">内容分发</a></li>
+						<li><a href="#vuejs_dynamic">动态组件</a></li>
+						<li><a href="#vuejs_hint">注意事项</a></li>
+					</ul>
+				</li>
+			</ul>
+			<li><a href="#vuejs_more">更多</a></li>
+			<li>
+				<a href="#vuejs_reference">附录</a>
+				<ul>
+					<li><a href="#vuejs_reserve">内置组件</a></li>
+					<li><a href="#vuejs_options">实例配置选项</a></li>
+					<li><a href="#vuejs_obj_fields">实例常用属性</a></li>
+					<li><a href="#vuejs_hooks">生命周期钩子</a></li>
+				</ul>
+			</li>
+		</ul>
 		<a href="#mangodb">Mangodb</a>
 		<ul>
 			<li><a href="#mango_brief">简介</a></li>
@@ -184,6 +251,13 @@
 			<li><a href="#mango_others">其他</a></li>
 		</ul>
 		<a href="#socketio">Socket.io</a>
+			<ul>
+				<li><a href="#socketio_brief">简介</a></li>
+				<li><a href="#WebSocket">WebSocket</a></li>
+				<li><a href="#socketio_install">安装与使用</a></li>
+				<li><a href="#socketio_api">部分API
+				</a></li>
+			</ul>
 		<a href="#jade">Jade</a>
 		<ul>
 			<li><a href="#jade_brief">简介</a></li>
@@ -225,6 +299,11 @@
 			<li><a href="#d3_behavior">行为API</a></li>
 			<li><a href="#d3_color">颜色API</a></li>
 			<li><a href="#d3_more">更多</a></li>
+		</ul>
+		<a href="#sass">Sass</a>
+		<ul>
+			<li><a href="#sass_rule">约定</a></li>
+			<li><a href="#compass">Compass</a></li>
 		</ul>
 		<a href="#es2015">ES6新特性</a>
 		<a href="#groccery">杂项</a>
@@ -1435,6 +1514,278 @@ bootstrap(angularComponent);
 		<p>A. Angular JS采用的MVVM的架构和jQuery的思路并不十分兼容，<a href="http://stackoverflow.com/questions/14994391/thinking-in-angularjs-if-i-have-a-jquery-background" target="_blank">建议使用前者，养成不用后者的习惯</a>。</p>
 		<p>Angular JS 1.x版本有着较丰富的参考资料，官网有<a href="https://docs.angularjs.org/api/" target="_blank">API reference</a>和demo分析，<a href="http://www.w3schools.com/angular/" target="_blank">w3school的教程</a>也是不错的学习资料。另外还有<a href="http://www.cnblogs.com/whitewolf/category/404298.html" target="_blank">一些博客</a>和<a href="https://checkcheckzz.gitbooks.io/angularjs-learning-notes/content/chapter4/chapter4.html" target="_blank">gitbook</a>可供参考。Angular 2.0版本较新，Angular 2.0版本的内容主要参考自<a href="https://dzone.com/articles/typed-front-end-with-angular-2" target="_blank">DZone的一篇文章</a>，同时2.0版本有了<a href="https://angular.io/" target="_blank">新的官网</a>。</p>
 		<hr>
+		<h1 id="vuejs">Vue.js</h1>
+		<p>Vue是与React.js和Angular JS类似的一套构建用户界面（以单页面应用为主）的渐进式框架，比较轻量级，<strong>易于入门和动手开发</strong>。同时，也可以很容易和其他库和项目进行整合（如vue-loader）。Vue的设计目标是<strong>通过尽可能简单且易于使用的API来实现响应式数据绑定和视图组件组合</strong>。</p>
+		<p>Vue有自己的<a href="https://vuejs.org/" target="_blank">官方网站</a>和一个很不错的<a href="https://cn.vuejs.org/v2/guide/" target="_blank">中文译版</a>。除了本身的库（star数已有41k）以外，面向复杂路由功能和复杂组件状态管理，开发组还额外提供了vue-router（star数4k）和vuex（star数5k）方便开发者管理。</p>
+		<h3 id="vuejs_start">第一印象</h3>
+		<p>Vue在起步上不需要复杂操作，只需要引入vue.js的源文件（下载到本地或是从CDN处获取）即可。Vue在API风格上和React，Angular甚至backbone都有相似之处。这里有官方所做的<a href="https://cn.vuejs.org/v2/guide/comparison.html" target="_blank">对比</a>。下面是一个最简单的使用Vue.js渲染DOM的例子。</p>
+		<pre><code>&lt;div id="app">
+  {{ message }}
+&lt;/div>
+</code></pre>
+		<pre><code>var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+</code></pre>
+		<p>其中涉及到的vue的使用方式，若是接触过React，Angular，backbone的会很容易理解。再复杂点如下，可以结合命令实现条件、循环、数据绑定等</p>
+		<pre><code>&lt;div id="app">
+  &lt;p v-if="seen">Now you see me&lt;/p>
+  &lt;ol>
+    &lt;li v-for="todo in todos">
+      {{ todo.text }}
+    &lt;/li>
+  &lt;/ol>
+&lt;/div>
+</code></pre>
+		<pre><code>var app3 = new Vue({
+  el: '#app',
+  data: {
+    seen: true，
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+  }
+})
+</code></pre>
+		<p>在上面的例子中，数据流向都是从上至下的，通过<code>v-on</code>指令可以让用户和应用进行互动，将用户输入的数据由下至上传递。</p>
+		<p>同时，组件系统也是Vue.js一个重要概念。它将前端界面抽象成独立可复用的各个小组件来构建大型应用。并通过<code>props</code>以及<code>emit/on</code>来实现组件间的信息沟通。组件内通过<code>template</code>定义渲染内容，组件间支持嵌套和组合。</p>
+		<h3 id="vuejs_base">基础</h3>
+		<ul>
+			<li>Vue.js的应用都是通过<code>new Vue({})</code>的形式创建Vue根实例的方式启动的。也可以通过<code>var MyComponent = Vue.extend({})</code>的形式创建自定义组件全局使用。</li>
+			<li>每个Vue实例会代理其<code>data</code>域内所有属性，实例创建后添加的新属性将不会触发视图更新，除<code>data</code>域外，还有些特殊属性和方法有前缀<code>$</code>作为区分，见附录</li>
+			<li>Vue实例在被创建后有自己的生命周期，并在周期变化时调用一些生命周期钩子。例如<code>created，mounted，updated，destroyed</code>。<a href="#vuejs_lifecycle">该图</a>做了细致的说明。</li>
+		</ul>
+		<h3 id="vuejs_usage">使用</h3>
+		<h4 id="vuejs_template">模板</h4>
+		<p>Vue.js使用了基于HTML的模版语法，允许开发者声明式地将DOM绑定至底层Vue实例的数据。在底层实现上，Vue将模板编译成虚拟DOM渲染函数。结合响应系统，在应用状态改变时，Vue会计算出重新渲染组件的最小代价并应用到DOM操作上。</p>
+		<p>如果你熟悉虚拟DOM和<span class="i">JSX</span>语法，也可以通过直接写<code>render</code>函数替代模板的效果。</p>
+		<h5 id="vuejs_text">文本</h5>
+		<p>数据绑定最常见的形式就是使用双大括号的语法进行文本插值。绑定的数据对象改变时，插值的内容也会实时更新。通过使用<code>v-once</code>指令，你还能执行一次性地插值。</p>
+		<p>如果需要纯HTML内容，可以使用<code>v-html</code>指令。但是不建议这么做，因为会导致难易防御<span class="i">XSS</span>攻击。绑定HTML属性时需要使用<code>v-bind</code>指令，该指令可以简写如下：</p>
+		<pre><code>&lt;div :id="dynamicId">&lt;/div></code></pre>
+		<p>在模板插值中，Vue.js还提供了完全的JavaScript表达式支持。</p>
+		<h5 id="vuejs_dire">指令</h5>
+		<p>指令（Directives）是带有<code>v-</code>前缀的特殊属性。除了<code>v-for</code>，指令属性的值预期是单一JavaScript表达式。一些指令能接受一个“参数”，在指令后以冒号指明。修饰符是以半角句号指明的特殊后缀，用于指出一个指定应该以特殊方式绑定，常用在绑定事件上。</p>
+		<h5 id="vuejs_abbr">缩写</h5>
+		<p><code>v-bind</code>可以缩写为半角冒号<code>:</code>，<code>v-on</code>可以缩写为<code>@</code>.</p>
+		<h4 id="vuejs_fields">复杂属性</h4>
+		<p>模板中放入太多的逻辑会让模板过重且难以维护。在这种情况下，模板不再简单和清晰，应该选用<strong>计算属性</strong>实现。</p>
+		<h5 id="vuejs_computed">计算属性</h5>
+		<p>可以像绑定普通属性一样在模板中绑定计算属性。<strong>在依赖属性改变时，计算属性也会跟着改变</strong>，声明式地创建这种依赖关系是易于测试和理解的。</p>
+		<pre><code>var vm = new Vue({
+  el: '#example',
+  data: {
+    message: 'Hello'
+  },
+  computed: {
+    // a computed getter
+    reversedMessage: function () {
+      // `this` points to the vm instance
+      return this.message.split('').reverse().join('')
+    }
+  }
+})
+</code></pre>
+		<p>需要注意的是，计算属性会缓存数据，只有在它的相关依赖发生改变时才会重新取值。因此，当依赖属性并非响应式时，计算属性将不会更新，如<code>Date.now()</code>。</p>
+		<p>在必要时你还可以提供一个 setter，提供修改计算属性时，依赖属性的更新。</p>
+		<h5 id="vuejs_watch">Watcher</h5>
+		<p><span class="i">Watcher</span>完成的功能和计算属性类似。但是它可以作为一种更通用的方法，来相应数据的变化。这在想要相应数据变化，执行异步操作或开销较大的操作时，是很有用的。<code>watch</code>属性接受<code>oldVal</code>和<code>newVal</code>两个参数。</p>
+		<h4 id="vuejs_style">样式</h4>
+		<p>数据绑定一个常见需求是操作元素的class列表和它的内联样式。我们可以用<code>v-bind</code>处理它们，为了减少字符串拼接，Vue.js提供了一些特供的特性。</p>
+		<h5 id="vuejs_class">Class</h5>
+		<p>class属性接受一个<strong>对象或数组</strong>，表示绑定到之上的类名列表。甚至可以直接绑定data域内的一个对象。最佳实践是绑定到对象的计算属性。</p>
+		<h5 id="vuejs_inlinestyle">内联样式</h5>
+		<p><code>v-bind:style</code>的使用方法类似上面，接受一个Javascript对象或数组。最佳实践是使用计算属性表示。</p>
+		<h5 id="vuejs_transition">Transition</h5>
+		<p>在插入、更新或者移除DOM时，Vue.js提供特色的过渡效果。使用<code>&lt;transition></code>标签包裹，结合<code>v-if</code>和<code>v-show</code>以及特殊css类名，可以实现元素的展现和消失。再结合效果库，如<span class="i">Animate.css</span>或<span class="i">Velocity.js</span>，可以实现酷炫的效果。不建议同时使用<span class="i">transition</span>和<span class="i">animation</span>。</p>
+		<p>多元素渐变时，可以在<code>&lt;transition></code>标签中指定<code>mode</code>属性优化渐变效果。Vue.js的<code>&lt;transition-group></code>可以专门用来处理列表的过渡效果，需要注意的是，使用transition-group时，元素需要不能是<span class="i">inline</span>，更多内容见<a href="#vuejs_reference">附录</a>。</p>
+		<p>Vue.js在元素出现和消失时，会触发<code>enter，leave</code>等钩子函数。搭配<span class="i">tween.js</span>和<span class="i">color.js</span>等可以实现<a href="https://cn.vuejs.org/v2/guide/transitioning-state.html" target="_blank">数值的渐变效果</a>。</p>
+		<p>更详细的讲解见<a href="https://cn.vuejs.org/v2/guide/transitions.html" target="_blank">过渡一节</a>。</p>
+		<h4 id="vuejs_control">流程控制</h4>
+		<h5 id="vuejs_if">v-if/f-else</h5>
+		<p>如字面意思，后跟表达式执行if功能。也可以用<code>v-else</code>添加一个“else”块。在和<code>&lt;template></code>标签合用时，可以包装一组标签。</p>
+		<p>V2.1.0后，新增了<code>v-else-if</code>。用做else-if块。</p>
+		<h5 id="vuejs_show">v-show</h4>
+		<p>等同于<code>v-if</code>，不同的是，<code>v-show</code>的元素会始终渲染并保持在DOM中。<code>v-show</code>是简单的切换元素的CSS属性<code>display</code>。而<code>v-if</code>是真实的条件渲染，在条件变化时进行局部编译并缓存起来。</p>
+		<p>一般来说，<code>v-if</code>有更高的切换消耗，而<code>v-show</code>有更高的初始渲染消耗</p>
+		<p><strong>注意，<code>v-show</code>不支持使用在<code>&lt;template></code>中。</strong></p>
+		<h5 id="vuejs_for">v-for</h5>
+		<p><code>v-for</code>指令根据一组数组的选项列表进行渲染，需要<code>item in items</code>形式的特殊语法，<code>items</code>是源数据数组并且<code>item</code>是数组元素迭代的别名。也可以使用<code>of</code>代替<code>in</code>。<code>v-for</code>除了循环数组也可以循环对象，如下：</p>
+		<pre><code>&lt;div v-for="(value, key, index) in object">
+  {{ index }}. {{ key }} : {{ value }}
+&lt;/div>
+</code></pre>
+		<p>为了便于简单的循环，可以使用类似于<code>n in 10</code>这样的用法，重复多次模板。<code>v-for</code>也有<code>&lt;template></code>的用法。为了确保在特定索引下显示已被渲染过的每个元素，可以为元素指定<code>key</code>属性。</p>
+		<p>另外，需要特别声明的是，<strong>由于Javascript的限制，Vue不能检测对数组以下两种情况的改动：</strong></p>
+		<ul>
+			<li>当你利用索引直接设置一个项时，例如： <code>vm.items[indexOfItem] = newValue</code></li>
+			<li>当你修改数组的长度时，例如： <code>vm.items.length = newLength</code></li>
+		</ul>
+		<h4 id="vuejs_response">响应</h4>
+		<p>数据驱动的重要一环是用户输入和响应。</p>
+		<h5 id="vuejs_event">监听事件</h5>
+		<p>使用<code>v-on</code>监听DOM事件来触发一些JavaScript代码。通常情况下，把事件处理逻辑下载方法中，让<code>v-on</code>接收一个方法名或内联JavaScript语句。</p>
+		<pre><code>&lt;div id="example-2">
+  &lt;!-- `greet` 是在下面定义的方法名 -->
+  &lt;button v-on:click="greet">Greet&lt;/button>
+&lt;/div>
+</code></pre>
+		<p>在使用内联语句时，可以将原生DOM事件——特殊变量<code>$event</code>作为输入参数传给方法。</p>
+		<p>事件处理器支持修饰符，如<code>.stop, .prevent, .capture, .self, .once</code>作为语法糖。按键事件keyup还支持按键修饰符，如<code>.enter, .delete, .esc, .space, .up</code>, .13等。可以全局通过<code>Vue.config.keyCodes.f1 = 112</code>的形式设置自定义按键修饰符。<code>.ctrl, .alt, .shift, .meta</code>四个修饰符用来配合其他鼠标和键盘事件开启监听。</p>
+		<p>除了原生事件，在自定义组件后，父组件可以监听子组件上的<a href="#vuejs_custom">自定义事件</a>。</p>
+		<h5 id="vuejs_form">表单控件</h5>
+		<p><code>v-model</code>常用在在表单控件元素上创建双向数据绑定。它会根据控件类型自动选取正确的方法来更新元素。但它实际上只是语法糖。它负责监听用户的输入事件以更新数据，并特别处理一些极端的例子。在有特殊需要时，可以自己用<code>v-on</code>和<code>v-bind</code>实现<code>v-model</code>。</p>
+		<p>单选框，多选框。单选列表，多选列表等可以简单使用<code>v-model</code>即可，而不必自己写处理函数。复选框和多选列表的各元素共用一个<code>v-model</code>数组。</p>
+		<p><code>v-model</code>支持修饰符<code>.lazy, .number, .trim</code>等。</p>
+		<h4 id="vuejs_component">组件</h4>
+		<p>组件是Vue最关键的一个特性，同时也是最灵活最有内容的特性。组件可以扩展HTML元素，封装可重用的代码。在较高层面上，组件是自定义元素。不过，有些情况下，组件也可以是原生HTML元素的形式，<strong>以<code>is</code>特性扩展</strong>。</p>
+		<h5 id="vuejs_comp_usage">使用</h5>
+		<p>通过<code>Vue.component(‘my-component’, {})</code>的形式注册。对于自定义标签名，Vue建议遵循小写且包含短杠的规则。</p>
+		<p>有时不必在全局注册每个组件。通过使用<code>components</code>选项注册，可以使组件仅在另一个实例或组件的作用域中可用。</p>
+		<pre><code>var Child = {
+  template: '<div>A custom component!</div>'
+}
+new Vue({
+  // ...
+  components: {
+    // &lt;my-component> 将只在父模板可用
+    'my-component': Child
+  }
+})
+</code></pre>
+		<p>当使用DOM作为模版时, 会受到HTML的一些限制，因为Vue只有在浏览器解析和标准化HTML后才能获取模版内容。变通的方案是使用特殊的 <code>is</code> 属性。同时，data域必须为函数，因为Vue组件可能被利用多次，使用对象定义data域会导致污染。</p>
+		<p>组件间协同工作必然需要相互通信：父组件要给子组件传递数据，子组件需要将它内部发生的事情告知给父组件。在Vue.js中，父子组件的关系可以总结为 <strong>props down, events up</strong>。父组件通过props向下传递数据给子组件，子组件通过events给父组件发送消息。</p>
+		<h5 id="vuejs_prop">Prop</h5>
+		<p>组件实例的作用域是孤立的。这意味着不能并且不应该在子组件的模板内直接引用父组件的数据。可以使用 <code>props</code> 把数据传给子组件。此时，子组件需要显式地用 <code>props</code> 选项声明prop。</p>
+		<p>初学者常犯的一个错误是使用字面量语法传递数值，如：</p>
+		<pre><code>&lt;comp some-prop="1">&lt;/comp></code></pre>
+		<p>如果<strong>想传递一个实际的JavaScript数字，需要使用<code>v-bind</code></strong>，从而让它的值被当作JavaScript表达式计算。</p>
+		<pre><code>&lt;comp v-bind:some-prop="1">&lt;/comp></code></pre>
+		<p>同时还要注意，prop 是单向绑定的：当父组件的属性变化时，将传导给子组件，但是不会反过来。另外，每次父组件更新时，子组件的所有 prop 都会更新为最新值。这意味着<storng>不应该在子组件内部改变prop</storng>。从而，有两种实践方法：</p>
+		<ul>
+			<li>prop作为初始值传入，子组件之后只是将它的初始值作为本地数据的初始值使用</li>
+			<li>确保prop不会被更改（用在计算属性中）</li>
+		</ul>
+		<p>当<code>prop</code>属性为对象时，可以包含对prop的验证要求。</p>
+		<h5 id="vuejs_custom">自定义事件</h5>
+		<p>每个Vue实例都实现了事件接口(Events interface)，从而都能使用<code>$on</code>监听事件和使用<code>$emit</code>触发事件。监听自定义事件的方法和原生事件一致。</p>
+		<p>在非父子通信时，通常可以使用一个空的Vue实例作为中央时间总线。如下：</p>
+		<pre><code>var bus = new Vue()
+// 触发组件 A 中的事件
+bus.$emit('id-selected', 1)
+// 在组件 B 创建的钩子中监听事件
+bus.$on('id-selected', function (id) {
+  // ...
+})
+</code></pre>
+		<p>在更复杂的场景下，建议使用<span class="i">vuex</span>管理状态。</p>
+		<h5 id="vuejs_dispatch">内容分发</h5>
+		<p>使用组件时，通过slot分发内容，使用特殊的<code>&lt;slot></code>元素作为原始内容的插槽。</p>
+		<p>除非子组件模板包含至少一个<code>&lt;slot></code>插口，否则父组件的内容将会被丢弃。当子组件模板只有一个没有属性的slot时，父组件整个内容片段将插入到slot所在的DOM位置，并替换掉slot标签本身。</p>
+		<p><code>&lt;slot></code>元素可以用一个特殊的属性<strong><code>name</code></strong>来配置如何分发内容。多个slot可以有不同的名字。具名slot将匹配内容片段中有对应slot特性的元素。在父组件中，通过为标签指定<strong><code>slot</code></strong>属性进行一一匹配。</p>
+		<p></p>
+		<p>作用域插槽通过在子组件的slot中指定<code>text</code>属性，将子组件prop传递给父级，在父组件具有<code>scope</code>属性的<code>&lt;template></code>中使用。详见<a href="https://cn.vuejs.org/v2/guide/components.html#作用域插槽" target="_blank">作用域插槽</a>。</p>
+		<h5 id="vuejs_dynamic">动态组件</h5>
+		<p>多个组件可以使用同一个挂载点，然后动态地在它们之间切换。<strong>最佳实践是，使用保留的<code>&lt;component></code>元素，动态地绑定到它的<code>is</code>特性</strong>。如下：</p>
+		<pre><code>var vm = new Vue({
+  el: '#example',
+  data: {
+    currentView: 'home'
+  },
+  components: {
+    home: { /* ... */ },
+    posts: { /* ... */ },
+    archive: { /* ... */ }
+  }
+})
+</code></pre>
+<pre><code>&lt;component v-bind:is="currentView">
+  <!-- 组件在 vm.currentview 变化时改变！ -->
+&lt;/component></code></pre>
+		<p>当组件全局定义时，甚至可以指定在<code>currentView</code>后。</p>
+		<p>如果把切换出去的组件保留在内存中，可以保留它的状态或避免重新渲染。为此可以添加一个<code>&lt;keep-alive></code>标签在<code>&lt;component></code>外。</p>
+		<h5 id="vuejs_hint">注意事项</h5>
+		<ul>
+			<li>编写组件时，需要设计好<code>Props，Events，Slots</code>，三项都不可少。</li>
+			<li>组件命名时，可以使用各种风格，但在HTML模板中，请使用kebab-case形式</li>
+			<li>如果子组件有<code>inline-template</code>特性，组件将把它的内容当作它的模板，而不是把它当作分发内容。这让模板更灵活。但是这也让作用域变得难以理解，最佳实践是使用<code>.vue</code>文件中的<code>template</code>元素。</li>
+			<li>另一种定义模板的方法是，使用<code>text/x-template</code>类型，并指定一个<code>id</code>。</li>
+			<li><code>v-once</code>在大量静态内容的网页中能加快Vue渲染HTML的速度。</li>
+		</ul>
+		<h3 id="vuejs_more">更多</h3>
+		<p>在<a href="https://cn.vuejs.org/v2/guide/custom-directive.html" target="_blank">自定义指令</a>和<a href="https://cn.vuejs.org/v2/guide/mixins.html" target="_blank">Mixin</a>上，因为未做实践，这里不做介绍，可以参考教程上的说明。<a href="https://github.com/vuejs/vuex" target="_blank">vuex</a>和<a href="http://router.vuejs.org/zh-cn/" target="_blank">vue-router</a>也是如此。</p>
+		<p>生产环境部署中，<a href="https://vue-loader.vuejs.org/en/?q=" target="_blank">vue-loader</a>是很方便的利用webpack自动打包.vue文件，同时支持使用<span class="i">pug</span>模板引擎，ES2015语法，<span class="i">Sass</span>等CSS预处理器。岂不美哉。</p>
+		<h3 id="vuejs_reference">附录</h3>
+		<h4 id="vuejs_reserve">内置组件</h4>
+		<p><span class="b">component</span></p>
+		<p>提供一个通过<code>is</code>属性指定具体渲染组件的组件占位符。通过<code>is</code>属性指定组件名或组件属性或组件构造器，<code>inline-template</code>属性指定component内的内容是否为模板（这么做会混淆作用域，并非最佳实践）。component组件通常用来构建动态组件（因为<code>is</code>属性完全可以作为props由父组件传入）。</p>
+		<p><span class="b">transition</span></p>
+		<p><a href="https://cn.vuejs.org/v2/guide/transitions.html" target="_blank">过渡</a>是Vue提供的很有特色的功能（虽然强大的渐变效果要借助第三方库）。与之相呼应的是<code>enter，leave，enter-active，leave-active，appear，appear-active</code>这些css预置类名。类名前缀由<strong><code>name</code></strong>属性指定，或者通过<strong>类名后+"class"</strong>作为<code>&lt;transition></code>属性名手动指定。另外，<strong><code>mode</code></strong>属性定义多个过渡同时出现的先后关系，有<code>out-in</code>和<code>in-out</code>两种。<strong><code>css（boolean）</code></strong>属性决定是否关联css过渡类，<strong><code>type</code></strong>属性指定过渡为<code>transition</code>或是<code>animation</code>。</p>
+		<p>Vue维护transition的一些内部事件，包括<code>before-enter，enter，after-enter</code>等，可用于js钩子函数监听。<code>&lt;transition></code><strong>本身不对应DOM元素</strong>，只是将需要过渡效果的内容包裹在里面。</p>
+		<p><span class="b">transition-group</span></p>
+		<p>与<code>&lt;transition></code>不同，<code>&lt;transition-group></code>元素渲染多个元素或组件的过渡效果，且对应一个真实的DOM元素（默认为span，可以通过<code>tag</code>属性修改）。它内部支持<span class="i">CSS transform</span>过渡移动。过渡效果通过<code>name</code>属性或<code>move-class</code>属性对应CSS自定义类。</p>
+		<p>需要注意的几点，1）<code>&lt;transition-group></code>的子节点必须有独立的key；2）子节点必须为<span class="i">inline-block</span>或是<span class="i">flex</span>，FLIP动画效果才有效果。</p>
+		<p><span class="b">slot</span></p>
+		<p>用于父组件进行内容分发。内容分发后自身会被替换掉。<code>name</code>属性用于对应父组件的<code>slot</code>属性元素里的内容。</p>
+		<h4 id="vuejs_options">实例配置选项</h4>
+		<p>在通过<code>new Vue()</code>或<code>Vue.extend</code>创建Vue实例时，可以指定一系列初始化配置选项。</p>
+		<p><span class="b">el</span> <code> string | HTMLElement</code></p>
+		<p>Vue实例挂载的DOM元素。可以是CSS选择器或是<span class="i">HTMLElement</span>实例。当该选项未指定时需要通过<code>vm.$mount()</code>手动开启。</p>
+		<p><span class="b">template</span> <code>string</code></p>
+		<p>使用一个字符串作为实例的渲染模板。除非模板有slot分发，<strong>模板内容将会替换挂载元素内容的所有内容</strong>。如果值以<code>#</code>开始，将使用匹配元素的<code>innerHTML</code>作为模板。</p>
+		<p><span class="b">render</span> <code> Function</code></p>
+		<p><code>template</code>属性的替代方案，<code>render</code>函数接受一个<code>createElement</code>函数作为第一个参数创建VNode。<code>createElement</code>函数接受三个参数，第一个参数表示绑定DOM元素，可以为<code>String</code>或<code>Object</code>或<code>Function</code>，第二个参数为修饰HTML标签的<a href="https://cn.vuejs.org/v2/guide/render-function.html#完整数据对象" target="_blank">数据对象</a>，第三个对象表示子节点，可以是<code>String</code>或<code>Array</code>类型。<code>createElement</code>内容较多，可以参见<a href="https://cn.vuejs.org/v2/guide/render-function.html#基础" target="_blank">Render函数</a>一节。</p>
+		<p>如果组件为<a href="https://cn.vuejs.org/v2/guide/render-function.html#函数化组件" target="_blank">函数组件</a>，则还可以接受<code>context</code>参数创建上下文。</p>
+		<p><span class="b">data</span> <code>Object | Function(组件定义中)</code></p>
+		<p>Vue实例的数据对象。Vue将会递归将data的属性转换为getter/setter，从而让data的属性能够响应数据变化，不推荐观察拥有状态行为的对象。实例创建之后，可以通过<code>vm.$data</code>访问原始数据对象。<strong>注意，为避免冲突，以<code>_</code>或<code>$</code>开头的属性不会被Vue实例代理。</strong></p>
+		<p><span class="b">props</span> <code>Array<string> | Object</code></p>
+		<p>props用来接收来自于父组件的数据。props可以是简单的数组，或者使用对象作为替代，使用对象时允许配置高级选项，如类型检测（type）、自定义校验（validator）和设置默认值（default）等。</p>
+		<p><span class="b">propsData</span> <code> { [string] : any }</code></p>
+		<p>用于创建实例时传递初始化的props，一般用于测试。</p>
+		<p><span class="b">methods</span> <code>{ [string]: Function }</code></p>
+		<p>methods属性和data属性类似，会混入到Vue实例当中，可以直接通过实例来访问这些方法。方法中的<code>this</code>绑定该Vue实例。因此<strong>不能使用箭头函数定义method函数</strong>。</p>
+		<p><span class="b">computed</span> <code>{ [string]: Function | { get: Function, set: Function } }</code></p>
+		<p>用于定义计算属性，计算属性将混入在Vue实例的属性中，同时绑定getter和setter函数。为了保证效率，<strong>计算属性结果会被缓存</strong>，当依赖属性更新时重新计算。最佳实践时用于表示<code>data</code>属性的简单计算得到时。在计算过程复杂或耗时时，选择<strong><code>watch</code>选项</strong>。</p>
+		<p><span class="b">watch</span> <code>{ [string]: Function | { get: Function, set: Function } }</code></p>
+		<p>键为观察的表达式，值为对应的回调函数。回调函数可以是方法名或是匿名函数，它接受原值和新值作为两个输入参数。同样，不应使用箭头函数定义watcher函数。</p>
+		<h4 id="vuejs_obj_fields">实例常用属性</h4>
+		<p>Vue实例创建后，默认的实例属性来自创建实例时的data属性。需要访问实例本身特性时统一在特性前加上<code>$</code>符号。根据官网教程的介绍，惯例使用<code>vm</code>作为创建Vue实例的变量名，下面也是如此。</p>
+		<p><a href="https://cn.vuejs.org/v2/api/#vm-data" target="_blank"><span class="b">vm.$data</span></a> <code>Object</code></p>
+		<p>Vue实例储存的数据对象，Vue通过<code>setter</code>和<code>getter</code>的形式代理对data属性的访问。通过类似<code>vm.foo</code>的形式访问。</p>
+		<p><a href="https://cn.vuejs.org/v2/api/#vm-el" target="_blank"><span class="b">vm.$el</span></a> <code>HTMLElement</code></p>
+		<p>返回Vue实例使用的根DOM元素。类型为<code>HTMLElement</code>。</p>
+		<p><span class="b">vm.$root</span> <code>Vue instance</code></p>
+		<p>当前组件树的根Vue实例或自己。</p>
+		<p><a href="https://cn.vuejs.org/v2/api/#vm-slots" target="_blank"><span class="b">vm.$slots</span></a> <code>{ [name: string]: ?Array<VNode> }</code></p>
+		<p>用来访问当前组件中被slot分发的内容，具名slot的内容可以通过<code>vm.$slots.foo</code>的方式来访问，<code>default</code>属性包括了所有未具名slot中的节点内容。2.1.0版本后新增了<code>$scopedSlots</code>访问作用域slot。</p>
+		<p><a href="https://cn.vuejs.org/v2/api/#ref" target="_blank"><span class="b">vm.$refs</span></a> <code>Object</code></p>
+		<p>类似于<span class="i">React</span>中的用法，访问所有在HTML中声明<code>ref</code>属性的DOM节点。当<code>ref</code>属性声明在组件上时，返回该组件实例。</p>
+		<p><span class="b">vm.$on(event, callback)</span></p>
+		<p>监听当前实例上的自定义事件。事件可以由<code>vm.$emit</code>触发。回调函数会接收所有传入事件触发函数的额外参数。此外，<code>vm.$once</code>完成同样的效果，但是只监听一次。</p>
+		<p><span class="b">vm.$emit(event. [...args])</span></p>
+		<p>触发当前实例上的事件。附加参数都会传给监听器回调。</p>
+		<p>此外，<span class="b">vm.$options</span>返回创建实例时输入的初始化选项；<span class="b">vm.$parent</span>返回当前实例的父实例，<span class="b">vm.$children</span>返回当前实例的直接子组件。<span class="b">vm.$off</span>移除事件监听。</p>
+		<h4 id="vuejs_hooks">生命周期钩子</h4>
+		<p>在Vue实例的生命周期里，会触发一些钩子函数。函数中的<code>this</code>自动绑定到该实例。</p>
+		<p><span class="b">beforeCreate</span></p>
+		<p>在实例初始化，数据观测前调用</p>
+		<p><span class="b">created</span></p>
+		<p>实例创建完成后调用，测试数据观测，属性方法运算，watch/event回调都已经完成。但是元素尚未渲染和挂载，<code>$el</code>属性不可见。此时对所做的DOM操作无效。</p>
+		<p><span class="b">beforeMounte</span></p>
+		<p>在挂载前调用，<code>render</code>函数首次被调用。</p>
+		<p><span class="b">mounted</span></p>
+		<p>el被新创建的<code>vm.$el</code>替换，并挂载到实例上去之后调用该钩子函数。</p>
+		<p><span class="b">beforeUpdate</span></p>
+		<p>数据更新发生时，虚拟DOM重新渲染和patch之前。</p>
+		<p><span class="b">updated</span></p>
+		<p>虚拟DOM重新渲染和patch之后。</p>
+		<p>此外，还有<span class="b">activated</span>，<span class="b">deactivated</span>用在<code>keep-alive</code>组件切换内部组件时；<span class="b">beforeDestroy</span>，<span class="b">destroyed</span>用在实例销毁时。</p>
+		<span id="vuejs_lifecycle"><img src="https://cn.vuejs.org/images/lifecycle.png"></span>
+		<hr>
 		<h1 id="mangodb">MangoDB</h1>
 		<p>MangoDB是node开发中经常用的数据库。这里做简单介绍。</p>
 		<h3 id="mango_brief">简介</h3>
@@ -1466,6 +1817,45 @@ bootstrap(angularComponent);
 		<p>备份：使用mongodump工具指定要备份的数据库，使用mongorestore数据恢复</p>
 		<hr>
 		<h1 id="socketio">Socket.io</h1>
+		<h3 id="socketio_brief">简介</h3>
+		<p>socket.io是为网络应用提供跨平台实时通信的javascript库。它旨在建立客户端与服务器端的持久性连接，并模糊底层传输机制的实现细节。socket.io主要采用了HTML5中的<code>WebSocket</code>技术（注意是HTML5，并非是HTTP协议的新技术），同时，该库也支持一些降级功能使用在不支持<code>WebSocket</code>的环境下，如AJAX long polling, AJAX multipart streaming, JSONP Polling等实现方式。</p>
+		<h3 id="WebSocket">WebSocket</h3>
+		<p>在WebSocket出现之前，有着其他和建立socket连接效果类似的做法。如AJAX轮询，浏览器每隔数秒向服务器发起请求，询问是否有新信息出现。Long polling也是类似，不过采取的阻塞模式。服务器端若没有新信息，就没有Response返回到客户端。由于HTTP协议的被动性，前者要求服务器很快的处理速度，后者要求服务器支持高并发的能力。</p>
+		<p>WebSocket是HTML5出的新协议，作为<code>HTTP1.1</code>版本的补充。相比非持久的HTTP协议来说，WebSocket是一个持久化的协议。HTTP的生命周期由<code>Request</code>发起，在<code>Response</code>后结束。<code>HTTP1.1</code>中，keep-alive特性可以在一个HTTP连接中，发送多个<code>Request</code>，接受多个<code>Response</code>，但是<code>Response</code>被动返回的特点没有改变。</p>
+		<p>WebSocket协议在握手时借用的HTTP协议， <code>Connection</code>和<code>Upgrade</code>字段分别为Upgrade和websocket，意为告诉服务器当前的连接要使用websocket协议。客户端发送<code>Sec-WebSocket-Key</code>，<code>Sec-WebSocket-Protocol</code>，<code>Sec-WebSocket-Version</code>分别为一个验证随机字符串，服务名和WebSocket协议版本，服务器返回正确的<code>Sec-WebSocket-Accept</code>和<code>Sec-WebSocket-Protocol</code>后，握手成功。接下来按照WebSocket的协议进行通信。关于WebSocket协议的细节，这里从略。</p>
+		<p>socket.io中主要采取WebSocket完成持久性连接，但是当浏览器不支持WebSocket协议时，也只能采取上面提到的一些替代方法。</p>
+		<h3 id="socketio_install">安装与使用</h3>
+		<p>使用命令<code>npm install --save socket.io</code>或是写在<span class="i">package.json</span>文件中直接通过<code>npm install</code>安装。<a href="http://socket.io/get-started/chat/" target="_blank">官方例子</a>中，安装前需要预装express。</p>
+		<p>安装完成后，在服务器端通过<code>require(socket.io).listen(server)</code>引入，之后<code>io.on(connection, function(socket){…})</code>即可对socket进行操作。<code>on</code>方法可以监听一个<code>emit</code>释放的事件，第一个参数为事件名，第二个参数为一个处理数据的函数。该函数接受两个参数，第一个为接受的数据，第二个为要返回的函数。socket.io默认支持<code>connect</code>，<code>message</code>，<code>disconnect</code>三个事件，用户也可以定义自己的事件。服务器端完整代码如下：</p>
+		<pre><code>/* server.js */
+var app = require('express')()
+  , server = require('http').createServer(app)
+  , io = require('socket.io').listen(server);
+
+server.listen(80);
+
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});	</code></pre>
+		<p>在浏览器端，通过引入<script src="/socket.io/socket.io.js"></script> 即可使用浏览器端的socket.io。通过<code>io()</code>启动客户端，默认与<span class="i">localhost</span>建立连接。接下来就可以通过<code>on</code>和<code>emit</code>方法和服务器端进行沟通了。emit方法用来触发一个事件，第一个参数为事件名，第二个参数为发送的数据，第三个参数为回调函数。值得注意的是，服务器端和客户端都有emit和on方法。客户端完整代码如下：</p>
+		<pre><code>&lt;script src="/socket.io/socket.io.js">&lt;/script>
+&lt;script>
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+&lt;/script>
+</code></pre>
+		<p>在官方样例中，还展示了socket.io的广播功能，<code>socket.emit()</code>向该连接的客户端广播，<code>socket.broadcast.emit()</code>向除此客户端外的所有客户端广播，<code>io.sockets.emit()</code>向所有连接到服务器端的客户端广播。</p>
+		<h3 id="socketio_api">部分API</h3>
 		<p><strong>TODO</strong></p>
 		<hr>
 		<h1 id="jade">Jade</h1>
@@ -1627,6 +2017,100 @@ html(lang="en")
 		<h3 id="d3_more">更多</h3>
 		<p>除了上面提到的官方wiki和<a href="https://github.com/d3/d3/wiki/API--中文手册" target="_blank">中文手册</a>，还有作者本人写的种种<a href="http://bl.ocks.org/mbostock" target="_blank">演示实例</a>，在关于D3.js在国内还没有很权威的入门教程，<a href="http://www.ourd3js.com/wordpress/?cat=2" target="_blank">ourd3js</a>算是写的比较好的d3入门和进阶教程了，在里面还有许多有助于d3学习的其他网站。</p>
 		<hr>
+		<h1 id="sass">Sass</h1>
+		<p>Sass是一种适合程序员使用的CSS预处理器。它预先约定了许多CSS的书写手法，为之赋予了可编程的能力。Sass使用<span class="i">Ruby</span>语言实现，安装使用时需要预装<span class="i">ruby</span>和g<span class="i">em</span>，再通过<code>gem install sass</code>安装Sass。Sass可以将<code>.scss</code>文件编译成普通的CSS文件。</p>
+		<p>编译时，<code>--style</code>选项可以指定<code>nested，expanded，compact，compressed</code>几种风格，默认为<code>nested</code>，在生产环境下一般使用<code>compressed</code>。<code>--watch</code>选项可以监听<code>.scss</code>文件，在源文件改动时。自动编译成css文件。</p>
+		<p><strong>注意：Sass可以编译后缀名为<code>.scss</code>和<code>.sass</code>两种css文件，两者的格式是不同的。前者更像传统的CSS，使用大括号区分层级；后者使用缩进，且不使用分号。具体可以见<a href="http://sass-lang.com/documentation/file.INDENTED_SYNTAX.html" target="_blank">参考</a>。</strong></p>
+		<h3 id="sass_rule">约定</h3>
+		<p>Sass自带交互shell，通过在命令行输入<code>sass –i</code>进入，便于开发者进行测试。</p>
+		<p>Sass中使用<code>/**/</code> <code>//</code>来注释，其中单行注释会在编译时移除。Sass允许使用变量，变量以$符号开头，使用时也需带上<code>$</code>。变量有number (<code>1, 2px</code>)，string (<code>"foo", 'bar', baz</code>)，color (<code>blue, #123456, rgba(0,0,0,255)</code>)，bool (<code>true, false</code>)，null (<code>null</code>)，list (<code>1em 0em 1.5em, Arial sans-serif serif</code>)，map ( <code>(key1: value1, key2: value2)</code> )几种类型。为变量赋值时，支持使用<code>!default</code>表示默认值。在变量名中甚至可以通过<code>#{…}</code>的形式嵌入变量名（这点像<span class="i">PHP</span>）。Sass允许在代码中使用算式和嵌套。在嵌套时，还可以使用<code>&</code>算符表示父元素。</p>
+		<pre><code>$var = 2;
+$hover = #0f0;
+$fonts = Arial sans-serif;
+div {
+    font-family: $fonts;
+    h1 {
+        color: red;
+        right: $var * 10%;
+    }
+    &:hover {
+        color: $hover;
+    }
+}
+</code></pre>
+		<p>Sass一大精髓就在于代码重用上。使用<code>@extend</code>可以继承某个选择器的样式，使用<code>@mixin</code>定义css中的mixin（类似于函数），通过<code>@include</code>使用定义好的mixin，更加灵活的是mixin支持输入参数。类似的<code>@</code>规则还有<code>@import</code>引入sass或是css文件，<code>@media</code>表示当前媒体，它们都支持嵌套。<code>@at-root，@debug，@warn，@error</code>等参见<a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html#directives" target="_blank">文档介绍</a>。</p>
+		<pre><code>@mixin rounded($vert, $horz, $radius: 10px) {
+border-#{$vert}-#{$horz}-radius: $radius;
+-moz-border-radius-#{$vert}#{$horz}: $radius;
+-webkit-border-#{$vert}-#{$horz}-radius: $radius;
+}
+
+.class1 {
+    border: 1px solid #ddd;
+}
+
+.class2 {
+    @extend .class1;
+    font-size: 12px;
+}
+
+#navbar li {
+    @include rounded(top, left);
+}
+#footer {
+    @include rounded(top, left, 5px);
+}
+</code></pre>
+		<p>另外，Sass还自带语法控制结构（<a href="https://css-tricks.com/sass-vs-less/" target="_blank">有人认为</a>这是它强于less的一点）。<code>@if，@else</code>用于判断，<code>@for，@while，@each</code>用于循环。用法如下：</p>
+		<pre><code class="scss">$type: monster;
+$i: 6;
+p {
+    @if $type == ocean {
+        color: blue;
+    } @else if $type == monster {
+        color: green;
+    } @else {
+        color: red;
+    }
+}
+//使用to也可以
+@for $i from 1 through 3 {
+    .item-#{$i} { width: 2em * $i; }
+}
+@each $animal in puma, sea-slug, egret, salamander {
+    .#{$animal}-icon {
+        background-image: url('/images/#{$animal}.png');
+    }
+}
+@each $header, $size in (h1: 2em, h2: 1.5em, h3: 1.2em) {
+    #{$header} {
+        font-size: $size;
+    }
+}
+@while $i > 0 {
+    .item-#{$i} { width: 2em * $i; }
+    $i: $i - 2;
+}
+</code></pre>
+		<p>最后，Sass还支持数量繁多的<a href="http://sass-lang.com/documentation/Sass/Script/Functions.html" target="_blank">预定义函数</a>和用户<a href="http://sass-lang.com/documentation/Sass/Script/Functions.html#declare-class_method" target="_blank">自定义函数</a>。如颜色函数<code>lighten(), darken(), grayscale(), complement(), opacity()</code>, 字符串函数，数字函数，<code>list</code>函数等等</p>
+		<pre><code class="scss">lighten(#cc3, 10%) // #d6d65c
+darken(#cc3, 10%) // #a3a329
+grayscale(#cc3) // #808080
+complement(#cc3) // #33c
+
+@function double($n) {
+    @return $n * 2;
+}
+#sidebar {
+    width: double(5px);
+}
+</code></pre>
+		<h3 id="compass">Compass</h3>
+		<p><span class="i">Compass</span>是建立在Sass之上的一个工具包。它和Sass的关系相当于<span class="i">jQuery</span>和<span class="i">Javascript</span>，<span class="i">Rails</span>和<span class="i">Ruby</span>，<span class="i">Django</span>和<span class="i">Python</span>，<span class="i">express</span>和<span class="i">nodejs</span>，是Sass的一个重量级的应用。<span class="i">Compass</span>封装了常用的各种模板，使得在Sass的基础上开发CSS效率大大提高。</p>
+		<p>Compass也是通过<code>gem install</code>来安装，安装完成后通过<code>compass create project</code>创建工程，文件夹下包括配置文件<span class="i">config.rb</span>，和<span class="i">scss，stylesheet</span>两个子文件夹。Scss文件编辑完成后，使用<code>compass compile</code>编译，还可以通过<code>output_style，force</code>等参数修饰，<span class="i">Compass</span>也有<code>watch</code>命令。</p>
+		<p>Compass将css设计中最常用以及最繁琐的部分通过预设的模块尽量封装了起来。包括reset，css3，layout，typography，utilities以及一些额外的helper函数。</p>
+		<p>不过，由于Compass的功能和<span class="i">bootstrap</span>这种css库功能有重叠（不过是更加开放灵活，且和Ruby绑定而已），让人犹豫它的定位。Compass自2014年起不再维护。</p>
+		<hr>
 		<h1 id="es2015">ES6新特性</h1>
 		<p><span class="i">ECMAscript</span>2015年5月份发布了第六版新标准。引入了一些更加方便的操作方式和一些突破性的新概念。以下是ES6的一些新特性。</p>
 		<p><code>let</code>用于在代码块中声明临时变量。尤其在for循环中最为常用。<code>const</code>用来声明常量，具有块级作用域。不能重复声明，复制无效。</p>
@@ -1681,6 +2165,25 @@ html(lang="en")
 		<h3 id="jsonp">JSONP & CORS</h3>
 		<p>同源策略由<span class="i">NetScape</span>网景公司提出。现在所有支持JS的浏览器都会使用这个策略。这个策略的意思是，只有相同域名、协议、端口下的脚本才会被执行，避免其他网页对本网页的非法篡改。因此，JS脚本不能跨域发起请求。除了使用Proxy server外，可以通过<strong>JSONP</strong>在服务器端支持的情况下，实现跨域访问。</p>
 		<p><span class="i">JSONP(JSON with padding)</span>并不是一种协议，而是解决办法。它允许服务器端集成Script标签，返回客户端，并以js callback的形式实现跨域。它的原理主要利用了<code>&lt;script></code>标签对JS脚本的动态解析实现。callback在客户端注册，并放在url中传给服务器；服务器先生成JSON数据，再以JS的形式调用与callback同名的函数，并将JSON数据以入参的形式返回给客户端。从而实现跨域请求。</p>
+		<p>下面是向一个支持JSONP请求的服务器发送跨域资源请求的代码，值得学习：</p>
+		<pre><code>function getJSONP(url, success) {
+
+    var ud = '_' + +new Date,
+        script = document.createElement('script'),
+        head = document.getElementsByTagName('head')[0] 
+               || document.documentElement;
+
+    window[ud] = function(data) {
+        head.removeChild(script);
+		//`success` can be undefined
+        success && success(data);
+    };
+
+    script.src = url.replace('callback=?', 'callback=' + ud);
+    head.appendChild(script);
+
+}
+</code></pre>
 		<p><i>注1：JSONP跨域请求需要服务器端支持，且只支持<code>GET</code>请求。</i></p>
 		<p><i>注2：jQuery支持JSONP，通过<code>$.getJSON</code>或其他基于<code>$.ajax()</code>的方法来加载JSON数据。</i></p>
 		<p><span class="i">CORS（Cross-origin resource sharing）</span>跨域资源共享标准允许浏览器向跨域服务器发送XMLHttpRequest请求，克服了同源限制。CORS是新标准，需要浏览器和服务器同时支持，目前所有浏览器都支持此功能。整个CORS通信过程，由浏览器自动完成，用户在发起跨域AJAX请求时与同源时没有区别。浏览器发现跨域后会添加额外头信息，实现了CORS接口的服务器可以完成跨域请求的响应。CORS实现的重点在服务器端，具体内容可以学习<a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank">阮一峰的博客</a>。</p>
@@ -1706,7 +2209,7 @@ html(lang="en")
 		<p>本文列举了十余项前端技术，涵盖了框架，包管理，包构建，模块规范，任务管理，可视化等方面。在测试框架，socket编程等方面还有欠缺。</p>
 		<p>另外，网页的结构灵感来自于<span class="i">backbone.js</span>, <span class="i">underscore</span>和<span class="i">zepto</span>的文档网页设计，个人认为这种设计清晰简洁，没有一些“没必要的废话”。</p>
 		<p>最后祝你，身体健康。</p>
-		<p><i>2016/9/20</i></p>
+		<p><i>2017/2/2</i></p>
 	</div>
 </body>
 </html>
