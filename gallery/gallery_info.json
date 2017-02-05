@@ -1,0 +1,342 @@
+{
+	"name": "MyPhotoGallery",
+	"author": "shenlvmeng",
+	"description": "My photo gallery",
+	"content": [
+		{
+			"date": 20120108,
+			"info": "12 angry men(不愧IMDB 8.9 豆瓣 9.3的评分）",
+			"tags": [
+				"十二怒汉", "剧情", "美国", "欧美", "Henry Fonda", "~70s", "人性", "法律", "黑白", "经典", "9+", "Sydney Lumet"
+			],
+			"type": "jpg"
+		},{
+			"date": 20120105,
+			"info": "熟悉的两位 gary oldman演得确实好~",
+			"tags": [
+				"欧美", "法国", "这个杀手不太冷", "Jean Reno", "Natalie Portman", "Gary Oldman", "经典", "剧情", "动作", "犯罪",
+				"90s", "9+", "Luc Besson", "精选"],
+			"type": "jpg"
+		},{
+			"date": 20120312,
+			"info": "牛B的连恩尼森 片子紧凑精简 没什么废话 动作片就应该这么不拖泥带水 就像一个精致的《007》 其实名字可以改成《保持通话》的————《Taken》（《飓风营救》）",
+			"tags": ["飓风营救", "Taken", "剧情", "动作", "惊悚", "犯罪", "欧美", "法国", "美国", "英国", "Liam Neeson", "00s", "特工", "8+", "Pierre Morel", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120313,
+			"info": "典型的美国个人英雄主义 典型的一水美国片坏蛋 政治因素的参与却让它有点变味儿 看看片中的各种枪 体会下其中暧昧的价值观就好了",
+			"tags": ["生死狙击", "动作", "悬疑", "犯罪", "欧美", "美国", "Mark Wahlberg", "Kate Mara", "Michael Peña", "00s", "特工", "战争", "7+", "Antoine Fuqua", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120315,
+			"info": "许鞍华式的笑中带泪 它像一杯清酒 清淡 有后劲儿 适合习惯油腻的浮躁之人品味",
+			"tags": ["桃姐", "剧情", "港台", "香港", "亚洲", "温情", "家庭", "叶德娴", "刘德华", "秦海璐", "秦沛", "黄秋生", "罗兰", "徐克", "洪金宝", "宁浩", "杜汶泽", "~10s", "8+", "许鞍华", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120318,
+			"info": "血 爱 毒品 肾上腺素 动作 暴力 刺激的混合体",
+			"tags": ["怒火攻心", "Crank", "欧美", "美国", "剧情", "动作", "犯罪", "暴力", "黑帮", "cult", "Jason Statham", "00s", "7+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120318,
+			"info": "低俗小说上映后 乌玛·瑟曼过气的事业又迎来了第二春。",
+			"tags": ["低俗小说", "Pulp Fiction", "剧情", "喜剧", "犯罪", "黑色", "黑帮", "经典", "欧美", "美国", "John Travolta", "Uma Thurman", "Tim Roth", "Samuel L. Jackson", "90s", "8+", "Quentin Tarantino", "preface", "精选"],
+			"type": "jpg"
+		},{
+			"date": 20120318,
+			"info": "94年的电影：肖申克的救赎 阿甘正传 低俗小说 这个杀手不太冷 东邪西毒 活着 那确实是一个黄金年代 电影里昆汀用回环的奇妙剪辑把本来毫不出彩的故事拍的有了味儿 ps：在电影中fuck出现了271次...",
+			"tags": ["低俗小说", "Pulp Fiction", "美国", "John Travolta", "Uma Thurman", "Tim Roth", "Samuel L. Jackson", "90s", "Quentin Tarantino", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120323,
+			"info": "给力 的字幕组~不过笑点得看了黑镜ep1才能明白~",
+			"tags": ["黑镜", "ep1", "screenshot", "CCTV"],
+			"type": "jpg"
+		},{
+			"date": 20120323,
+			"info": "有些故事愈荒诞 愈能说明道理 youtube和twitter成为了网络时代的“民意” 网络上的热闹和公主解救时的空荡的街道构成了鲜明的对比 什么是人性？",
+			"tags": ["黑镜", "ep1", "黑色", "~10s", "英剧"],
+			"type": "jpg"
+		},{
+			"date": 20120323,
+			"info": "这就是科技带给我们的进步？除了nopple（no apple）的影射 选秀的嫁接也天衣无缝 所有人都生活在消费主义的世界里 影片的最后 反叛精神又一次被消费主义吞噬了",
+			"tags": ["黑镜", "ep2", "screenshot", "黑色", "英剧", "~10s"],
+			"type": "jpg"
+		},{
+			"date": 20120323,
+			"info": "你用什么来证明你到过一个名胜古迹呢？拍下来的一堆照片？",
+			"tags": ["黑镜", "ep3", "screenshot", "黑色", "英剧", "~10s"],
+			"type": "jpg"
+		},{
+			"date": 20120323,
+			"info": "They are all tragedies.",
+			"tags": ["黑镜", "黑色", "人性", "欧美", "英国", "~10s", "9+", "英剧"],
+			"type": "jpg"
+		},{
+			"date": 20120107,
+			"info": "“做人如果没有梦想，那和一条咸鱼有什么分别”",
+			"tags": ["少林足球", "喜剧", "动作", "运动", "星爷", "港台", "香港", "亚洲", "周星驰", "吴孟达", "赵薇", "谢贤", "莫文蔚", "黄一飞", "田启文", "林子聪", "00s", "7+"],
+			"type": "jpg"
+		},{
+			"date": 20120107,
+			"info": "“做人如果没有梦想，那和一条咸鱼有什么分别”",
+			"tags": ["少林足球", "周星驰", "田启文", "吴孟达", "screenshot", "00s"],
+			"type": "jpg"
+		},{
+			"date": 20120108,
+			"info": "12怒汉",
+			"tags": ["12怒汉", "黑白", "~70s", "Henry Fonda", "Sydney Lumet"],
+			"type": "jpg"
+		},{
+			"date": 20120108,
+			"info": "12怒汉",
+			"tags": ["12怒汉", "黑白", "~70s", "Henry Fonda", "Sydney Lumet"],
+			"type": "jpg"
+		},{
+			"date": 20120107,
+			"info": "或然率的剧情演绎。",
+			"tags": ["少林足球", "或然率", "周星驰"],
+			"type": "jpg"
+		},{
+			"date": 20120406,
+			"info": "想了好久才发现“崔尼蒂” 就是记忆碎片里的女主~",
+			"tags": ["Keanu Reeves", "Carrie-Anne Moss"],
+			"type": "jpg"
+		},{
+			"date": 20120407,
+			"info": "百看不厌",
+			"tags": ["黑客帝国", "第2部", "动作", "科幻", "经典", "剧情", "Keanu Reeves", "Carrie-Anne Moss", "Hugo Weaving", "Laurence Fishburne", "欧美", "8+", "Lilly Wachowski", "Lana Wachowski", "Joe Pantoliano", "preface", "精选"],
+			"type": "jpg"
+		},{
+			"date": 20120407,
+			"info": "百看不厌",
+			"tags": ["黑客帝国", "第3部", "动作", "科幻", "经典", "剧情", "Keanu Reeves", "Carrie-Anne Moss", "Hugo Weaving", "Monica Bellucci", "邹兆龙", "欧美", "8+", "Lilly Wachowski", "Lana Wachowski", "preface", "精选"],
+			"type": "jpg"
+		},{
+			"date": 20120407,
+			"info": "继续了多线索推进的方式 还是一贯的黑色幽默 告别了上集的浓重重庆风味 这次则把地点选在了厦门 ps: 本片有青岛话、闽南话、武汉话、四川话、陕西话等多种语言。",
+			"tags": ["疯狂的赛车", "喜剧", "冒险", "国产", "大陆", "黑色", "黄渤", "宁浩", "戎祥", "徐峥", "王双宝", "亚洲", "00s", "7+"],
+			"type": "jpg"
+		},{
+			"date": 20120407,
+			"info": "方言笑点神马的还是挺适合吐槽的，个人认为故事情节上比疯狂的赛车要略弱一些",
+			"tags": ["疯狂的石头", "喜剧", "犯罪", "国产", "大陆", "黑色", "黄渤", "宁浩", "刘桦", "徐峥", "王迅", "亚洲", "00s", "8+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120411,
+			"info": "每一部恐怖片总有那么一个疑神疑鬼的女人养着一个喜欢到处乱跑的宠物，本片也不例外。果不其然除了女主角，人不多不少都死完了。不过79年能拍出这种影片也还是不容易了。——《Alien》（《异形1》）",
+			"tags": ["异形", "Alien", "欧美", "美国", "英国", "Sigourney Weaver", "John Hurt", "Ridley Scott", "~70s", "科幻", "恐怖", "惊悚", "经典", "第1部", "7+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120411,
+			"info": "在第二部中，瑞普丽成功从第一部的女强人进化到了第二部的女兰博。作为86年的作品，个人认为已经比第一部故事性好了很多，不过女人还是女人，只是猫换成了小女孩罢了 ps：导演是卡梅隆——《Alien2》（《异形2》）",
+			"tags": ["异形", "Aliens", "欧美", "美国", "英国", "Sigourney Weaver", "Michael Biehn", "James Cameron", "动作", "科幻", "恐怖", "经典", "第2部", "7+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120418,
+			"info": "作为一部动作片，节奏紧凑异常，从头到尾一气呵成，并无太多细节的拖沓，简直是怎么爽怎么拍，有彩蛋哦——《Shoot‘Em Up》",
+			"tags": ["Shoot'Em Up", "赶尽杀绝", "动作", "惊悚", "犯罪", "暴力", "00s", "欧美", "美国", "Clive Owen", "Monica Bellucci", "Paul Giamatti", "7+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120422,
+			"info": "越狱的影片有很多，文绉绉的罗素为它穿插了细腻的感情线，包括他的挣扎、改变，这也使剧情前半段有些沉闷，可能更加投女性的口味了吧，爱是一种信仰或许是观影之后的收获 ——《The Next Three Days》(《危情三日》)",
+			"tags": ["危情三日", "剧情", "动作", "爱情", "惊悚", "犯罪", "悬疑", "欧美", "美国", "preface", "Russell Crowe", "Olivia Wilde", "Liam Neeson", "Paul Haggis", "10s~", "7+"],
+			"type": "jpg"
+		},{
+			"date": 20120503,
+			"info": "又一部硬汉电影。尽管剧情人物逃不出典型的美国英雄“四人帮”框架，不过大场面还是可以一看的，——《A-Team》（《天龙特工队》）",
+			"tags": ["The A-Team", "天龙特攻队", "欧美", "美国", "动作", "冒险", "喜剧", "战争", "Liam Neeson", "Bradley Cooper", "Sharlto Copley", "10s~", "7+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120503,
+			"info": "（海报涉及剧透，慎入！）这部影片不会让人失望，一个简单的“天黑请闭眼”游戏引发出的一切，情节自然，结尾的转折，应有尽有，当心身后的黄雀。——《cry wolf》 （《豺狼计划》）",
+			"tags": ["豺狼计划", "Cry Wolf", "欧美", "美国", "悬疑", "惊悚", "犯罪", "Jon Bon Jovi", "00s", "7+", "preface", "烧脑"],
+			"type": "jpg"
+		}, {
+			"date": 20120503,
+			"info": "贴一张女主的，话说最后一点她的表情变化真心吓到我了。。。",
+			"tags": ["豺狼计划", "Cry Wolf", "00s", "screenshot", "Lindy Booth"],
+			"type": "jpg"
+		},{
+			"date": 20120504,
+			"info": "《seven》（《七宗罪》）",
+			"tags": ["七宗罪", "Se7en", "欧美", "美国", "剧情", "悬疑", "惊悚", "犯罪", "宗教", "经典", "Morgan Freeman", "Brad Pitt", "Kevin Spacey", "Gwyneth Paltrow", "David Fincher", "Vera Farmiga", "90s", "8+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120504,
+			"info": "《source code》（《源代码》）",
+			"tags": ["源代码", "Source Code", "美国", "欧美", "加拿大", "剧情", "科幻", "动作", "惊悚", "人性", "Jake Gyllenhaal", "Vera Farmiga", "Jeffrey Wright", "Michelle Monaghan", "Duncan Jones", "10s~", "8+", "preface", "烧脑"],
+			"type": "jpg"
+		},{
+			"date": 20120504,
+			"info": "《Memento》（《记忆碎片》）",
+			"tags": ["记忆碎片", "Memento", "欧美", "美国", "剧情", "悬疑", "惊悚", "犯罪", "记忆", "心理", "Guy Pearce", "Carrie-Anne Moss", "Joe Pantoliano", "Christopher Nolan", "00s", "8+", "preface", "烧脑", "经典", "精选"],
+			"type": "jpg"
+		},{
+			"date": 20120504,
+			"info": "《Inception》（《盗梦空间》）",
+			"tags": ["盗梦空间", "Inception", "剧情", "科幻", "动作", "悬疑", "冒险", "记忆", "梦", "经典", "preface", "Christopher Nolan", "Leonardo DiCaprio", "Joseph Gordon-Levitt", "Ellen Page", "Ken Watanabe", "Tom Hardy", "Marion Cotillard", "Cillian Murphy", "Michael Caine", "Pete Postlethwaite", "10s~", "9+", "精选"],
+			"type": "jpg"
+		},{
+			"date": 20120504,
+			"info": "《the silence of the lambs》(《沉默的羔羊》)",
+			"tags": ["沉默的羔羊", "剧情", "惊悚", "犯罪", "心理", "悬疑", "经典", "美国", "欧美", "preface", "Jodie Foster", "Anthony Hopkins", "90s", "8+"],
+			"type": "jpg"
+		},{
+			"date": 20120504,
+			"info": "《Shutter Island》(《禁闭岛》)",
+			"tags": ["禁闭岛", "Shutter Island", "剧情", "惊悚", "犯罪", "心理", "悬疑", "preface", "美国", "欧美", "Leonardo DiCaprio", "Mark Ruffalo", "Ben Kingsley", "8+", "10s~", "Martin Scorsese", "烧脑"],
+			"type": "jpg"
+		},{
+			"date": 20120505,
+			"info": "其他的神马黑色幽默政治讽刺我倒是没看到，肿么觉得基情是《让子弹飞》的主调呢。。。",
+			"tags": ["screenshot", "周润发", "葛优", "廖凡", "让子弹飞", "10s~"],
+			"type": "jpg"
+		},{
+			"date": 20120505,
+			"info": "豆瓣的评分比我想象的要高些，里面有着许多黑色幽默，引用一句老罗的话：姜文的问题不是没有才华，也不是没有力道，而是用力过猛，该做到百分之百的，他总是做到百分之一百二——《让子弹飞》",
+			"tags": ["让子弹飞", "国产", "亚洲", "剧情", "喜剧", "动作", "黑色", "姜文", "葛优", "周润发", "刘嘉玲", "陈坤", "张默", "姜武", "周韵", "廖凡", "苗圃", "冯小刚", "胡军", "10s~", "8+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120507,
+			"info": "据说此片很治愈。从头到尾一直想找高潮，后来发现，各种亮点其实已经溶解在整个影片中了，ps：囧瑟夫的笑很像我一高中同学——《50/50》（《抗癌的我》）",
+			"tags": ["抗癌的我", "50/50", "剧情", "喜剧", "励志", "独立电影", "人生", "Joseph Gordon-Levitt", "Seth Rogen", "Anna Kendrick", "美国", "欧美", "10s", "7+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120510,
+			"info": "留着一撮小胡子的屈伏塔和样板男休·杰克曼一起探讨何为正义观，浓墨重彩地加入了黑客的冷硬元素，另外还有哈利·贝瑞和小萝莉乱入，从最开头仪式般的绚丽慢动作到最后意味深长的结局，除了华丽还是华丽啊，吐槽一句：中间贝瑞你跳忠是在卖萌么？——《Swordfish》（《剑鱼行动》）",
+			"tags": ["剑鱼行动", "Swordfish", "欧美", "美国", "澳大利亚", "犯罪", "动作", "John Travolta", "preface", "Hugh Jackman", "Halle Berry", "Don Cheadle", "Vinnie Jones", "00s", "7+"],
+			"type": "jpg"
+		},{
+			"date": 20120513,
+			"info": "卡司并不出色，概念很出彩，五个人失去了记忆，被困在了一个密室，其中有好有坏，你要怎么去让别人相信你呢？只是到最后的包袱抛得有点疲软了。柯南告诉我们：真相只有一个！真的吗？看到最后你就知道了。——《Unknown》(《玩命记忆》)",
+			"tags": ["玩命记忆", "Unknown", "欧美", "美国", "剧情", "悬疑", "惊悚", "犯罪", "记忆", "心理", "Jim Caviezel", "Joe Pantoliano", "preface", "00s", "7+", "烧脑"],
+			"type": "jpg"
+		},{
+			"date": 20120519,
+			"info": "还在为60分痛苦么？艾文公司最新研制大脑“伟哥”NZT，一粒让你获得逆天技能。最开头的Zoom in长镜头炫爆了。模糊的价值观，至当不易的剧情不置可否，适合消闲。ps：这种药貌似存在——《Limitless》（《永无止境》）",
+			"tags": ["永无止境", "Limitless", "欧美", "美国", "科幻", "悬疑", "惊悚", "人性", "Bradley Cooper", "Abbie Cornish", "Robert De Niro", "10s~", "preface", "7+"],
+			"type": "jpg"
+		},{
+			"date": 20120521,
+			"info": "这部黑色的惊悚电影节奏流畅，视觉也很讲究。阿汤哥不再年轻，第一次演一个满头银发的杀手，很有味道。影片的黑色还在于它对现实的反讽：如果我们不在乎卢旺达数百万人在日落之前惨遭屠杀这样的事实，我们凭什么对Vincent杀死一个毫不相干的人耿耿于怀？你我不过是一粒浮尘罢了。冷漠的城市里谁会知道你已经死去。——《Collateral》（《借刀杀人》）",
+			"tags": ["借刀杀人", "Collateral", "欧美", "美国", "悬疑", "犯罪", "剧情", "动作", "Jamie Foxx", "Tom Cruise", "Mark Ruffalo", "Javier Bardem", "Jason Statham", "Michael Mann", "00s", "7+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120522,
+			"info": "《21》（《决胜21点》）",
+			"tags": ["决胜21点", "21", "剧情", "犯罪", "悬疑", "赌博", "Jim Sturgess", "Kevin Spacey", "6+", "00s", "preface","Laurence Fishburne", "欧美", "美国"],
+			"type": "jpg"
+		},{
+			"date": 20150527,
+			"info": "收获1：屌丝追女神的典型案例；2：爱是无视时间和空间的距离的 3：苹果在哪里都会出现4：人的笑点和泪点是可以改变的。五颗星的评价是不过分的——《Wall-e》（《机器人总动员》）",
+			"tags": ["机器人总动员", "WALL·E", "欧美", "美国", "喜剧", "爱情", "科幻", "动画", "冒险", "皮克斯", "温情", "00s", "9+", "经典", "preface", "精选"],
+			"type": "jpg"
+		},{
+			"date": 20150528,
+			"info": "值得细看和分析的心理作品 ——《Detachment》（《超脱》）",
+			"tags": ["超脱", "Detachment", "剧情", "心理", "人性", "欧美", "美国", "人生", "Adrien Brody", "Sami Gayle", "Christina Hendricks", "Marcia Gay Harden", "preface", "刘玉玲", "10s~", "8+", "Tony Kaye", "精选"],
+			"type": "jpg"
+		},{
+			"date": 20120529,
+			"info": "猜猜这是十几罗汉~~",
+			"tags": ["11罗汉", "花絮", "合影"],
+			"type": "jpg"
+		},{
+			"date": 20120529,
+			"info": "老套路，老结局，大场面，适合各个年龄段。挑一个懒得动脑筋晚上或下午看看就当休闲挺好的。片名翻译的很有意思。全片就看到皮特在一直吃吃吃啊吃。。。——《Ocean's eleven》（《十一罗汉》）",
+			"tags": ["十一罗汉", "Ocean's eleven", "动作", "犯罪", "赌博", "剧情", "欧美", "美国", "George Clooney", "Brad Pitt", "Matt Damon", "Julia Roberts", "Andy Garcia", "Don Cheadle", "Steven Soderbergh", "00s", "7+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20150531,
+			"info": "萝莉：下面为你展示一款居家旅行杀人灭口必备利器AK47，各位观众请看。影片下一秒的画面立马燃到爆",
+			"tags": ["天佑美利坚", "God Bless America", "screenshot", "萝莉", "大叔"],
+			"type": "jpg"
+		},{
+			"date": 20150531,
+			"info": "一个多动症会使枪有暴力倾向的萝莉和一个身患“绝症”自感人生无望因而想在有生之年替天行道的老大爷上演一出“这个杀手有点冷”的剧情，萝莉的出现把原本的暴力剧情变得挺干净的，站在道德制高点的大爷让一些画面顿时燃了起来，结局意味深长。另外，片名译为《少女教你如何打枪》可能会吸引更多男性观众。——《God Bless America》（《天佑美利坚》）",
+			"tags": ["天佑美利坚", "God Bless America", "preface", "欧美", "美国", "喜剧", "犯罪", "黑色", "暴力", "剧情", "Joel Murray", "Tara Lynne Barr", "10s~", "7+"],
+			"type": "jpg"
+		},{
+			"date": 20120610,
+			"info": "王小帅站在了小男孩的角度,努力用第一镜头说明文革那段时光的那些事,暧昧的借由小男孩的自传式眼光道了出来,同时反映了男孩的成长.可能由于影片过于碎片化而不太讨人喜欢,不过其中反应的童年生活感觉和我的很像啊,闫妮的母亲角色很真实,父亲也不错~  ——《我11》（《11 flowers》）",
+			"tags": ["我11", "国产", "剧情", "政治", "文艺", "王小帅", "闫妮", "乔任梁", "10s~", "7+", "文革", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120612,
+			"info": "最早见到这张图是高一,那时同学的《认识电影》一书的封面就用的《钢琴家》（不过最新版貌似换成《黑天鹅》了），",
+			"tags": ["钢琴家", "Adrien Brody", "花絮", "封面"],
+			"type": "jpg"
+		},{
+			"date": 20120612,
+			"info": "波兰斯基摆脱低谷之作,艾德里安·布洛迪勇夺奥斯卡之作（他的另一部《Detachment》也很棒）,传记式的语言,其中反映的人性等内涵无法一一道出,人生的乖舛,德国军官人性的觉醒,不断的悲剧,相信不同人会有不同的收获,影片略长,但绝不单调.有人说他像《辛德勒的名单》,就连拿小金人的节奏都很像,但在立意上还是不一样的.——《The Pianist》（《钢琴家》）",
+			"tags": ["钢琴家", "The Pianist", "剧情", "传记", "历史", "战争", "人性", "德国", "法国", "英国", "波兰", "Adrien Brody", "Thomas Kretschmann", "Roman Polanski", "00s", "9+", "精选", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120613,
+			"info": "编剧沃卓斯基兄弟(现在已经是姐妹)果然不是盖的,美国人假装英国人拍给中国人看的电影，太多不合理的因素，噱头大于影片内容本身，就不说过多了，注意观察,彩蛋不止一个.——《V for Vendetta》（《V怪客》）",
+			"tags": ["V字仇杀队", "V for Vendetta", "美国", "英国", "欧美", "Natalie Portman", "Hugh Weaving", "John Hurt", "剧情", "惊悚", "动作", "政治", "科幻", "Lilly Wachowski", "Lana Wachowski", "00s", "8+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120615,
+			"info": "blue eyed=搞不定的女人",
+			"tags": ["screenshot", "天堂电影院"],
+			"type": "jpg"
+		},{
+			"date": 20120615,
+			"info": "30年后,闭上眼旧时光涌上心头,那因艾费多的死回不去的旧时光,那回不去的爱情,那幢老影院,垂垂老矣的老观众,当时的一幕幕就像一场重做的梦,而今背井离乡功成名就,却没有了当时的感情,当时的人.为什么那个士兵第99个晚上走了呢,也许是想让公主永远记得他吧.佳作一部,豆瓣评分9.2,IMDB top100.——《Nuovo cinema Paradiso》（《天堂电影院》）",
+			"tags": ["天堂电影院", "欧美", "意大利", "法国", "剧情", "爱情", "经典", "精选", "Giuseppe Tornatore", "80s", "9+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120616,
+			"info": "信息量真大 一个字：燃~！——《Avengers》（《复仇者联盟》）",
+			"tags": ["复仇者联盟", "Avengers", "动作", "科幻", "冒险", "欧美", "美国", "大片", "Samuel L. Jackson", "Chris Hemsworth", "Robert Downey Jr.", "Mark Ruffalo", "Scarlett Johansson", "Jeremy Renner", "Tom Hiddleston", "Gwyneth Paltrow", "Stellan Skarsgård", "10s~", "8+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120616,
+			"info": "又是一部明星看到吐的片子,略.——《Ocean‘s Twelve》（《十二罗汉》）",
+			"tags": ["十二罗汉", "Ocean‘s Twelve", "欧美", "美国", "动作", "犯罪", "赌博", "剧情", "George Clooney", "Brad Pitt", "Matt Damon", "Julia Roberts", "Andy Garcia", "Don Cheadle", "Steven Soderbergh", "Catherine Zeta-Jones", "00s", "7+", "preface", "大片"],
+			"type": "jpg"
+		},{
+			"date": 20120624,
+			"info": "走着伪纪录片的路子，看得出想要打破超级英雄的给人们留下的老印象，故事倒是不错，男主角挺像里昂那多小时候，整个情节大体讲的一个家庭不太和谐的闷骚小男生和影片中惯例首杀的黑人朋友还有与他关系暧昧的表哥偶然获得超能力走上逆袭之路的故事，看到最后发现这能力简直胜过复仇者联盟有木有。作为导演处女作还是差强人意的。——《Chronicle》（《超能失控》）",
+			"tags": ["超能失控", "Chronicle", "欧美", "美国", "英国", "剧情", "惊悚", "动作", "科幻", "伪纪录片", "反类型", "Michael B. Jordan", "10s~", "6+", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120709,
+			"info": "从长得很丽质到长得很励志再到长得很丽质的中规中矩意料之中的真人电影版美女与野兽。——《Beastly》（《野兽情人》）",
+			"tags": ["野兽情人", "欧美", "美国", "剧情", "爱情", "奇幻", "Vanessa Hudgens", "10s~", "~5"],
+			"type": "jpg"
+		},{
+			"date": 20120804,
+			"info": "梵高的《星空》 几米的《星空》 Tom Lin的《星空》 五月天的《星空》",
+			"tags": ["星空", "花絮", "合影", "徐娇", "林晖闵"],
+			"type": "jpg"
+		},{
+			"date": 20120814,
+			"info": "盗梦里面的金发妹子？！ 不科学啊！ 还是这里面的更好些~",
+			"tags": ["screenshot", "妹子", "海盗电台", "Talulah Riley"],
+			"type": "jpg"
+		},{
+			"date": 20120823,
+			"info": "四国合拍的一部讲述摇滚电台的故事,取材于现实,很好的讲述了摇滚,怀旧,自由主义. 冲着有趣程度 此片还是很值得一看的 卡司上可要留意有木有熟悉面孔哦 ps：DAVE的艳遇不科学！ ——《The Boat that Rocked》(《海盗电台》)",
+			"tags": ["海盗电台", "欧美", "英国", "德国", "法国", "剧情", "喜剧", "音乐", "励志", "摇滚", "Bill Nighy", "Tom Sturridge", "Philip Seymour Hoffman", "Rhys Ifans", "Nick Frost", "Talulah Riley", "00s", "8+", "精选", "preface"],
+			"type": "jpg"
+		},{
+			"date": 20120830,
+			"info": "画面 创意 编剧 甚至卡司都能满足青年这个电影的主要受众。曾江几米徐娇奶茶哈林五月天的组合应该可以老中青通吃吧~ 因为星空绘本对我的意义，电影对我的触动很深——《星空》（《Starry Starry Night》）",
+			"tags": ["星空", "剧情", "爱情", "奇幻", "青春", "文艺", "温情", "港台", "台湾", "徐娇", "林晖闵", "刘若英", "庾澄庆", "桂纶镁", "10s~", "7+", "preface", "林书宇", "五月天", "几米"],
+			"type": "jpg"
+		},{
+			"date": 20120903,
+			"info": "一部高智商精致小片 片名的“tri”恰到好处 幽灵船？ 弱爆了！导演告诉我们真正的幽灵正是自己 随着剧情推移到后半段 真相不断挑战观众的G点 不像穆赫兰道晦涩 没有盗梦宏大 全靠一个异形式女强人撑起 巧妙的回环像低俗小说 最后一句话道破全片：这是死后的赎罪 ——《triangle》（《恐怖游轮》）",
+			"tags": ["恐怖游轮", "triangle", "欧美", "英国", "澳大利亚", "悬疑", "惊悚", "剧情", "心理", "烧脑", "恐怖", "Melissa George", "00s", "8+", "preface", "精选", "循环"],
+			"type": "jpg"
+		},{
+			"date": 20120910,
+			"info": "真有趣的表情 from 《无耻混蛋》",
+			"tags": ["无耻混蛋", "花絮", "Brad Pitt"],
+			"type": "jpg"
+		}
+	]
+}
