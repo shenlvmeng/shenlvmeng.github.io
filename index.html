@@ -86,7 +86,7 @@
 </head>
 <body>
 	<header>
-		<span>PhotoGallery</span> | 
+		<span id="gallery"><a href="./gallery/index.html">PhotoGallery</a></span> | 
 		<span id="lab">lab ▾
 			<span id="lablist">
 				<a href="./lab/1.html">Lab001</a>
@@ -102,6 +102,7 @@
 	</footer>
 	<script type="text/javascript">
 		var back = document.getElementsByTagName('body'),
+			gallery = document.getElementById('gallery'),
 			foot = document.getElementsByTagName('footer'),
 			lab = document.getElementById('lab'),
 			target = document.getElementById('slogan'),
@@ -134,6 +135,7 @@
 		Array.apply(null, Array(4)).forEach(function(val, i){
 			attachListener(foot[0].children[i], color[i]);
 		});
+		attachListener(gallery.children[0], "orange");
 		lab.addEventListener('touchend', function() {
 			if (this.children[0].style.display == "block") {
 				this.children[0].style.display = "";
