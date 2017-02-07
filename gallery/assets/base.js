@@ -49,7 +49,7 @@ loadFile("./gallery_info.json", function(){
 
 	var Wall = {
 			template: '<div id="photos">\
-				<figure v-for="item in items" :id="item.id" @touchend="changeView($event)" @click="changeView($event)">\
+				<figure v-for="item in items" :id="item.id" @click="changeView($event)">\
 					<img :src="item.path">\
 					<aside><span>{{item.desc}}</span></aside>\
 				</figure>\
@@ -250,7 +250,7 @@ loadFile("./gallery_info.json", function(){
 					}
 				},
 				toInfo: function (id) {
-					console.log(id);
+					//console.log(id);
 					if (id) {
 						this.pid = id;
 					}
