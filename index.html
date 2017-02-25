@@ -17,7 +17,7 @@
 			-webkit-transition: background-color 1s;
 			-o-transition: background-color 1s;
 		}
-		div#slogan{
+		#slogan{
 			position: absolute;
 			top: 50%;
 			width: 100%;
@@ -57,22 +57,15 @@
 		span:last-child{
 			margin-left: 25px;
 		}
-		span#lab{
+		#lab{
 			display: inline-block;
 			position: relative;
 			cursor: pointer; 
 		}
-		span#lab:hover{
-			color: #fff;
-		}
-		span#lab:hover span#lablist{
-			display: block !important;
-		}
-		span#lablist{
+		#lablist{
 			display: none;
 			position: absolute;
-			top: 23px;
-			right: -40px;
+			margin: 0 0 0 -10px;
 			background-color: #eee;
 			color: #555;
 			width: 60px;
@@ -136,12 +129,20 @@
 			attachListener(foot[0].children[i], color[i]);
 		});
 		attachListener(gallery.children[0], "orange");
+		lab.addEventListener('click', function() {
+			if (this.children[0].style.display == "block") {
+				this.children[0].style.display = "";
+			} else {
+				this.children[0].style.display = "block";
+			}
+		});
 		lab.addEventListener('touchend', function() {
 			if (this.children[0].style.display == "block") {
 				this.children[0].style.display = "";
 			} else {
 				this.children[0].style.display = "block";
 			}
+			this.stopPropagation();
 		});
 		window.addEventListener('touchend', function() {
 			lab.children[0].style.display = "";

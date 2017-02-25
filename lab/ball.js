@@ -40,6 +40,8 @@
 
 		ci = 0,
 
+		speed_x = 2;
+
 		status = 'on',
 
 		svg = d3.select('svg'),
@@ -85,7 +87,7 @@
 		_createOne = function () {
 			svg.append('circle')
 				.datum({
-					x: (Math.random() > 0.5 ? -1 : 1) * (Math.random() * 3 + 2), y: -4 * Math.random(), f: true,
+					x: (Math.random() > 0.5 ? -1 : 1) * (Math.random() * 3 + speed_x), y: -4 * Math.random(), f: true,
 					r: 10 + Math.random() * 8
 				})
 				.attr({
@@ -113,12 +115,12 @@
 	if (window.addEventListener){
 		document.getElementById('switch').addEventListener('click', turn);
 		document.getElementById('speed').addEventListener('change', function (e) {
-			requestAnimationFrame(function(){G = parseInt(e.target.value);});
+			requestAnimationFrame(function(){speed_x = parseInt(e.target.value);});
 		});
 	} else {
 		document.getElementById('switch').attachEvent('click', turn);
 		document.getElementById('speed').attachEvent('change', function (e) {
-			requestAnimationFrame(function(){G = parseInt(e.target.value);});
+			requestAnimationFrame(function(){speed_x = parseInt(e.target.value);});
 		});
 	}
 
