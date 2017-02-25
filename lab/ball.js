@@ -112,8 +112,14 @@
 
 	if (window.addEventListener){
 		document.getElementById('switch').addEventListener('click', turn);
+		document.getElementById('speed').addEventListener('change', function (e) {
+			requestAnimationFrame(function(){G = parseInt(e.target.value);});
+		});
 	} else {
 		document.getElementById('switch').attachEvent('click', turn);
+		document.getElementById('speed').attachEvent('change', function (e) {
+			requestAnimationFrame(function(){G = parseInt(e.target.value);});
+		});
 	}
 
 	_nextTick();
