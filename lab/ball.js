@@ -97,13 +97,13 @@
 		},
 
 		turn = function() {
-			if (status == 'off'){
-				status = 'on';
+			if (status == 'off' || !status){
+				status = "on";
 				ni = true;
 				_nextTick();
 				document.getElementById('switch').innerHTML = 'Pause';
 			} else {
-				status = 'off';
+				status = "off";
 				ni = false;
 				document.getElementById('switch').innerHTML = 'Continue';
 			}
