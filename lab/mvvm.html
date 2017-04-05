@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<title>Lab002</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="word">
+		<p>{{word}}</p>
+		<button v-on:click="sayHi">change model</button>
+	</div>
+	<script>
+		// Observer.js部分
+		function observe (data) {
+			//未考虑数组的情况
+			if (!data || typeof data !== 'object') {
+				return;
+			}
+			return new Observer(data);
+		}
+
+		function Observer (data) {
+			this.data = data;
+			this.walk(data);
+		}
+
+		Observer.prototype = {
+			walk: function (data) {
+				Object.keys(data).forEach(function (key) {
+					defineReactive(data, key, data[key]);
+				});
+			}
+		};
+
+		function defineReactive(data, key, val) {
+			var dep = new Dep(),
+			//监听子属性
+				child = observe(val);
+
+			Object.defineProperty(data, key, {
+				enumerable: true,
+				configurable: false,
+				get: function () {
+					//添加订阅者
+					if (Dep.target) {
+						dep.depend();
+						if (child) {
+							child.dep.depend();
+						}
+					}
+					return val;
+				},
+				set: function (newVal) {
+					if (newVal === val) return;
+					val = newVal; // tricky 闭包
+					child = observe(newVal); // 新的属性为对象时继续监听
+					dep.notify(); // 通知订阅者
+				}
+			});
+		}
+
+		//Dep.js 部分
+		var uid = 0;
+
+		function Dep () {
+			this.depId = uid++;
+			this.subs = [];
+		}
+
+		Dep.prototype = {
+			addSub: function (sub) {
+				this.subs.push(sub);
+			},
+
+			depend: function () {
+				//在Watcher中添加依赖ID，避免重复添加
+				Dep.target.addDep(this);
+			},
+
+			removeSub: function (sub) {
+				var index = this.subs.indexOf(sub);
+				if (index != -1) {
+					this.subs.splice(index, 1);
+				}
+			},
+
+			notify: function () {
+				this.subs.forEach(function (sub) {
+					sub.update();
+				});
+			}
+		};
+
+		Dep.target = null;
+
+		//Watcher.js部分
+		function Watcher (vm, exp, cb) {
+			this.cb = cb;
+			this.vm = vm;
+			this.exp = exp;
+			this.depIds = {};
+			this.value = this.get(); //触发属性getter函数
+		}
+
+		Watcher.prototype = {
+			get: function () {
+				Dep.target = this; //添加订阅者
+				var value = this._getVMVal(); //触发getter函数
+				Dep.target = null; //重置target
+				return value;
+			},
+			update: function () {
+				this.run();
+			},
+			run: function () {
+				var value = this.get();
+				var oldValue = this.value;
+				if (value !== oldValue) {
+					this.value = value;
+					this.cb.call(this.vm, value, oldValue);
+				}
+			},
+			addDep: function (dep) {
+				// 调用run()时，会去触发相应属性的getter函数
+				// 从而触发dep.depend()收集依赖，并触发Watcher.prototype.addDep
+				// 之后检查dep.id是否出现在Watcher的dep list中
+				// 如果已有则只是属性修改，不必再次添加到属性的dep中
+				if (!this.depIds.hasOwnProperty(dep.id)) {
+					dep.addSub(this);
+					this.depIds[dep.id] = dep;
+				}
+			},
+			_getVMVal: function () {
+				// 在嵌套寻找中会在属性的父属性中依次添加这个Watcher对象
+				var val = this.vm._data,
+					exp = this.exp.split('.');
+				exp.forEach(function (e) {
+					val = val[e];
+				});
+				return val;
+			}
+		}
+
+		//compile.js部分
+		function Compile (el, vm) {
+			this.$vm = vm;
+			this.$el = this.isElementNode(el) ? el : document.querySelector(el);
+
+			if (this.$el) {
+				this.$fragment = this.node2fragment(this.$el);
+				this.init(); // 模板编译
+				this.$el.appendChild(this.$fragment);
+			}
+		}
+
+		Compile.prototype = {
+			init: function () {
+				this.compileElement(this.$fragment);
+			},
+
+			node2fragment: function (el) {
+				var fragment = document.createDocumentFragment(), 
+					child;
+				while (child = el.firstChild) {
+					fragment.appendChild(child);
+				}
+				return fragment;
+			},
+
+			compileElement: function (el) {
+				var childs = el.childNodes,
+					self = this;
+				Array.prototype.slice.call(childs).forEach(function (node) {
+					var text = node.textContent,
+						reg = /\{\{(.*)\}\}/; //匹配模型数据
+
+					if (self.isElementNode(node)) {
+						self.compile(node); //若子元素仍为元素类型则继续编译模板
+					} else if (self.isTextNode(node) && reg.test(text)) {
+						self.compileText(node, RegExp.$1);
+					}
+
+					//编译子节点
+					if (node.childNodes && node.childNodes.length) {
+						self.compileElement(node);
+					}
+				});
+			},
+
+			compileText: function(node, exp) {
+				compileUtil.text(node, this.$vm, exp);
+			},
+
+			compile: function (node) {
+				var nodeAttrs = node.attributes,
+					self = this;
+
+				Array.prototype.slice.call(nodeAttrs).forEach(function (attr) {
+					//解析directives
+					var attrName = attr.name;
+					if (self.isDirective(attrName)) {
+						var exp = attr.value;
+						var dir = attrName.substring(2); //从第3位开始取
+						//监听事件
+						if (self.isEventDirective(dir)) {
+							compileUtil.eventHandler(node, self.$vm, exp, dir);
+						//普通属性
+						} else {
+							compileUtil[dir] && compileUtil[dir](node, self.$vm, exp);
+						}
+						//移除自定义属性
+						node.removeAttribute(attr);
+					}
+				});
+			},
+
+			isElementNode: function(el) {
+				return el.nodeType === 1;
+			},
+
+			isTextNode: function (el) {
+				return el.nodeType === 3;
+			},
+
+			isDirective: function (attr) {
+				return attr.indexOf('v-') == 0;
+			},
+
+			isEventDirective: function (dir) {
+				return dir.indexOf('on') == 0;
+			}
+		};
+
+		var compileUtil = {
+			text: function (node, vm, exp) {
+				this.bind(node, vm, exp, 'text');
+			},
+
+			html: function (node, vm, exp) {
+				this.bind(node, vm, exp, 'html');
+			},
+
+			model: function (node, vm, exp) {
+				this.bind(node, vm, exp, 'model');
+
+				//伪双向绑定
+				var self = this,
+					val = this._getVMVal(vm, exp);
+				node.addEventListener('input', function (e) {
+					var newVal = e.target.value;
+					if (val === newVal) {
+						return;
+					}
+					self._setVMVal(vm, exp, newVal);
+					val = newVal;
+				});
+			},
+
+			class: function (node, vm, exp) {
+				this.bind(node, vm, exp, 'class');
+			},
+
+			bind: function (node, vm, exp, dir) {
+				var updaterFn = updater[dir + 'Updater'];
+				//第一次初始化视图
+				updaterFn && updaterFn(node, this._getVMVal(vm, exp));
+
+				new Watcher(vm, exp, function (val, oldVal) {
+					updaterFn && updaterFn(node, val, oldVal);
+				});
+			},
+
+			eventHandler: function (node, vm, exp, dir) {
+				var eventType = dir.split(':')[1],
+					handler = vm.$options.methods && vm.$options.methods[exp];
+
+				if (eventType, handler) {
+					node.addEventListener(eventType, handler.bind(vm), false);
+				}
+			},
+
+			_getVMVal: function (vm, exp) {
+				var val = vm._data;
+				exp = exp.split('.');
+				exp.forEach(function (e) {
+					val = val[e];
+				});
+				return val;
+			},
+
+			_setVMVal: function (vm, exp, newVal) {
+				var val = vm._data;
+				exp = exp.split('.');
+				exp.forEach(function (e, i) {
+					if (i < exp.length - 1) {
+						val = val[e];
+					} else {
+						val[e] = newVal;
+					}
+				});
+			}
+		}
+
+		var updater = {
+			textUpdater: function (node, value) {
+				node.textContent = typeof value == 'undefined' ? '' : value;
+			},
+
+			htmlUpdater: function (node, value) {
+				node.innerHTML = typeof value == 'undefined' ? '' : value;
+			},
+
+			modelUpdater: function (node, value) {
+				node.value = typeof value == 'undefined' ? '' : value;
+			},
+
+			classUpdater: function (node, value, oldValue) {
+				var className = node.className;
+				className = className.replace(oldValue, '').trim();
+
+				var space = className && String(value).trim() ? ' ' : '';
+
+				node.className = className + space + value;
+			}
+		}
+
+		//入口部分
+		function MiniVue (options) {
+			this.$options = options;
+			var data = this._data = this.$options.data,
+				self = this;
+
+			//数据代理
+			Object.keys(data).forEach(function (key) {
+				self._proxy(key);
+			});
+
+			//监听变化
+			observe(data);
+
+			this.$compile = new Compile(options.el || document.body, this);
+		}
+
+		MiniVue.prototype = {
+			_proxy: function (key) {
+				var self = this;
+				Object.defineProperty(self, key, {
+					configurable: false,
+					enumerable: true,
+					get: function () {
+						return self._data[key];
+					},
+					set: function (newVal) {
+						self._data[key] = newVal;
+					}
+				});
+			}
+		};
+
+		var vm = new MiniVue({
+			el: "#app",
+			data: {
+				word: 'Hello world!'
+			},
+			methods: {
+				sayHi: function () {
+					this.word = 'Hi, everyone!';
+				}
+			}
+		});
+	</script>
+</body>
+</html>
