@@ -1,98 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-	<link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
-	<meta name="description" content="myphotogallery">
-	<title>MyPhotoGallery-看电影也可以很有趣</title>
-	<link rel="stylesheet" type="text/css" href="./dist/base.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="author" content="shenlvmeng">
+  <meta name="description" content="myphotogallery">
+  <title>MyPhotoGallery-看电影也可以很有趣</title>
+  <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="./dist/base.css">
 </head>
 <body>
-	<div id="app">
-	<section id="navbar">
-		<nav>
-			<a href="#" id="brand"><img src="./assets/img/favicon.png">PhotoGallery</a>
-			<ul>
-				<li class="list-item"><a href="#">按类型 ▾</a>
-					<ul>
-						<li><a href="#" @click="addTag($event)">剧情</a></li>
-						<li><a href="#" @click="addTag($event)">爱情</a></li>
-						<li><a href="#" @click="addTag($event)">犯罪</a></li>
-						<li><a href="#" @click="addTag($event)">科幻</a></li>
-						<li><a href="#" @click="addTag($event)">恐怖</a></li>
-						<li><a href="#" @click="addTag($event)">动作</a></li>
-						<li><a href="#" @click="addTag($event)">喜剧</a></li>
-						<li><a href="#" @click="addTag($event)">悬疑</a></li>
-					</ul>
-				</li>
-				<li class="list-item"><a href="#">按地区 ▾</a>
-					<ul>
-						<li><a href="#" @click="addTag($event)">欧美</a></li>
-						<li><a href="#" @click="addTag($event)">亚洲</a></li>
-						<li><a href="#" @click="addTag($event)">美国</a></li>
-						<li><a href="#" @click="addTag($event)">法国</a></li>
-						<li><a href="#" @click="addTag($event)">英国</a></li>
-						<li><a href="#" @click="addTag($event)">国产</a></li>
-						<li><a href="#" @click="addTag($event)">港台</a></li>
-						<li><a href="#" @click="addTag($event)">日本</a></li>
-						<li><a href="#" @click="addTag($event)">韩国</a></li>
-						<li><a href="#" @click="addTag($event)">其他</a></li>
-					</ul>
-				</li>
-				<li class="list-item"><a href="#">按年代 ▾</a>
-					<ul>
-						<li><a href="#" @click="addTag($event)">10s~</a></li>
-						<li><a href="#" @click="addTag($event)">00s</a></li>
-						<li><a href="#" @click="addTag($event)">90s</a></li>
-						<li><a href="#" @click="addTag($event)">80s</a></li>
-						<li><a href="#" @click="addTag($event)">~70s</a></li>
-					</ul>
-				</li>
-				<li class="list-item"><a href="#">按评分 ▾</a>
-					<ul>
-						<li><a href="#" @click="addTag($event)">9+</a></li>
-						<li><a href="#" @click="addTag($event)">8+</a></li>
-						<li><a href="#" @click="addTag($event)">7+</a></li>
-						<li><a href="#" @click="addTag($event)">6+</a></li>
-						<li><a href="#" @click="addTag($event)">~5</a></li>
-					</ul>
-				</li>
-				<li class="list-item"><a href="#">按观影时间 ▾</a>
-					<ul>
-						<li><a href="#" @click="addTag($event)">2016~</a></li>
-						<li><a href="#" @click="addTag($event)">2015</a></li>
-						<li><a href="#" @click="addTag($event)">2014</a></li>
-						<li><a href="#" @click="addTag($event)">2013</a></li>
-						<li><a href="#" @click="addTag($event)">~2012</a></li>
-					</ul>
-				</li>
-			</ul>
-			<input type="text" name="tags" placeholder="按标签搜索" v-model="filter">
-			<button @click="addPreface">Search Poster</button>
-			<button @click="addShot">Search Screenshot</button>
-		</nav>
-	</section>
-	<section id="body">
-		<div>
-			<picwall :factors="factors" @toinfo="toInfo">
-		</div>
-		<transition name="picinfo">
-			<picinfo v-if="currView == 'picinfo'" :pid="pid" class="clearfix" @revisetag="reviseTag">
-		</transition>
-	</section>
-	</div>
-	<aside id="totop">
-		<a href="#navbar">
-			<div class="arrow-up"></div>
-		</a>
-	</aside>
-	<footer>
-		<p>&copy; shenlvmeng 2017</p>
-		<p>使用半角逗号隔开标签，照片信息中的tag亦可以点击</p>
-	</footer>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
-	<script type="text/javascript" src="./dist/base.min.js"></script>
+  <div id="app">
+    <transition name="picinfo">
+      <picinfo v-if="currView == 'picinfo'" :pid="pid" class="clearfix" @revisetag="reviseTag">
+    </transition>
+    <section id="navbar">
+      <nav>
+        <a href="#" id="brand"><img src="./assets/img/favicon.png">PhotoGallery</a>
+        <ul>
+          <li
+            class="list-item"
+            :class="{show: this.index === 0}"
+            id="0"
+          >按类型 ▾
+            <ul>
+              <li class="list-unit">剧情</li>
+              <li class="list-unit">爱情</li>
+              <li class="list-unit">犯罪</li>
+              <li class="list-unit">科幻</li>
+              <li class="list-unit">恐怖</li>
+              <li class="list-unit">动作</li>
+              <li class="list-unit">喜剧</li>
+              <li class="list-unit">悬疑</li>
+            </ul>
+          </li>
+          <li
+            class="list-item"
+            :class="{show: this.index === 1}"
+            id="1"
+          >按地区 ▾
+            <ul>
+              <li class="list-unit">欧美</li>
+              <li class="list-unit">亚洲</li>
+              <li class="list-unit">美国</li>
+              <li class="list-unit">法国</li>
+              <li class="list-unit">英国</li>
+              <li class="list-unit">国产</li>
+              <li class="list-unit">港台</li>
+              <li class="list-unit">日本</li>
+              <li class="list-unit">韩国</li>
+              <li class="list-unit">其他</li>
+            </ul>
+          </li>
+          <li
+            class="list-item"
+            :class="{show: this.index === 2}"
+            id="2"
+          >按年代 ▾
+            <ul>
+              <li class="list-unit">10s</li>
+              <li class="list-unit">00s</li>
+              <li class="list-unit">90s</li>
+              <li class="list-unit">80s</li>
+              <li class="list-unit">~70s</li>
+            </ul>
+          </li>
+          <li
+            class="list-item"
+            :class="{show: this.index === 3}"
+            id="3"
+          >按评分 ▾
+            <ul>
+              <li class="list-unit">9+</li>
+              <li class="list-unit">8+</li>
+              <li class="list-unit">7+</li>
+              <li class="list-unit">6+</li>
+              <li class="list-unit">~5</li>
+            </ul>
+          </li>
+          <li
+            class="list-item"
+            :class="{show: this.index === 4}"
+            id="4"
+          >按观影时间 ▾
+            <ul>
+              <li class="list-unit">2016~</li>
+              <li class="list-unit">2015</li>
+              <li class="list-unit">2014</li>
+              <li class="list-unit">2013</li>
+              <li class="list-unit">~2012</li>
+            </ul>
+          </li>
+        </ul>
+        <input type="text" name="tags" placeholder="按标签搜索" v-model="filter">
+        <button @click="addPreface">Search Poster</button>
+        <button @click="addShot">Search Screenshot</button>
+      </nav>
+    </section>
+    <section id="body">
+      <div>
+        <picwall :factors="factors" @toinfo="toInfo">
+      </div>
+    </section>
+  </div>
+  <aside id="totop">
+    <div class="arrow-up"></div>
+  </aside>
+  <footer>
+    <p>&copy; shenlvmeng 2017</p>
+    <p>使用半角逗号隔开标签，照片信息中的tag亦可以点击</p>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+  <script type="text/javascript" src="./dist/base.min.js"></script>
 </body>
 </html>
