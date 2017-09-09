@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <meta name="author" content="shenlvmeng">
   <meta name="description" content="myphotogallery">
   <title>MyPhotoGallery-看电影也可以很有趣</title>
@@ -16,7 +16,10 @@
     </transition>
     <section id="navbar">
       <nav>
-        <a href="#" id="brand"><img src="./assets/img/favicon.png">PhotoGallery</a>
+        <a href="#" id="brand">
+          <img src="./assets/img/favicon.png">
+          <span class="slogan">PhotoGallery</span>
+        </a>
         <ul class="nav-categories">
           <li
             class="list-item"
@@ -85,7 +88,7 @@
             id="4"
           >按观影时间 ▾
             <ul>
-              <li class="list-unit" data-tag="2016~">2016~</li>
+              <li class="list-unit" data-tag="2016">2016~</li>
               <li class="list-unit" data-tag="2015">2015</li>
               <li class="list-unit" data-tag="2014">2014</li>
               <li class="list-unit" data-tag="2013">2013</li>
@@ -108,8 +111,12 @@
   <aside id="totop" class="hidden">
     <div class="arrow-up"></div>
   </aside>
+  <aside id="hint" class="hidden">
+    <span id="close">×</span>
+    PC端浏览效果更佳哦~
+  </aside>
   <footer>
-    <div class="endding"> ———— 🌞 到底了，试试别的标签吧~ 🌞 ———— </div>
+    <div class="endding"> ——— 🌞 到底了，试试别的标签吧~ 🌞 ——— </div>
     <div>&copy; shenlvmeng 2017</div>
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
