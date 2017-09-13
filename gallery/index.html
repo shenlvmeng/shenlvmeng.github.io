@@ -6,8 +6,8 @@
   <meta name="author" content="shenlvmeng">
   <meta name="description" content="myphotogallery">
   <title>MyPhotoGallery-看电影也可以很有趣</title>
-  <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="./dist/base.css">
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="./dist/index.css">
 </head>
 <body>
   <div id="app">
@@ -17,7 +17,7 @@
     <section id="navbar">
       <nav>
         <a href="#" id="brand">
-          <img src="./assets/img/favicon.png">
+          <img src="./favicon.png">
           <span class="slogan">PhotoGallery</span>
         </a>
         <ul class="nav-categories">
@@ -88,7 +88,8 @@
             id="4"
           >按观影时间 ▾
             <ul>
-              <li class="list-unit" data-tag="2016">2016~</li>
+              <li class="list-unit" data-tag="2017">2017</li>
+              <li class="list-unit" data-tag="2016">2016</li>
               <li class="list-unit" data-tag="2015">2015</li>
               <li class="list-unit" data-tag="2014">2014</li>
               <li class="list-unit" data-tag="2013">2013</li>
@@ -98,7 +99,7 @@
         </ul>
         <div class="nav-padding"></div>
         <div class="nav-search">
-          <input type="text" name="tags" placeholder="按标签搜索，如：精选,王" v-model="filter">
+          <input type="text" name="tags" placeholder="按标签搜索，如：screenshot,妹子" v-model="filter">
           <button @click="addPreface">搜海报</button>
           <button @click="addShot">搜片断</button>
         </div>
@@ -119,8 +120,8 @@
     <div class="endding"> ——— 🌞 到底了，试试别的标签吧~ 🌞 ——— </div>
     <div>&copy; shenlvmeng 2017</div>
   </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
-  <script type="text/javascript" src="./dist/base.min.js"></script>
+  <script src="./dist/vue.min.js"></script>
+  <script src="./dist/lodash.min.js"></script>
+  <script src="./dist/index.min.js"></script>
 </body>
 </html>
