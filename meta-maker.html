@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="shenlvmeng">
+  <title>meta.json生成器 | PhotoGallery专用</title>
+  <style type="text/css">
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    form > div {
+      padding: 10px;
+      font-size: 18px;
+    }
+    div > label {
+      font-weight: bold;
+    }
+    input[type="text"] {
+      display: block;
+      height: 2em;
+      width: 400px;
+      margin: 10px 0;
+      padding: 0 3px;
+      font-size: 16px;
+    }
+    .fast,
+    .control {
+      padding: 5px 8px;
+      border-radius: 3px;
+      line-height: 1.5em;
+      color: #fff;
+      background: #228b22;
+      font-size: 14px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+    }
+    .control {
+      margin-right: 10px;
+    }
+    #tags{
+      max-width: 400px;
+      margin-top: 25px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 5px;
+      margin: 2px 3px;
+      border-radius: 5px;
+      background: #2dafec;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .panel {
+      width: 400px;
+      padding: 10px;
+    }
+    .danger {
+      background: #c91d12;
+    }
+    textarea {
+      margin: 10px;
+      width: 400px;
+      min-height: 200px;
+    }
+    footer {
+      padding: 10px;
+      font-size: 12px;
+      color: #aaa;
+    }
+    footer a {
+      color: #aaa
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <form id="myform">
+      <div>
+        <label for="date">观影时间: </label>
+        <input type="text" name="date" id="date">
+      </div>
+      <div>
+        <label for="info">描述: </label>
+        <input type="text" name="info" id="info">
+      </div>
+      <div>
+        <label for="tag">标签: </label>
+        <input type="text" name="tag" id="tag">
+        <span class="fast" id="fasttag">一键生成</span>
+        <div id="tags"></div>
+      </div>
+      <div>
+        <label for="type">图片类型: </label>
+        <input type="text" name="type" id="type">
+      </div>
+    </form>
+    <div class="panel">
+      <span id="add" class="control">新增</span>
+      <span id="clipboard" class="control">复制</span>
+      <span id="clear" class="control danger">清空</span>
+    </div>
+    <textarea id="result" readonly></textarea>
+    <footer>更多：<a href="https://shenlvmeng.github.io/gallery/index.html" target="_blank">Photogallery</a></footer>
+  </div>
+  <script>
+    let data = [];
+    let meta = {
+      date: true,
+      info: true,
+      tags: [],
+      type: true
+    };
+    let tags = [];
+
+    function renderTags() {
+      let fragment = document.createDocumentFragment();
+      let t = document.getElementById("tags");
+      tags.forEach(tag => {
+        let span = document.createElement("SPAN");
+        span.className = "tag";
+        span.innerText = tag;
+        fragment.appendChild(span);
+      });
+      t.innerHTML = "";
+      t.appendChild(fragment);
+      meta.tags = tags;
+    }
+
+    function renderResult() {
+      let str = JSON.stringify(data);
+      document.getElementById("result").value = str;
+    }
+
+    document.addEventListener("input", e => {
+      let id = e.target.id;
+      if (id === "tag" || !meta[id]) {
+        return;
+      }
+      if (id === "date") {
+        meta.date = e.target.value;
+      }
+      meta[id] = e.target.value;
+    });
+
+    document.getElementById("tag").addEventListener('keyup', e => {
+      if (e.keyCode !== 13) {
+        return;
+      }
+      let value = e.target.value.trim();
+      if (value) {
+        tags.push(value);
+        e.target.value = "";
+        renderTags();
+      }
+    });
+
+    document.getElementById("fasttag").addEventListener("click", e => {
+      tags =  document.getElementById("tag").value.trim().split(" ").filter(tag => !!tag);
+      renderTags();
+    });
+
+    document.getElementById("tags").addEventListener("click", e => {
+      if (e.target.className !== "tag") {
+        return;
+      }
+      let index = tags.indexOf(e.target.innerText.trim());
+      if (index !== -1) {
+        tags.splice(index, 1);
+      }
+      renderTags();
+    });
+
+    document.getElementById("add").addEventListener("click", e => {
+      if (typeof meta.date === "boolean" || typeof meta.type === "boolean" || typeof meta.info === "boolean") {
+        alert("未填写完整！");
+        return;
+      }
+      meta.date = +meta.date;
+      data.push(meta);
+      meta = {
+        date: true,
+        info: true,
+        tags: [],
+        type: true
+      };
+      tags = [];
+      document.getElementById("myform").reset();
+      renderTags();
+      renderResult();
+    });
+
+    document.getElementById("clipboard").addEventListener("click", e => {
+      document.getElementById("result").select();
+      let message = document.execCommand('copy');
+      let msg = message ? 'successful' : 'unsuccessful';
+      console.log(`Copying text command was ${msg}`);
+    });
+
+    document.getElementById("clear").addEventListener("click", e => {
+      document.getElementById("myform").reset();
+      data = [];
+      meta = {
+        date: true,
+        info: true,
+        tags: [],
+        type: true
+      };
+      tags = [];
+      renderTags();
+      renderResult();
+    })
+
+  </script>
+</body>
+</html>
