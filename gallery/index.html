@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="./dist/index.css">
 </head>
-<body>
+<body class="noscroll">
   <div id="app">
     <transition name="picinfo">
       <picinfo v-if="currView == 'picinfo'" :pid="pid" @revisetag="reviseTag">

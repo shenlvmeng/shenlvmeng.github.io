@@ -166,7 +166,7 @@
     });
 
     document.getElementById("fasttag").addEventListener("click", e => {
-      tags =  document.getElementById("tag").value.trim().split(" ").filter(tag => !!tag);
+      tags =  document.getElementById("tag").value.trim().split(",").filter(tag => !!tag);
       renderTags();
     });
 
