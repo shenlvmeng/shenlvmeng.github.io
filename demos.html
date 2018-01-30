@@ -8,15 +8,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 	<title>Shenlvmeng's demos</title>
 	<style type="text/css">
-		body{
+		* {
 			margin: 0;
 			padding: 0;
+			box-sizing: border-box;
+		}
+		body{
 			background-color: #111;
-			font-family: Helvetica, "Microsoft Yahei", sans-serif;
+			font-family: "Helvetica Neue", "Microsoft Yahei", sans-serif;
 			transition: background-color 1s;
-			-moz-transition: background-color 1s;
-			-webkit-transition: background-color 1s;
-			-o-transition: background-color 1s;
 		}
 		#slogan{
 			position: absolute;
@@ -27,6 +27,12 @@
 			color: #fff;
 			text-align: center;
 		}
+		@media(max-width: 450px) {
+			#slogan {
+				font-size: 70px;
+				margin-top: -90px;
+			}
+		}
 		a{
 			color: inherit;
 			text-decoration: none;
@@ -35,14 +41,22 @@
 			text-decoration: underline;
 		}
 		header, footer{
-			position: fixed;
+			position: absolute;
 			font-size: 15px;
 			font-weight: bold;
 			color: #999;
 		}
 		header{
-			right: 35px;
 			top: 30px;
+			width: 100%;
+			padding-right: 35px;
+			text-align: right;
+		}
+		@media(max-width: 450px) {
+			header {
+				padding: 0;
+				text-align: center;
+			}
 		}
 		footer{
 			bottom: 30px;
@@ -69,10 +83,10 @@
 		#lablist{
 			display: none;
 			position: absolute;
-			margin: 0 0 0 -10px;
+			margin: 0 0 0 -20px;
 			background-color: #eee;
 			color: #555;
-			width: 60px;
+			width: 80px;
 			text-align: center;
 			border-radius: 3px;
 		}
@@ -84,20 +98,21 @@
 <body>
 	<header>
 		<span id="gallery"><a href="http://shenlvmeng.github.io/gallery/">PhotoGallery</a></span> | 
-		<span id="lab">lab ▾
+		<span id="lab">toys ▾
 			<span id="lablist">
-				<a href="./lab/1.html">Lab001</a>
-				<a href="./lab/mvvm.html">Lab002</a>
-				<a href="./meta-maker.html">Lab003</a>
+				<a href="./lab/1.html" target="_blank">Bubbles</a>
+				<a href="./lab/mvvm.html" target="_blank">Listeners</a>
+				<a href="./elevator/index.html" target="_blank">Elevators</a>
+				<a href="./meta-maker.html" target="_blank">Peeler</a>
+				<a href="./embed-js/index.html" target="_blank">VNE</a>
 			</span>
 		</span>
 	</header>
 	<div id="slogan"></div>
 	<footer>
 		<!--<span><a href="http://cfighter.cn:3000">Chat !</a></span> |-->
-		<span><a href="./book.html">Book</a></span> | 
-		<span><a href="./embed-js/index.html">Virtual Network Embedding</a></span> | 
-		<span><a href="./elevator/index.html">Elevator</a></span>
+		<span><a href="/Distance" target="_blank">Distance</a></span> |
+		<span><a href="./book.html" target="_blank">Book</a></span>
 	</footer>
 	<script type="text/javascript">
 		var back = document.getElementsByTagName('body'),
@@ -120,11 +135,11 @@
 				target.innerHTML = ("0"+d.getHours()).substr(-2,2) + ":" + 
 					("0"+d.getMinutes()).substr(-2,2) + ":" + ("0"+d.getSeconds()).substr(-2,2);
 			},
-			color = ["#b0c4de", "#bebebe", "#20b2aa"]
+			color = ["#b0c4de", "#bebebe"]
 		// 时钟
 		setInterval(update, 1000);
 		// 下方选项卡hover变色
-		Array.apply(null, Array(3)).forEach(function(val, i){
+		Array.apply(null, Array(2)).forEach(function(val, i){
 			attachListener(foot[0].children[i], color[i]);
 		});
 		// Photogallery的hover
@@ -137,18 +152,9 @@
 				this.children[0].style.display = "block";
 			}
 		});
-		lab.addEventListener('touchend', function() {
-			if (this.children[0].style.display == "block") {
-				this.children[0].style.display = "";
-			} else {
-				this.children[0].style.display = "block";
-			}
-			this.stopPropagation();
-		});
 		window.addEventListener('touchend', function() {
 			lab.children[0].style.display = "";
 		});
-
 	</script>
 </body>
 </html>
