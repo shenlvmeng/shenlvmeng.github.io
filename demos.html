@@ -13,40 +13,48 @@
 			padding: 0;
 			box-sizing: border-box;
 		}
-		body{
+    html,
+    body {
+      height: 100%;
+    }
+		body {
 			background-color: #111;
 			font-family: "Helvetica Neue", "Microsoft Yahei", sans-serif;
 			transition: background-color 1s;
 		}
-		#slogan{
+		#slogan {
 			position: absolute;
 			top: 50%;
 			width: 100%;
-			margin-top: -100px;
 			font-size: 100px;
 			color: #fff;
 			text-align: center;
+      transform: translateY(-50%);
 		}
 		@media(max-width: 450px) {
 			#slogan {
 				font-size: 70px;
-				margin-top: -90px;
 			}
 		}
-		a{
-			color: inherit;
+		a {
+      color: inherit;
 			text-decoration: none;
 		}
-		a:hover{
+		a:hover {
 			text-decoration: underline;
 		}
-		header, footer{
+		header,
+    footer {
 			position: absolute;
-			font-size: 15px;
+			font-size: 0;
 			font-weight: bold;
 			color: #999;
 		}
-		header{
+    header > span:not(:last-child),
+    footer > span:not(:last-child) {
+      border-right: 1px solid #555;
+    }
+		header {
 			top: 30px;
 			width: 100%;
 			padding-right: 35px;
@@ -58,103 +66,108 @@
 				text-align: center;
 			}
 		}
-		footer{
+		footer {
 			bottom: 30px;
 			width: 100%;
 			text-align: center;
 		}
-		span:first-child{
-			margin-right: 25px;
+		span {
+      font-size: 15px;
+			padding: 0 35px;
 		}
-		span{
-			margin: 0 25px;
-		}
-		span:last-child{
-			margin-left: 25px;
-		}
-		#gallery a{
+		#gallery a {
 			color: #ccc;
 		}
-		#lab{
-			display: inline-block;
-			position: relative;
-			cursor: pointer; 
+		.dropdown {
+			display: inline-flex;
+      flex-flow: row wrap;
+      width: 80px;
+      padding: 0;
+      font-size: 15px;
+      color: #999;
 		}
-		#lablist{
-			display: none;
-			position: absolute;
-			margin: 0 0 0 -20px;
-			background-color: #eee;
-			color: #555;
-			width: 80px;
-			text-align: center;
-			border-radius: 3px;
-		}
-		#lablist a{
-			line-height: 30px;
+    .dropdown > div:first-child {
+      flex: 1;
+      line-height: 32px;
+      text-align: right;
+      cursor: pointer;
+    }
+    .dropdown.hide .dropdown__items {
+      height: 0;
+    }
+    .dropdown__items {
+      overflow: hidden;
+      transition: height 1.5s;
+      text-align: right;
+      z-index: 100;
+    }
+		.dropdown__items div {
+      padding: 0 5px;
+      line-height: 32px;
 		}
 	</style>
 </head>
 <body>
 	<header>
-		<span id="gallery"><a href="http://shenlvmeng.github.io/gallery/">PhotoGallery</a></span> | 
-		<span id="lab">toys ▾
-			<span id="lablist">
-				<a href="./lab/1.html" target="_blank">Bubbles</a>
-				<a href="./lab/mvvm.html" target="_blank">Listeners</a>
-				<a href="./elevator/index.html" target="_blank">Elevators</a>
-				<a href="./meta-maker.html" target="_blank">Peeler</a>
-				<a href="./embed-js/index.html" target="_blank">VNE</a>
-			</span>
+		<span id="gallery"><a class="fade" href="http://shenlvmeng.github.io/gallery/" target="_blank">PhotoGallery</a></span>
+		<span id="lab" class="dropdown hide">
+      <div id="dropdown">toys ▾</div>
+      <div class="dropdown__items">
+        <div><a href="./lab/1.html" target="_blank">Bubbles</a></div>
+        <div><a href="./lab/mvvm.html" target="_blank">Listeners</a></div>
+        <div><a href="./elevator/index.html" target="_blank">Elevators</a></div>
+        <div><a href="./meta-maker.html" target="_blank">Peeler</a></div>
+        <div><a href="./embed-js/index.html" target="_blank">VNE</a></div>
+      </div>
 		</span>
 	</header>
 	<div id="slogan"></div>
 	<footer>
-		<!--<span><a href="http://cfighter.cn:3000">Chat !</a></span> |-->
-		<span><a href="/Distance" target="_blank">Distance</a></span> |
-		<span><a href="./book.html" target="_blank">Book</a></span>
+		<!--<span><a href="http://cfighter.cn:3000">Chat !</a></span>-->
+		<span><a class="fade" href="/Distance" target="_blank">Distance</a></span>
+    <span><a class="fade" href="./book.html" target="_blank">Book</a></span>
 	</footer>
 	<script type="text/javascript">
-		var back = document.getElementsByTagName('body'),
-			gallery = document.getElementById('gallery'),
-			foot = document.getElementsByTagName('footer'),
-			lab = document.getElementById('lab'),
-			target = document.getElementById('slogan'),
-			attachListener = function (el, color) {
-				el.addEventListener('mouseover', function(){
-					this.style.color = "#fff";
-					back[0].style.backgroundColor = color;
-				}, false);
-				el.addEventListener('mouseout', function(){
-					this.style.color = "#999";
-					back[0].style.backgroundColor = "#111";
-				}, false);	
-			},
-			update = function () {
-				var d = new Date();
-				target.innerHTML = ("0"+d.getHours()).substr(-2,2) + ":" + 
-					("0"+d.getMinutes()).substr(-2,2) + ":" + ("0"+d.getSeconds()).substr(-2,2);
-			},
-			color = ["#b0c4de", "#bebebe"]
-		// 时钟
-		setInterval(update, 1000);
-		// 下方选项卡hover变色
-		Array.apply(null, Array(2)).forEach(function(val, i){
-			attachListener(foot[0].children[i], color[i]);
-		});
-		// Photogallery的hover
-		attachListener(gallery.children[0], "#ff4500");
-		// lab下拉菜单
-		lab.addEventListener('click', function() {
-			if (this.children[0].style.display == "block") {
-				this.children[0].style.display = "";
-			} else {
-				this.children[0].style.display = "block";
-			}
-		});
-		window.addEventListener('touchend', function() {
-			lab.children[0].style.display = "";
-		});
+		(function(){
+			const body = document.body;
+      const time = document.getElementById('slogan');
+      const lab = document.getElementById('lab');
+			const colors = ["#ff4500", "#b0c4de", "#bebebe"];
+
+      function update() {
+        var d = new Date();
+        time.innerHTML = ("0"+d.getHours()).substr(-2,2) + ":" + 
+          ("0"+d.getMinutes()).substr(-2,2) + ":" + ("0"+d.getSeconds()).substr(-2,2);
+      }
+
+      // 鼠标悬停变色
+      [].slice.call(document.getElementsByClassName('fade')).forEach(function(demo, i) {
+        demo.addEventListener('mouseover', function() {
+          this.style.color = "#fff";
+          body.style.backgroundColor = colors[i];
+        });
+        demo.addEventListener('mouseout', function() {
+          this.style.color = "#999";
+          body.style.backgroundColor = "#111";
+        });
+      });
+
+      // 更新时间
+			setInterval(update, 1000);
+
+      // 下拉菜单
+      document.getElementById('dropdown').addEventListener('click', function(event) {
+        if (lab.className == "dropdown") {
+          lab.className += " hide";
+        } else {
+          lab.className = "dropdown";
+        }
+        event.stopPropagation();
+      });
+      window.addEventListener('click', function() {
+        lab.className = "dropdown hide";
+      });
+		})();
 	</script>
 </body>
 </html>
