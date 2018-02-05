@@ -54,6 +54,11 @@
     footer > span:not(:last-child) {
       border-right: 1px solid #555;
     }
+    @media (max-width: 450px) {
+      header > span:nth-child(2) {
+        border: none;
+      }
+    }
 		header {
 			top: 30px;
 			width: 100%;
@@ -75,7 +80,7 @@
       font-size: 15px;
 			padding: 0 35px;
 		}
-		#gallery a {
+		.my a {
 			color: #ccc;
 		}
 		.dropdown {
@@ -86,6 +91,11 @@
       font-size: 15px;
       color: #999;
 		}
+    @media(max-width: 450px) {
+      .dropdown {
+        display: none;
+      }
+    }
     .dropdown > div:first-child {
       flex: 1;
       line-height: 32px;
@@ -109,9 +119,14 @@
 </head>
 <body>
 	<header>
-		<span id="gallery"><a class="fade" href="http://shenlvmeng.github.io/gallery/" target="_blank">PhotoGallery</a></span>
+		<span class="my">
+      <a class="fade" href="http://shenlvmeng.github.io/gallery/" target="_blank">My movies</a>
+    </span>
+    <span class="my">
+      <a class="fade" href="#">My traces</a>
+    </span>
 		<span id="lab" class="dropdown hide">
-      <div id="dropdown">toys ▾</div>
+      <div id="dropdown">Toys ▾</div>
       <div class="dropdown__items">
         <div><a href="./lab/1.html" target="_blank">Bubbles</a></div>
         <div><a href="./lab/mvvm.html" target="_blank">Listeners</a></div>
@@ -132,7 +147,7 @@
 			const body = document.body;
       const time = document.getElementById('slogan');
       const lab = document.getElementById('lab');
-			const colors = ["#ff4500", "#b0c4de", "#bebebe"];
+			const colors = ["#ff4500", "#fad44f", "#b0c4de", "#bebebe"];
 
       function update() {
         var d = new Date();
