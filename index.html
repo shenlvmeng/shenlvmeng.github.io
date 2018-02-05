@@ -6,46 +6,43 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 	<title>Shenlvmeng</title>
 	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
 		body {
-			transition: background-color 0.5s;
+			display: flex;
+			align-items: center;
+			height: 100vh;
+			background: #111;
 		}
 		#entrance {
-			position: absolute;
-			top: 50%;
-			right: 50%;
-			-webkit-transform: translateX(50%) translateY(-50%);
-            -ms-transform    : translateX(50%) translateY(-50%);
-			transform        : translateX(50%) translateY(-100%);
-			min-width: 420px;
-			color: #4f94cd;
-			text-align: center;
-			font: 70px "WenQuanYi Zen Hei", "Microsoft YaHei", sans-serif;
+			display: flex;
+			width: 100%;
+			min-width: 320px;
+			line-height: 1.5;
+			font: 30px "Helvetica Neue", "Microsoft Yahei", sans-serif;
 		}
-		a {
-			margin: 0 20px;
-			color: #4f94cd;
-			font-weight: 700px;
+		#entrance a {
+			flex: 1;
+			padding: 0 20px;
+			color: #aaa;
+			font-weight: 100;
+			text-align: center;
 			text-decoration: none;
 		}
-		a:hover {
-			text-decoration: underline;
+		#entrance a:not(:last-child) {
+			border-right: 1px solid #333;
 		}
-		#entrance:hover, #entrance:hover a {
+		#entrance a:hover {
 			color: #fff;
 		}
 	</style>
 </head>
 <body>
 	<div id="entrance">
-		<a href="/blog">Blog</a> | <a href="./demos.html">Demo</a>
+		<a href="/blog">Blog</a>
+		<a href="./demos.html">Demo</a>
 	</div>
-	<script type="text/javascript">
-		document.getElementById('entrance').onmouseover = function () {
-			document.body.style.backgroundColor = "#4f94cd";
-		}
-		document.getElementById('entrance').onmouseout = function () {
-			document.body.style.backgroundColor = "";
-		}
-	</script>
 </body>
 </html>
