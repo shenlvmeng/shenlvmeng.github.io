@@ -1,48 +1,126 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-	<meta charset="utf-8">
-	<meta name="author" content="shenlvmeng">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
-	<title>Shenlvmeng</title>
-	<style type="text/css">
-		* {
-			margin: 0;
-			padding: 0;
-		}
-		body {
-			display: flex;
-			align-items: center;
-			height: 100vh;
-			background: #111;
-		}
-		#entrance {
-			display: flex;
-			width: 100%;
-			min-width: 320px;
-			line-height: 1.5;
-			font: 30px "Helvetica Neue", "Microsoft Yahei", sans-serif;
-		}
-		#entrance a {
-			flex: 1;
-			padding: 0 20px;
-			color: #aaa;
-			font-weight: 100;
-			text-align: center;
-			text-decoration: none;
-		}
-		#entrance a:not(:last-child) {
-			border-right: 1px solid #333;
-		}
-		#entrance a:hover {
-			color: #fff;
-		}
-	</style>
+    <meta charset="utf-8">
+    <meta name="author" content="shenlvmeng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <title>Shenlvmeng</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            background: #111;
+        }
+        canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            transition: opacity 1.5s ease;
+        }
+        .hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #entrance {
+            display: flex;
+            width: 100%;
+            min-width: 320px;
+            line-height: 1.5;
+            font: 30px "Helvetica Neue", "Microsoft Yahei", sans-serif;
+        }
+        #entrance a {
+            flex: 1;
+            padding: 0 20px;
+            color: #aaa;
+            font-weight: 100;
+            text-align: center;
+            text-decoration: none;
+        }
+        #entrance a:not(:last-child) {
+            border-right: 1px solid #333;
+        }
+        #entrance a:hover {
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-	<div id="entrance">
-		<a href="/blog">Blog</a>
-		<a href="./demos.html">Demo</a>
-	</div>
+    <canvas id="intro"></canvas>
+    <div id="entrance">
+        <a href="/blog">Blog</a>
+        <a href="./demos.html">Demo</a>
+    </div>
+    <script>
+    !function(){
+        const canvas = document.getElementById('intro');
+        let flag = false;
+        if (!canvas.getContext) {
+            console.log('Poor old IE. Use chrome please.');
+            return;
+        }
+        function preface() {
+            const ctx = canvas.getContext('2d');
+            const [width, height] = [canvas.offsetWidth, canvas.offsetHeight];
+            canvas.width = width;
+            canvas.height = height;
+            ctx.globalCompositeOperation = 'lighten'; // 类似PS中的混合模式
+
+            function drawText({text, color, offsetX}) {
+                const fontSize = Math.min(~~(width / 10), 200);
+                ctx.font = `700 ${fontSize}px 'Helvetica Neue'`;
+                const textWidth = ctx.measureText(text).width;
+                ctx.fillStyle = color;
+                ctx.textBaseline = 'hanging';
+                const x = offsetX || 0;
+                ctx.fillText(text, (width - textWidth) / 2 + x, (height - fontSize) / 2);
+            }
+            function init() {
+                // clear
+                ctx.clearRect(0, 0, width, height);
+                drawText({
+                    text: "shenlvmeng",
+                    color: "#0ff",
+                    offsetX: 5
+                });
+                drawText({
+                    color: "#f0f",
+                    text: 'shenlvmeng'
+                });
+            }
+            function frame() {
+                // clear
+                ctx.clearRect(0, 0, width, height);
+                drawText({
+                    text: "shenlvmeng",
+                    color: "#0ff",
+                    offsetX: 5
+                });
+                drawText({
+                    color: "#f0f",
+                    text: 'shenlvmeng',
+                    offsetX: Math.random() * 50
+                });
+            }
+            function next() {
+                frame();
+                setTimeout(init, 100);
+                if (!flag) setTimeout(next, 400 + Math.random() * 400)
+            };
+            init();
+            setTimeout(next, 500);
+        }
+        preface();
+        document.addEventListener('click', function() {
+            canvas.classList.add('hide');
+            flag = true;
+        });
+    }()
+    </script>
 </body>
 </html>
