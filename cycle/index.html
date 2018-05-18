@@ -40,7 +40,7 @@
             image.onload = () => {
                 EXIF.getData(image, function() {
                     imageInfo.push({
-                        vertical: this.width === 600,
+                        vertical: this.height === 200,
                         time: EXIF.getTag(this, 'DateTime'),
                         altitude: EXIF.getTag(this, 'GPSAltitude').valueOf(),
                         latitude: convertLocation(EXIF.getTag(this, 'GPSLatitude')),
