@@ -52,7 +52,6 @@
         }
         get();
         function draw() {
-            console.log(imageInfo)
             imageInfo.forEach((m, index) => {
                 const correctPoint = wgs2bd({lat: m.latitude, lon: m.longitude});
                 const point = new BMap.Point(correctPoint.lon, correctPoint.lat);
@@ -76,7 +75,7 @@
                 $('#altitude').innerText = info.altitude.toFixed(3);
                 $('#longitude').innerText = info.longitude.toFixed(5);
                 $('#latitude').innerText = info.latitude.toFixed(5);
-                $('#image').src = `./images/${t.id}.jpg`;
+                $('#image').src = `http://p2worlbdz.bkt.clouddn.com/c_${t.id}.jpg-depress`;
                 $('#create-time').innerText = `${info.time.slice(0, 11).replace(/:/g, '-')}${info.time.slice(11)}`;
             }
         });
