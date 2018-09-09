@@ -4,24 +4,44 @@
     <meta charset="utf-8">
     <title>EXIF</title>
     <style>
-        div {
+        #original {
             padding-top: 20px;
-            width: 150px;
+        }
+        #hint {
+            color: #ff5d4e;
         }
         img {
             max-height: 100%;
             max-width: 100%;
+            margin: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>保留所有EXIF信息的图片压缩</h1>
-    <input type="file" id="file" multiple />
+    <h1>保留EXIF的图片压缩</h1>
+    <div>
+        <h2>Step 1: 上传文件</h2>
+        <input type="file" id="file" multiple />
+        <p id="hint"></p>
+    </div>
+    <div>
+        <h2>（可选）Step 2: 选择尺寸</h2>
+        <p>
+            <label for="width">宽度：</label>
+            <input id="width" type="number" min="10" /> px
+        </p>
+        <p>
+            <label for="height">高度：</label>
+            <input id="height" type="number" min="10" /> px
+        </p>
+    </div>
     <div id="original">
         原图：
     </div>
     <p><button id="btn">Generate!</button></p>
-    <p>结果：</p>
+    <hr />
+    <h2>结果：</h2>
+    <div id="result"></div>
 </body>
 <script>
     // 以下代码改编自 小菜 前端图片压缩并保留EXIF信息
@@ -149,7 +169,17 @@
             reader.readAsDataURL(file);
         }
 
-        function imageResize(img, width, height, quality ,callback) {
+        function downloadImage(name, dataURL) {
+            // support in Chrome FF Opera
+            var link = document.createElement('a');
+            link.download = "result-" + name + ".jpg";
+            link.href = dataURL;
+            setTimeout(function(){
+                link.click();
+            });
+        }
+
+        function imageResize(img, width, height, quality, callback) {
             var type = "image/jpeg";
             var canvas = document.createElement("canvas"),
                 ctx = canvas.getContext("2d");
@@ -163,16 +193,37 @@
         var filedom = document.getElementById("file");
         var btn = document.getElementById("btn");
         var original = document.getElementById("original");
+        var hint = document.getElementById("hint");
 
-        btn.onclick = function() {            
+        filedom.addEventListener('change', function() {
+            hint.innerText = '上传成功！';
+        });
+
+        btn.addEventListener('click', function() {
+            hint.innerText = '';
+            document.getElementById('result').innerText = '';
+            original.innerText = '';
+
+            var width = document.getElementById('width').value;
+            var height = document.getElementById('height').value;
+            if (width) {
+                original.style.width = document.getElementById('width').value + 'px';
+            }
+            if (height) {
+                original.style.height = document.getElementById('height').value + 'px';
+            }
+            if (!width && !height) {
+                original.style.width = 'auto';
+            }
+
             var files = Array.prototype.slice.call(filedom.files);
-            function gen() {
+            function gen(index) {
                 var imgFile = files.shift();
-                if(!imgFile){    
+                if (!imgFile) {
                     alert("Bingo！成功生成！");
                     return false;
                 }
-                let imgdom = new Image();
+                var imgdom = new Image();
                 showImage(imgFile,function(src){
                     imgdom.src = src;
                     imgdom.onload = function(){
@@ -184,8 +235,9 @@
                                     showImage(new Blob([newImage],{type : "image/jpeg"}),function(src){
                                         var img = new Image();
                                         img.src = src;
-                                        document.body.appendChild(img);
-                                        gen();
+                                        document.getElementById('result').appendChild(img);
+                                        downloadImage(index,src);
+                                        gen(index + 1);
                                     });
                                 });
                             }); //获取 分割 segments
@@ -196,9 +248,9 @@
             if (!files.length) {
                 alert('未选择文件。')
             } else {
-                gen();
+                gen(0);
             }
-        }
+        });
     }()
 </script>
 </html>
