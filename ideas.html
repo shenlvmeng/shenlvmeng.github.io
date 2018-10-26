@@ -120,7 +120,7 @@
 <body>
 	<header>
 		<span class="my">
-      <a class="fade" href="http://shenlvmeng.github.io/gallery/" target="_blank">My movies</a>
+      <a class="fade" href="./gallery/" target="_blank">My movies</a>
     </span>
     <span class="my">
       <a class="fade" href="./cycle/">My traces</a>
@@ -128,6 +128,7 @@
 		<span id="lab" class="dropdown hide">
       <div id="dropdown">Toys ▾</div>
       <div class="dropdown__items">
+        <div><a href="./book.html" target="_blank">Book</a></div>
         <div><a href="/Distance" target="_blank">Distance</a></div>
         <div><a href="./lab/1.html" target="_blank">Bubbles</a></div>
         <div><a href="./lab/mvvm.html" target="_blank">Listeners</a></div>
@@ -140,15 +141,15 @@
 	<div id="slogan"></div>
 	<footer>
 		<!--<span><a href="http://cfighter.cn:3000">Chat !</a></span>-->
-		<span><a class="fade" href="./lab/exif.html">EXIF</a></span>
-    <span><a class="fade" href="./book.html" target="_blank">Book</a></span>
+    <span><a class="fade" href="https://shenlvmeng.cn/trace-story" target="_blank">Travel</a></span>
+		<span><a class="fade" href="./lab/exif.html" target="_blank">EXIF</a></span>
 	</footer>
 	<script type="text/javascript">
 		(function(){
 			const body = document.body;
       const time = document.getElementById('slogan');
       const lab = document.getElementById('lab');
-			const colors = ["#ff4500", "#fad44f", "#b0c4de", "#bebebe"];
+			const colors = ["#ff4500", "#fad44f", "#88e264", "#b0c4de"];
 
       function update() {
         var d = new Date();
@@ -163,7 +164,7 @@
           body.style.backgroundColor = colors[i];
         });
         demo.addEventListener('mouseout', function() {
-          this.style.color = "#999";
+          this.style = "";
           body.style.backgroundColor = "#111";
         });
       });
