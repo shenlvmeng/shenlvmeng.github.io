@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="author" content="shenlvmeng">
 	<meta name="description" content="一些新奇的小玩意儿">
-	<meta name="keywords" content="sdn, front-end, 前端">
+	<meta name="keywords" content="front-end, 前端, sdn, 骑行, blog">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 	<title>Ideas</title>
 	<style type="text/css">
@@ -18,23 +18,33 @@
       height: 100%;
     }
 		body {
-			background-color: #111;
+      background-color: #111;
 			font-family: "Helvetica Neue", "Microsoft Yahei", sans-serif;
 			transition: background-color 1s;
 		}
-		#slogan {
+		.main-content {
 			position: absolute;
-			top: 50%;
+			top: 48%;
 			width: 100%;
-			font-size: 100px;
-			color: #fff;
 			text-align: center;
       transform: translateY(-50%);
 		}
+    #slogan {
+      font-size: 100px;
+      color: #fff;
+    }
+    #color-hex {
+      font-size: 32px;
+      font-family: 'Courier New', Courier, monospace;
+      color: #f1f1f1;
+    }
 		@media(max-width: 450px) {
 			#slogan {
 				font-size: 70px;
 			}
+      #color-hex {
+      font-size: 22px;
+      }
 		}
 		a {
       color: inherit;
@@ -48,7 +58,7 @@
 			position: absolute;
 			font-size: 0;
 			font-weight: bold;
-			color: #999;
+			color: #ccc;
 		}
     header > span:not(:last-child),
     footer > span:not(:last-child) {
@@ -79,9 +89,6 @@
 		span {
       font-size: 15px;
 			padding: 0 35px;
-		}
-		.my a {
-			color: #ccc;
 		}
 		.dropdown {
 			display: inline-flex;
@@ -138,7 +145,10 @@
       </div>
 		</span>
 	</header>
-	<div id="slogan"></div>
+  <div class="main-content">
+    <div id="slogan"></div>
+    <div id="color-hex"></div>
+  </div>
 	<footer>
 		<!--<span><a href="http://cfighter.cn:3000">Chat !</a></span>-->
     <span><a class="fade" href="https://github.com/shenlvmeng/calendone" target="_blank">Calendone</a></span>
@@ -148,12 +158,130 @@
 		(function(){
 			const body = document.body;
       const time = document.getElementById('slogan');
+      const colorHex = document.getElementById('color-hex');
       const lab = document.getElementById('lab');
-			const colors = ["#41b883", "#fad44f", "#88e264", "#b0c4de"];
+			const themeColors = ["#41b883", "#fad44f", "#88e264", "#b0c4de"];
+      const gradientColors = ['111111', '88e264', '87ceeb', 'd14f15', '87ceeb', '88e264'];
+      const [nadirColor, dawnColor, sunriseColor, noonColor, sunsetColor, duskColor] = gradientColors;
+      let bkgPause = false;
+
+      // 计算当天日出日落清晨黄昏正午深夜时间
+      function getSunTimes(date, lat, lng) {
+        const PI = Math.PI;
+        const sin = Math.sin;
+        const cos = Math.cos;
+        const asin = Math.asin;
+        const acos = Math.acos;
+        const rad = PI / 180;
+        const dayMs = 86400 * 1000;
+        const J0 = 0.0009;
+        const J1970 = 2440588;
+        const J2000 = 2451545;
+        const e = rad * 23.4397;
+        const times = [
+          [-0.833, 'sunrise', 'sunset'],
+          // [  -0.3, 'sunriseEnd',    'sunsetStart' ],
+          [-6, 'dawn', 'dusk'],
+          // [   -12, 'nauticalDawn',  'nauticalDusk'],
+          // [   -18, 'nightEnd',      'night'       ],
+          // [     6, 'goldenHourEnd', 'goldenHour'  ]
+      ];
+
+        const declination = (l, b) => asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l));
+        const fromJulian = (j) => new Date((j + 0.5 - J1970) * dayMs);
+        const toDays = (date) => date / dayMs - 0.5 + J1970 - J2000;
+        const julianCycle = (d, lw) => Math.round(d - J0 - lw / (2 * PI));
+        const approxTransit = (Ht, lw, n) => J0 + (Ht + lw) / (2 * PI) + n;
+        const solarTransitJ = (ds, M, L) => J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L);
+        const hourAngle = (h, phi, d) => acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d)));
+        const solarMeanAnomaly = (d) => rad * (357.5291 + 0.98560028 * d);
+        const eclipticLongitude = (M) => {
+          const C = rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M));
+          const P = rad * 102.9372;
+          return M + C + P + PI;
+        }
+        const getSetJ = (h, lw, phi, dec, n, M, L) => {
+
+          var w = hourAngle(h, phi, dec),
+              a = approxTransit(w, lw, n);
+          return solarTransitJ(a, M, L);
+        }
+
+        const lw = rad * -lng;
+        const phi = rad * lat;
+        const dh = 0; // altitude
+        const d = toDays(date);
+        const n =julianCycle(d, lw);
+        const ds = approxTransit(0, lw, n)
+        const M = solarMeanAnomaly(ds);
+        const L = eclipticLongitude(M);
+        const dec = declination(L, 0);
+        const Jnoon = solarTransitJ(ds, M, L);
+        const res = {
+          // nadir: fromJulian(Jnoon - 0.5),
+          solarnoon: fromJulian(Jnoon)
+        }
+        times.forEach(time => {
+          const h0 = (time[0] + dh) * rad;
+          const Jset = getSetJ(h0, lw, phi, dec, n, M, L);
+          const Jrise = Jnoon - (Jset - Jnoon);
+          res[time[1]] = fromJulian(Jrise);
+          res[time[2]] = fromJulian(Jset);
+        });
+        return res;
+      }
+      function calcCurrentColor(start, end, delta) {
+        const startRgbArr = [start.slice(0, 2), start.slice(2, 4), start.slice(4, 6)].map(str => parseInt(str, 16));
+        const endRgbArr = [end.slice(0, 2), end.slice(2, 4), end.slice(4, 6)].map(str => parseInt(str, 16));
+        const [startRed, startGreen, startBlue] = startRgbArr;
+        const [endRed, endGreen, endBlue] = endRgbArr;
+
+        const rgbArr = [];
+        startRgbArr.forEach((startValue, i) => {
+          const colorValue = Math.round(startValue + delta * (endRgbArr[i] - startValue));
+          rgbArr.push(colorValue.toString(16));
+        });
+        return `#${rgbArr.join('')}`
+      }
+
+      const homeLat = 31.16;
+      const homeLon = 121.38;
+      const todaySunTimes = getSunTimes(Date.now(), homeLat, homeLon);
+
+      // 根据当前时间，计算出渐变中的天空颜色
+      function getCurrentColor(ts) {
+        const start = new Date();
+        const startOfDay = start.setUTCHours(0, 0, 0, 0).valueOf();
+        const endOfDay = start.setUTCHours(23, 59, 59, 999).valueOf();
+        let delta = 0;
+        if (ts <= +todaySunTimes.dawn) {
+          delta = (ts - startOfDay) / (+todaySunTimes.dawn - startOfDay);
+          return calcCurrentColor(nadirColor, dawnColor, delta);
+        }
+        if (ts <= +todaySunTimes.sunrise) {
+          delta = (ts - +todaySunTimes.dawn) / (+todaySunTimes.sunrise - +todaySunTimes.dawn);
+          return calcCurrentColor(dawnColor, sunriseColor, delta);
+        }
+        if (ts <= +todaySunTimes.solarnoon) {
+          delta = (ts - +todaySunTimes.sunrise) / (+todaySunTimes.solarnoon - +todaySunTimes.sunrise);
+          return calcCurrentColor(sunriseColor, noonColor, delta);
+        }
+        if (ts <= +todaySunTimes.sunset) {
+          delta = (ts - +todaySunTimes.solarnoon) / (+todaySunTimes.sunset - +todaySunTimes.solarnoon);
+          return calcCurrentColor(noonColor, sunsetColor, delta);
+        } 
+        delta = (ts - +todaySunTimes.sunset) / (endOfDay - +todaySunTimes.sunset);
+        return calcCurrentColor(sunsetColor, nadirColor, delta);
+      }
 
       function update() {
-        var d = new Date();
-        time.innerHTML = ("0"+d.getHours()).substr(-2,2) + ":" + 
+        const d = new Date();
+        if (!bkgPause) {
+          const bkgColor = getCurrentColor(+d);
+          body.style.backgroundColor = bkgColor;
+          colorHex.innerText = bkgColor;
+        }
+        time.innerText = ("0"+d.getHours()).substr(-2,2) + ":" + 
           ("0"+d.getMinutes()).substr(-2,2) + ":" + ("0"+d.getSeconds()).substr(-2,2);
       }
 
@@ -161,11 +289,13 @@
       [].slice.call(document.getElementsByClassName('fade')).forEach(function(demo, i) {
         demo.addEventListener('mouseover', function() {
           this.style.color = "#fff";
-          body.style.backgroundColor = colors[i];
+          bkgPause = true;
+          body.style.backgroundColor = themeColors[i];
         });
         demo.addEventListener('mouseout', function() {
           this.style = "";
-          body.style.backgroundColor = "#111";
+          bkgPause = false;
+          body.style.backgroundColor = getCurrentColor(+Date.now());
         });
       });
 
