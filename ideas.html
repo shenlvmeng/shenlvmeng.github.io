@@ -161,7 +161,7 @@
       const colorHex = document.getElementById('color-hex');
       const lab = document.getElementById('lab');
 			const themeColors = ["#41b883", "#fad44f", "#88e264", "#b0c4de"];
-      const gradientColors = ['111111', '88e264', 'd14f15', '87ceeb', 'd14f15', '88e264'];
+      const gradientColors = ['111111', 'b0c4de', 'd14f15', '87ceeb', 'd14f15', 'b0c4de'];
       const [nadirColor, dawnColor, sunriseColor, noonColor, sunsetColor, duskColor] = gradientColors;
       let bkgPause = false;
 
@@ -269,9 +269,13 @@
         if (ts <= +todaySunTimes.sunset) {
           delta = (ts - +todaySunTimes.solarnoon) / (+todaySunTimes.sunset - +todaySunTimes.solarnoon);
           return calcCurrentColor(noonColor, sunsetColor, delta);
-        } 
-        delta = (ts - +todaySunTimes.sunset) / (endOfDay - +todaySunTimes.sunset);
-        return calcCurrentColor(sunsetColor, nadirColor, delta);
+        }
+        if (ts <= +todaySunTimes.dusk) {
+          delta = (ts - +todaySunTimes.sunset) / (+todaySunTimes.dusk - +todaySunTimes.sunset);
+          return calcCurrentColor(sunsetColor, duskColor, delta);
+        }
+        delta = (ts - +todaySunTimes.dusk) / (endOfDay - +todaySunTimes.dusk);
+        return calcCurrentColor(duskColor, nadirColor, delta);
       }
 
       function update() {
