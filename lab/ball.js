@@ -40,11 +40,11 @@
 
 		ci = 0,
 
-		speed_x = 2;
+		speed_x = 2,
 
 		status = 'on',
 
-		svg = d3.select('svg'),
+		svg = d3.select('svg');
 
 		_nextTick = function () {
 			svg.selectAll("ellipse").remove();

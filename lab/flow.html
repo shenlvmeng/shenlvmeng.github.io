@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fade</title>
+  <style>
+    body {
+      background-color: #f1f2ff;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    #root {
+      margin: 0 40px;
+      font-size: 0;
+    }
+    img {
+      display: block;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <label for="pic">Select Comic Pics: </label>
+    <input class="input" id="pic" type="file" accept="image/*" multiple name="pic" />
+  </div>
+  <div id="root"></div>
+  <script>
+    (function() {
+      const $ = document.querySelector.bind(document);
+      const input = $('#pic');
+      const root = $('#root');
+
+      let comicList = [];
+      const pageCount = 10;
+      let currentIndex = 0;
+
+      const createImg = (dataUri, fakeRoot) => {
+        const img = new Image();
+        img.src = dataUri;
+        fakeRoot.appendChild(img);
+      };
+      const appendImg = () => {
+        const fakeRoot = document.createDocumentFragment();
+        Array.from(comicList).slice(currentIndex, currentIndex + pageCount).forEach(img => {
+          createImg(URL.createObjectURL(img), fakeRoot);
+        });
+        root.appendChild(fakeRoot);
+      };
+      const throttle = (fn, interval) => {
+        let flag = false;
+        return () => {
+          if (flag) return;
+          fn();
+          flag = true;
+          setTimeout(() => flag = false, interval);
+        };
+      };
+
+      const throttleScroll = throttle(() => {
+        if (currentIndex >= comicList.length) {
+          alert('reach the end');
+          window.removeEventListener('scroll', throttleScroll);
+          return;
+        }
+        const delta = document.body.offsetHeight - window.innerHeight - window.pageYOffset
+        if (delta < 400) {
+          currentIndex += pageCount;
+          appendImg();
+        }
+      }, 200);
+
+      input.addEventListener('change', (e) => {
+        comicList = e.target.files;
+        appendImg();
+      });
+      window.addEventListener('scroll', throttleScroll);
+    })()
+  </script>
+</body>
+</html>
