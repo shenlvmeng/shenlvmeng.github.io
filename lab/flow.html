@@ -15,7 +15,8 @@
       margin-bottom: 16px;
     }
     #root {
-      margin: 0 40px;
+      margin: 0 auto;
+      max-width: 700px;
       font-size: 0;
     }
     img {
@@ -36,9 +37,11 @@
       const input = $('#pic');
       const root = $('#root');
 
+      const pageCount = 3;
+      const pageInViewport = 2;
       let comicList = [];
-      const pageCount = 10;
       let currentIndex = 0;
+      let cachePage = 0;
 
       const createImg = (dataUri, fakeRoot) => {
         const img = new Image();
@@ -51,6 +54,10 @@
           createImg(URL.createObjectURL(img), fakeRoot);
         });
         root.appendChild(fakeRoot);
+      };
+      const removeLastPage = () => {
+        if (cachePage < pageInViewport) return;
+        Array.from(root.children).slice(0, pageCount).forEach(child => child.remove());
       };
       const throttle = (fn, interval) => {
         let flag = false;
@@ -72,6 +79,8 @@
         if (delta < 400) {
           currentIndex += pageCount;
           appendImg();
+          removeLastPage();
+          cachePage++;
         }
       }, 200);
 
